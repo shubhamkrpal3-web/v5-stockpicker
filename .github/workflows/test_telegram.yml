@@ -1,0 +1,38 @@
+name: Telegram Pipeline Test
+
+# Manual trigger only — used to validate that secrets + bot + channel are wired up correctly
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Send test message
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python v5_modules/telegram_broadcaster.py --type test
+
+      - name: Report on failure
+        if: failure()
+        run: |
+          echo "❌ Telegram test failed. Most common causes:"
+          echo "  1. TELEGRAM_BOT_TOKEN secret missing or wrong"
+          echo "  2. TELEGRAM_CHAT_ID secret missing or wrong (must include the minus sign for channels)"
+          echo "  3. Bot is not an admin in the channel"
+          echo "  4. Bot does not have 'Post Messages' permission"
