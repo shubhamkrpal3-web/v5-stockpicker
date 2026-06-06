@@ -75,11 +75,12 @@ def fetch_one(d: date) -> pd.DataFrame | None:
                     "CLOSE_PRICE": "CLOSE", "TTL_TRD_QNTY": "VOLUME",
                     "TURNOVER_LACS": "TRADED_VALUE",
                 }
+                had_turnover_lacs = "TURNOVER_LACS" in df.columns
                 for old, new in rename.items():
                     if old in df.columns and new not in df.columns:
                         df = df.rename(columns={old: new})
                 # TURNOVER_LACS is in lakhs of rupees, convert to rupees
-                if "TRADED_VALUE" in df.columns and "TURNOVER_LACS" in rename.values():
+                if had_turnover_lacs and "TRADED_VALUE" in df.columns:
                     df["TRADED_VALUE"] = pd.to_numeric(df["TRADED_VALUE"], errors="coerce") * 100_000
                 df["SYMBOL"] = df["SYMBOL"].astype(str).str.strip().str.upper()
                 if "SERIES" in df.columns:
@@ -87,7 +88,7 @@ def fetch_one(d: date) -> pd.DataFrame | None:
                     df = df[df["SERIES"] == "EQ"].copy()
                 if "CORPORATE_ACTION_FLAG" not in df.columns:
                     df["CORPORATE_ACTION_FLAG"] = 0
-                return df
+                return df.reset_index(drop=True)
             if r.status_code in (403, 404):
                 # 403/404 → likely a holiday or pre-listing date; not retried
                 return None
@@ -98,25 +99,48 @@ def fetch_one(d: date) -> pd.DataFrame | None:
 
 
 def append_to_master(new_rows: pd.DataFrame, master_path: Path) -> int:
-    """Append new_rows to master if those dates aren't already present. Returns rows added."""
+    """Append new_rows to master if those (DATE, SYMBOL) keys aren't already present.
+
+    Returns the number of rows actually appended.
+    """
     master_path.parent.mkdir(parents=True, exist_ok=True)
-    if master_path.exists():
-        existing = pd.read_csv(master_path, low_memory=False, usecols=lambda c: c.upper() in ("DATE", "SYMBOL"))
-        existing.columns = [c.upper() for c in existing.columns]
-        existing_key = set(zip(existing["DATE"].astype(str), existing["SYMBOL"].astype(str).str.upper()))
-        new_key = set(zip(new_rows["DATE"].astype(str), new_rows["SYMBOL"]))
-        truly_new = new_key - existing_key
-        if not truly_new:
-            return 0
-        mask = list(zip(new_rows["DATE"].astype(str), new_rows["SYMBOL"])).__iter__()
-        # vectorized version
-        key_series = pd.Series(list(zip(new_rows["DATE"].astype(str), new_rows["SYMBOL"])))
-        new_rows = new_rows[key_series.isin(truly_new)].copy()
-        new_rows.to_csv(master_path, mode="a", header=False, index=False,
-                        columns=existing.columns if False else None)
-    else:
+
+    # First-ever write: just dump the file directly with full headers
+    if not master_path.exists():
         new_rows.to_csv(master_path, index=False)
-    return len(new_rows)
+        return len(new_rows)
+
+    # Build a set of existing (DATE, SYMBOL) keys from the master so we don't
+    # double-insert
+    existing = pd.read_csv(master_path, low_memory=False, usecols=["DATE", "SYMBOL"])
+    existing.columns = [c.upper() for c in existing.columns]
+    existing_keys = set(zip(
+        existing["DATE"].astype(str),
+        existing["SYMBOL"].astype(str).str.upper(),
+    ))
+
+    # Make a clean copy with a fresh RangeIndex to avoid any index-alignment
+    # surprises when boolean-indexing below.
+    new_rows = new_rows.reset_index(drop=True).copy()
+    new_rows["SYMBOL"] = new_rows["SYMBOL"].astype(str).str.upper()
+    new_rows["DATE"] = new_rows["DATE"].astype(str)
+
+    # Build the keep mask the simple, explicit way (no Series alignment)
+    keep = [
+        (d, s) not in existing_keys
+        for d, s in zip(new_rows["DATE"], new_rows["SYMBOL"])
+    ]
+    truly_new = new_rows.loc[keep].copy()
+    if truly_new.empty:
+        return 0
+
+    # Ensure the appended rows write in the same column order as the master,
+    # so the CSV stays readable. Any missing columns get NaN; extra columns
+    # get dropped.
+    master_cols = pd.read_csv(master_path, low_memory=False, nrows=0).columns.tolist()
+    truly_new = truly_new.reindex(columns=master_cols)
+    truly_new.to_csv(master_path, mode="a", header=False, index=False)
+    return len(truly_new)
 
 
 def main():
