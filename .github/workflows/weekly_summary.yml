@@ -1,0 +1,38 @@
+name: V5 Weekly Summary
+
+# Saturdays 03:30 UTC = 09:00 IST
+on:
+  schedule:
+    - cron: '30 3 * * 6'
+  workflow_dispatch:
+
+jobs:
+  summary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Send weekly summary to Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          if [ -f data/live_signals/equity_log.csv ]; then
+            python v5_modules/telegram_broadcaster.py \
+              --type weekly_summary \
+              --equity-log data/live_signals/equity_log.csv \
+              --regime-json data/live_signals/daily_regime.json
+          else
+            echo "No equity_log.csv yet — skip (paper trading hasn't started)"
+          fi

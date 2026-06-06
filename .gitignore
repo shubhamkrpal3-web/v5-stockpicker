@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Logs (these get committed by the workflow but local copies should be ignored during dev)
+logs/*.log
+
+# Secrets — NEVER commit
+secrets/
+oracle_keys/
+*.key
+*.pem
+telegram_creds.txt
+
+# Original V4 zip (too large for git)
+*.zip
+StockPicker_Automation*/
+
+# Output build artifacts
+docbuild/node_modules/
+*.docx.tmp
+
+# Decompressed master (only the .gz version is committed)
+data/market_database/master_history.csv
+data/factors/*.parquet
+data/factors_v2/*.parquet
+
+# OS
+Thumbs.db

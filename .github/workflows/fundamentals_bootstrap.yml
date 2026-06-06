@@ -1,0 +1,61 @@
+name: V5 Fundamentals Bootstrap (one-time / quarterly)
+
+# Manual trigger only — too long to run on every push
+on:
+  workflow_dispatch:
+    inputs:
+      force_refresh:
+        description: 'Force refresh all symbols (ignore cache)'
+        required: false
+        default: 'false'
+      symbols_limit:
+        description: 'Max symbols to fetch this run (split into multiple runs if you hit timeout)'
+        required: false
+        default: '500'
+
+permissions:
+  contents: write
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    # GitHub Actions free runner timeout is 6 hours — plenty for our 1-2 hour bootstrap
+    timeout-minutes: 350
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Prepare directory
+        run: mkdir -p data/fundamentals
+
+      - name: Run bootstrap (limited to inputs.symbols_limit)
+        run: |
+          head -${{ github.event.inputs.symbols_limit }} symbols.txt > /tmp/symbols_run.txt
+          FORCE_FLAG=""
+          if [ "${{ github.event.inputs.force_refresh }}" = "true" ]; then
+            FORCE_FLAG="--force"
+          fi
+          python v5_modules/screener_scraper.py \
+            --bootstrap /tmp/symbols_run.txt \
+            --cache-dir data/fundamentals \
+            $FORCE_FLAG
+
+      - name: Commit fundamentals cache
+        run: |
+          git config user.name "v5-automation"
+          git config user.email "v5-automation@users.noreply.github.com"
+          git add data/fundamentals/
+          git diff --cached --quiet || git commit -m "Fundamentals bootstrap $(date -u +%Y-%m-%d)"
+          git push

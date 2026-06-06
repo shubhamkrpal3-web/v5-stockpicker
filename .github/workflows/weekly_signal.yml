@@ -1,0 +1,35 @@
+name: V5 Weekly Signal Broadcast
+
+# Mondays 03:40 UTC = 09:10 IST (pre-market)
+on:
+  schedule:
+    - cron: '40 3 * * 1'
+  workflow_dispatch:
+
+jobs:
+  broadcast:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Send weekly signal to Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python v5_modules/telegram_broadcaster.py \
+            --type weekly_signal \
+            --portfolio data/live_signals/daily_live_portfolio.csv \
+            --positions data/live_signals/positions.csv \
+            --regime-json data/live_signals/daily_regime.json

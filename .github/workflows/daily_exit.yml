@@ -1,0 +1,34 @@
+name: V5 Daily Exit Check
+
+# Trading days at 11:00 UTC = 16:30 IST (post-close)
+on:
+  schedule:
+    - cron: '0 11 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  exit_check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Check exits and broadcast (only if any)
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          # Will print "No exits to broadcast — skipping." if positions file is empty
+          python v5_modules/telegram_broadcaster.py \
+            --type daily_exit \
+            --positions data/live_signals/positions.csv

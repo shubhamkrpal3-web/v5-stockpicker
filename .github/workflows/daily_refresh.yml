@@ -1,0 +1,91 @@
+name: V5 Daily Data Refresh
+
+# Runs every weekday at 16:00 UTC = 21:30 IST (after NSE market close)
+on:
+  schedule:
+    - cron: '0 16 * * 1-5'
+  workflow_dispatch:   # allows manual trigger from GitHub UI
+
+permissions:
+  contents: write   # needed to commit updated data back to repo
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          # We need full history for data files. Shallow clone breaks git LFS sometimes.
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Decompress master history if compressed
+        run: |
+          mkdir -p data/market_database data/fundamentals data/live_signals logs
+          if [ -f data/market_database/master_history.csv.gz ]; then
+            gunzip -k -f data/market_database/master_history.csv.gz
+          fi
+
+      - name: Download latest bhavcopy
+        run: |
+          python v5_modules/bhavcopy_downloader.py \
+            --master data/market_database/master_history.csv \
+            --max-back-days 7
+
+      - name: Refresh stale fundamentals (top 500 only — to fit in 30-min budget)
+        run: |
+          # Only refresh if symbols.txt exists; first run bootstraps via separate workflow
+          if [ -f symbols.txt ]; then
+            head -500 symbols.txt > /tmp/symbols_today.txt
+            python v5_modules/screener_scraper.py \
+              --bootstrap /tmp/symbols_today.txt \
+              --cache-dir data/fundamentals
+          fi
+
+      - name: Generate V5 signals
+        run: |
+          python v5_modules/v5_signal_generator.py \
+            --master data/market_database/master_history.csv \
+            --fundamentals data/fundamentals/screener.sqlite \
+            --output-dir data/live_signals \
+            --top-n 15 \
+            --portfolio-inr 200000 \
+            --risk-pct 0.01 \
+            --min-close 20 \
+            --min-traded-value 10000000
+
+      - name: Recompress master history
+        run: |
+          gzip -f data/market_database/master_history.csv
+
+      - name: Commit updated data back to repo
+        run: |
+          git config user.name "v5-automation"
+          git config user.email "v5-automation@users.noreply.github.com"
+          git add -A data/ logs/ || true
+          git diff --cached --quiet || git commit -m "V5 daily refresh $(date -u +%Y-%m-%d)"
+          git push
+
+      - name: Send failure alert to Telegram
+        if: failure()
+        env:
+          BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
+            -d "chat_id=${CHAT_ID}" \
+            -d "text=⚠️ V5 daily refresh FAILED on $(date -u). Check GitHub Actions logs."
