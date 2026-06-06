@@ -5,6 +5,11 @@ on:
   schedule:
     - cron: '0 16 * * 1-5'
   workflow_dispatch:   # allows manual trigger from GitHub UI
+    inputs:
+      max_back_days:
+        description: 'Days of bhavcopy to fetch (default 7; use 35+ for first-run gap backfill)'
+        required: false
+        default: '7'
 
 permissions:
   contents: write   # needed to commit updated data back to repo
@@ -42,9 +47,11 @@ jobs:
 
       - name: Download latest bhavcopy
         run: |
+          MAX_BACK="${{ github.event.inputs.max_back_days }}"
+          if [ -z "$MAX_BACK" ]; then MAX_BACK=7; fi
           python v5_modules/bhavcopy_downloader.py \
             --master data/market_database/master_history.csv \
-            --max-back-days 7
+            --max-back-days $MAX_BACK
 
       - name: Refresh stale fundamentals (top 500 only — to fit in 30-min budget)
         run: |
