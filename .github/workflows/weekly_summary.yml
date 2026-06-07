@@ -23,16 +23,14 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Send weekly summary to Telegram
+      - name: Build weekly summary from positions + equity log
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          if [ -f data/live_signals/equity_log.csv ]; then
-            python v5_modules/telegram_broadcaster.py \
-              --type weekly_summary \
-              --equity-log data/live_signals/equity_log.csv \
-              --regime-json data/live_signals/daily_regime.json
-          else
-            echo "No equity_log.csv yet — skip (paper trading hasn't started)"
-          fi
+          python v5_modules/weekly_pnl_broadcaster.py \
+            --equity-log data/live_signals/equity_log.csv \
+            --positions data/live_signals/positions.csv \
+            --realized data/live_signals/realized_trades.csv \
+            --regime-json data/live_signals/daily_regime.json \
+            --portfolio-inr 200000

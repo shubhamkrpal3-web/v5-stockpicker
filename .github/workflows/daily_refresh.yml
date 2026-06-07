@@ -75,6 +75,27 @@ jobs:
             --min-close 20 \
             --min-traded-value 10000000
 
+      - name: Update paper trade positions (stops, time exits, new Monday entries)
+        run: |
+          python v5_modules/paper_trade_manager.py \
+            --master data/market_database/master_history.csv \
+            --signal data/live_signals/daily_live_portfolio.csv \
+            --positions data/live_signals/positions.csv \
+            --equity-log data/live_signals/equity_log.csv \
+            --realized data/live_signals/realized_trades.csv \
+            --portfolio-inr 200000 \
+            --entry-day mon \
+            --max-holding-days 25
+
+      - name: Broadcast today's exits to Telegram (only if any fired)
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python v5_modules/daily_exit_broadcaster.py \
+            --positions data/live_signals/positions.csv \
+            --realized data/live_signals/realized_trades.csv
+
       - name: Recompress master history
         run: |
           gzip -f data/market_database/master_history.csv
