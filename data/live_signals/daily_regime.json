@@ -1,13 +1,13 @@
 {
-  "state": "RISK_NEU",
-  "score": 2,
+  "state": "RISK_OFF",
+  "score": 1,
   "triggers": {
     "Trend": "\u2713",
-    "Breadth": "\u2713",
+    "Breadth": "\u2717",
     "VIX": "\u2717"
   },
-  "mean_close": 2022.9700999999998,
-  "mean_200dma": 1871.641072859868,
-  "breadth_above_50dma": 0.5836477987421383,
-  "vol_proxy_ann": 0.4255803657794581
+  "mean_close": 2040.8225999999997,
+  "mean_200dma": 1897.3257294991945,
+  "breadth_above_50dma": 0.44370029300962743,
+  "vol_proxy_ann": 0.3889726239767498
 }
