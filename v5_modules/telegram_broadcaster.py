@@ -1,18 +1,19 @@
 """
 telegram_broadcaster.py
 =======================
-Upgraded Telegram broadcaster for V5 signals.
+Telegram broadcaster for V5 signals.
 
 Reads daily_live_portfolio.csv, positions.csv, and regime state, then sends
-formatted messages to your Telegram channel. Designed to be called from
+formatted messages to a Telegram channel. Designed to be called from
 GitHub Actions on the cron schedule defined in .github/workflows/.
 
-Three message types:
-  1. WEEKLY_SIGNAL  : Mondays pre-market — new entries, holds, exits, conviction
-  2. DAILY_EXIT     : trading day evenings — only if stop-loss or time-stop fired
-  3. WEEKLY_SUMMARY : Saturdays — PnL, drawdown, regime state, win rate
+Four message types:
+  1. WEEKLY_SIGNAL  : Mondays pre-market — new entries with conviction + stops
+  2. DAILY_EXIT     : trading day evenings — only if exits fired
+  3. WEEKLY_SUMMARY : Saturdays — PnL, drawdown, regime
+  4. TEST           : sanity check that secrets + bot are wired up
 
-Usage from GitHub Actions or cron:
+Usage:
     python telegram_broadcaster.py --type weekly_signal
     python telegram_broadcaster.py --type daily_exit
     python telegram_broadcaster.py --type weekly_summary
@@ -70,9 +71,9 @@ def send(text: str, creds_path: Optional[str] = None, parse_mode: str = "Markdow
 
 
 def _fmt_inr(v: float) -> str:
-    if v >= 10_000_000:
+    if abs(v) >= 10_000_000:
         return f"₹{v / 10_000_000:.2f} Cr"
-    if v >= 100_000:
+    if abs(v) >= 100_000:
         return f"₹{v / 100_000:.2f} L"
     return f"₹{v:,.0f}"
 
@@ -87,9 +88,6 @@ def _conviction_band(score: float) -> str:
     return "skip"
 
 
-# =========================================================
-# Builders
-# =========================================================
 def build_weekly_signal(
     portfolio_path: str,
     positions_path: Optional[str] = None,
@@ -105,18 +103,15 @@ def build_weekly_signal(
     df.columns = [c.upper() for c in df.columns]
     today = pd.Timestamp.now().strftime("%a %d %b %Y")
 
-    # Read regime details if a json file is provided (preferred)
     if regime_json_path and Path(regime_json_path).exists():
         with open(regime_json_path) as f:
             rj = json.load(f)
         regime_state = rj.get("state", regime_state)
         regime_triggers = rj.get("triggers", regime_triggers)
-        # Override portfolio_target based on regime
         portfolio_target = {"RISK_ON": 1.0, "RISK_NEU": 0.7, "RISK_OFF": 0.4}.get(
             regime_state, 1.0
         )
 
-    # Compose triggers string
     rt = regime_triggers or {"Trend": "?", "Breadth": "?", "VIX": "?"}
     trig = "  ".join(f"{k}{v}" for k, v in rt.items())
 
@@ -127,7 +122,6 @@ def build_weekly_signal(
     lines.append(f"_Portfolio YTD:_ {ytd_pct * 100:+.2f}%   _DD from peak:_ {dd_from_peak_pct * 100:+.2f}%")
     lines.append("")
 
-    # New entries section
     new_entries = df[df.get("ACTION", "ENTER") == "ENTER"] if "ACTION" in df.columns else df
     if len(new_entries):
         lines.append(f"*NEW ENTRIES ({len(new_entries)}):*")
@@ -144,31 +138,20 @@ def build_weekly_signal(
             )
         lines.append("")
 
-    # Holds (if positions file exists)
     if positions_path and Path(positions_path).exists():
         pos = pd.read_csv(positions_path)
         if len(pos):
             held = pos[pos["status"] == "open"]
-            lines.append(f"*HOLD ({len(held)}):* " + ", ".join(held["symbol"].head(8).tolist()))
-            lines.append("")
-            # Exits
-            exits = pos[pos["status"] == "exit_pending"]
-            if len(exits):
-                lines.append(f"*EXITS ({len(exits)}):*")
-                for r in exits.itertuples():
-                    reason = getattr(r, "exit_reason", "REBALANCE")
-                    lines.append(f"- `{r.symbol}` | {reason} | Exit@open")
+            if len(held):
+                lines.append(f"*HOLD ({len(held)}):* " + ", ".join(held["symbol"].head(8).tolist()))
                 lines.append("")
 
     lines.append("_Disclaimer: Educational signal. Not investment advice. Execute at your discretion._")
     return "\n".join(lines)
 
 
-def build_daily_exit(
-    positions_path: str,
-    exit_signals_path: Optional[str] = None,
-) -> Optional[str]:
-    """Build daily exit broadcast — returns None if no exits fired."""
+def build_daily_exit(positions_path: str) -> Optional[str]:
+    """Build daily exit broadcast — returns None if no exits fired today."""
     if not Path(positions_path).exists():
         return None
     pos = pd.read_csv(positions_path)
@@ -182,9 +165,7 @@ def build_daily_exit(
     for r in exits.itertuples():
         reason = getattr(r, "exit_reason", "STOP")
         stop = getattr(r, "current_stop", 0)
-        lines.append(
-            f"`{r.symbol}` | {reason} at ₹{stop:.2f}\nExit at next open."
-        )
+        lines.append(f"`{r.symbol}` | {reason} at ₹{stop:.2f}\nExit at next open.")
     return "\n".join(lines)
 
 

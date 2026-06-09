@@ -1,10 +1,19 @@
 name: V5 Weekly Signal Broadcast
 
-# Mondays 03:40 UTC = 09:10 IST (pre-market)
+# Multiple Monday IST trigger windows to beat GitHub Actions free-tier delays.
+# 09:10 IST (03:40 UTC), 09:25, 09:40, 10:30, 11:30
+# Script checks a "last sent date" file and skips if already sent this Monday.
 on:
   schedule:
-    - cron: '40 3 * * 1'
+    - cron: '40 3 * * 1'   # 09:10 IST Monday
+    - cron: '55 3 * * 1'   # 09:25 IST Monday
+    - cron: '10 4 * * 1'   # 09:40 IST Monday
+    - cron: '0 5 * * 1'    # 10:30 IST Monday
+    - cron: '0 6 * * 1'    # 11:30 IST Monday
   workflow_dispatch:
+
+permissions:
+  contents: write    # need to commit the last-sent marker
 
 jobs:
   broadcast:
@@ -14,6 +23,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
@@ -23,7 +34,22 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Check if already sent today (idempotency guard)
+        id: idem
+        run: |
+          TODAY=$(date -u +%Y-%m-%d)
+          MARKER_FILE="data/live_signals/last_signal_sent.txt"
+          mkdir -p data/live_signals
+          if [ -f "$MARKER_FILE" ] && [ "$(cat $MARKER_FILE)" = "$TODAY" ]; then
+            echo "Already sent today ($TODAY) — skipping."
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "Not yet sent today — proceeding."
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Send weekly signal to Telegram
+        if: steps.idem.outputs.skip == 'false'
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -33,3 +59,14 @@ jobs:
             --portfolio data/live_signals/daily_live_portfolio.csv \
             --positions data/live_signals/positions.csv \
             --regime-json data/live_signals/daily_regime.json
+
+      - name: Mark as sent
+        if: steps.idem.outputs.skip == 'false'
+        run: |
+          TODAY=$(date -u +%Y-%m-%d)
+          echo "$TODAY" > data/live_signals/last_signal_sent.txt
+          git config user.name "v5-automation"
+          git config user.email "v5-automation@users.noreply.github.com"
+          git add data/live_signals/last_signal_sent.txt
+          git commit -m "Mark weekly signal sent $TODAY" || true
+          git push || true
