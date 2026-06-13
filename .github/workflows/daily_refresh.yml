@@ -63,19 +63,15 @@ jobs:
               --cache-dir data/fundamentals
           fi
 
-      - name: Generate V5 signals
-        run: |
-          python v5_modules/v5_signal_generator.py \
-            --master data/market_database/master_history.csv \
-            --fundamentals data/fundamentals/screener.sqlite \
-            --output-dir data/live_signals \
-            --top-n 15 \
-            --portfolio-inr 200000 \
-            --risk-pct 0.01 \
-            --min-close 20 \
-            --min-traded-value 10000000
-
-      - name: Update paper trade positions (stops, time exits, new Monday entries)
+      # IMPORTANT ORDER:
+      # paper_trade_manager MUST run BEFORE signal_generator. The signal that
+      # the user saw on Telegram Monday morning lives in daily_live_portfolio.csv.
+      # If signal_generator runs first, it overwrites that file with TODAY's
+      # picks (or an empty file under RISK_OFF), and paper_trade_manager loses
+      # the signal it was supposed to act on. So:
+      #   1. paper_trade_manager reads the EXISTING file (what user already saw)
+      #   2. THEN signal_generator regenerates for next reference cycle
+      - name: Update paper trade positions (uses signal user saw on Telegram)
         run: |
           python v5_modules/paper_trade_manager.py \
             --master data/market_database/master_history.csv \
@@ -86,6 +82,18 @@ jobs:
             --portfolio-inr 200000 \
             --entry-day mon \
             --max-holding-days 25
+
+      - name: Generate V5 signals (for tomorrow's reference / next Monday)
+        run: |
+          python v5_modules/v5_signal_generator.py \
+            --master data/market_database/master_history.csv \
+            --fundamentals data/fundamentals/screener.sqlite \
+            --output-dir data/live_signals \
+            --top-n 15 \
+            --portfolio-inr 200000 \
+            --risk-pct 0.01 \
+            --min-close 20 \
+            --min-traded-value 10000000
 
       - name: Broadcast daily status to Telegram (always — heartbeat + exits if any)
         env:

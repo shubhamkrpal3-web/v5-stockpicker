@@ -227,11 +227,16 @@ def detect_regime(master: pd.DataFrame, snap_date: pd.Timestamp) -> tuple[str, d
 
 
 def regime_sizing(state: str) -> dict:
+    """Regime-aware gross exposure. max_new is informational (not enforced as a hard
+    "no entries" gate any more — instead we always generate the full top-N picks,
+    and use 'gross' to scale position sizes down in defensive regimes)."""
     if state == "RISK_ON":
-        return {"gross": 1.00, "max_new": 5}
+        return {"gross": 1.00, "max_new": 15}
     if state == "RISK_NEU":
-        return {"gross": 0.70, "max_new": 3}
-    return {"gross": 0.40, "max_new": 0}
+        return {"gross": 0.70, "max_new": 15}
+    # RISK_OFF: still generate picks, but at 40% gross — picks are
+    # smaller, defending capital while staying responsive when regime improves.
+    return {"gross": 0.40, "max_new": 8}
 
 
 # =========================================================
@@ -320,8 +325,12 @@ def main():
     diag["regime"] = regime_detail
     sizing_params = regime_sizing(state)
 
-    # If RISK_OFF: emit no new entries
-    if sizing_params["max_new"] == 0 or len(snap) == 0:
+    # Only skip generation if there are literally no eligible stocks.
+    # RISK_OFF used to write an empty file here, which caused the bug where
+    # the picks the user saw on Monday morning got wiped before paper_trade_manager
+    # could use them. Now we ALWAYS generate picks; the regime controls sizing
+    # via sizing_params["gross"] (40% in RISK_OFF, 70% in NEU, 100% in ON).
+    if len(snap) == 0:
         print(f"[WARN] No new entries: regime={state}, universe={len(snap)}")
         # Write empty portfolio file
         empty = pd.DataFrame(columns=[

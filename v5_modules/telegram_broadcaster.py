@@ -125,7 +125,8 @@ def build_weekly_signal(
     new_entries = df[df.get("ACTION", "ENTER") == "ENTER"] if "ACTION" in df.columns else df
     if len(new_entries):
         lines.append(f"*NEW ENTRIES ({len(new_entries)}):*")
-        for i, r in enumerate(new_entries.head(10).itertuples(), 1):
+        # Show ALL picks. Telegram allows 4096 chars/msg; 15 picks ~ 1200 chars — well under.
+        for i, r in enumerate(new_entries.itertuples(), 1):
             sym = getattr(r, "SYMBOL", "?")
             close = getattr(r, "CLOSE", 0)
             conv = getattr(r, "CONFIDENCE", 7.0)
