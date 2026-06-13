@@ -98,6 +98,33 @@ jobs:
             --equity-log data/live_signals/equity_log.csv \
             --regime-json data/live_signals/daily_regime.json
 
+      - name: Generate live Excel tracker
+        run: |
+          python v5_modules/excel_report_generator.py \
+            --positions data/live_signals/positions.csv \
+            --equity-log data/live_signals/equity_log.csv \
+            --realized data/live_signals/realized_trades.csv \
+            --signal data/live_signals/daily_live_portfolio.csv \
+            --regime-json data/live_signals/daily_regime.json \
+            --master data/market_database/master_history.csv \
+            --output-dir . \
+            --filename V5_Live_Tracker.xlsx
+
+      - name: Email live tracker
+        env:
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+        run: |
+          if [ -f "V5_Live_Tracker.xlsx" ]; then
+            python v5_modules/email_sender.py \
+              --subject "V5 Daily Report — $(date -u +%a\ %d\ %b\ %Y)" \
+              --body "Attached: open positions with current MTM, equity curve, closed trades, today's signal. This is the latest snapshot — same file is updated daily." \
+              --attach "V5_Live_Tracker.xlsx"
+          else
+            echo "V5_Live_Tracker.xlsx not generated — skipping email."
+          fi
+
       - name: Recompress master history
         run: |
           gzip -f data/market_database/master_history.csv
@@ -106,7 +133,7 @@ jobs:
         run: |
           git config user.name "v5-automation"
           git config user.email "v5-automation@users.noreply.github.com"
-          git add -A data/ logs/ || true
+          git add -A data/ logs/ V5_Live_Tracker.xlsx || true
           git diff --cached --quiet || git commit -m "V5 daily refresh $(date -u +%Y-%m-%d)"
           git push
 
