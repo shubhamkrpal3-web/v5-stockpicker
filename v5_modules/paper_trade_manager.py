@@ -54,6 +54,13 @@ REALIZED_COLS = [
 ]
 
 
+# Columns that hold text/dates. When a ledger has no closed trades yet, these
+# load from CSV as all-NaN float64, and pandas 2.x raises a hard TypeError
+# (LossySetitemError) when an exit later assigns a string like "2026-06-26"
+# into them. Forcing object dtype on load makes those assignments safe.
+TEXT_COLS = ["symbol", "signal_date", "entry_date", "status", "exit_date", "exit_reason"]
+
+
 def _load_positions(path: Path) -> pd.DataFrame:
     if path.exists():
         df = pd.read_csv(path)
@@ -61,7 +68,12 @@ def _load_positions(path: Path) -> pd.DataFrame:
         for c in POSITIONS_COLS:
             if c not in df.columns:
                 df[c] = None
-        return df[POSITIONS_COLS]
+        df = df[POSITIONS_COLS]
+        # Force text/date columns to object so exit writes never hit the
+        # pandas 2.x float64 dtype crash.
+        for c in TEXT_COLS:
+            df[c] = df[c].astype(object)
+        return df
     return pd.DataFrame(columns=POSITIONS_COLS)
 
 

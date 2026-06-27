@@ -118,6 +118,19 @@ jobs:
             --output-dir . \
             --filename V5_Live_Tracker.xlsx
 
+      - name: Build readable email body (dashboard + picks as plain text)
+        run: |
+          python v5_modules/email_body_builder.py \
+            --equity-log data/live_signals/equity_log.csv \
+            --positions data/live_signals/positions.csv \
+            --realized data/live_signals/realized_trades.csv \
+            --signal data/live_signals/daily_live_portfolio.csv \
+            --regime-json data/live_signals/daily_regime.json \
+            --master data/market_database/master_history.csv \
+            > /tmp/email_body.txt || echo "Body build failed — email_sender will fall back to --body."
+          echo "----- email body preview -----"
+          cat /tmp/email_body.txt || true
+
       - name: Email live tracker
         env:
           EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
@@ -127,6 +140,7 @@ jobs:
           if [ -f "V5_Live_Tracker.xlsx" ]; then
             python v5_modules/email_sender.py \
               --subject "V5 Daily Report — $(date -u +%a\ %d\ %b\ %Y)" \
+              --body-file /tmp/email_body.txt \
               --body "Attached: open positions with current MTM, equity curve, closed trades, today's signal. This is the latest snapshot — same file is updated daily." \
               --attach "V5_Live_Tracker.xlsx"
           else

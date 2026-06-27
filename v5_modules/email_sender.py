@@ -12,14 +12,19 @@ How to get a Gmail app password:
   1. https://myaccount.google.com/security
   2. Turn ON 2-Step Verification (if not already on)
   3. Go to https://myaccount.google.com/apppasswords
-  4. Pick "Mail" / "Other (Custom name)" → "V5 stockpicker"
-  5. Google shows a 16-char password — copy it (only shown once)
+  4. Pick "Mail" / "Other (Custom name)" -> "V5 stockpicker"
+  5. Google shows a 16-char password - copy it (only shown once)
   6. Save to GitHub Secrets as GMAIL_APP_PASSWORD
 
 Usage:
   python email_sender.py --subject "V5 Daily Report 2026-06-10" \
                         --body "See attached" \
                         --attach data/reports/V5_Daily_Report_2026-06-10.xlsx
+
+  # Or read the body text from a file (e.g. a generated daily summary):
+  python email_sender.py --subject "V5 Daily Report" \
+                        --body-file /tmp/email_body.txt \
+                        --attach V5_Live_Tracker.xlsx
 """
 from __future__ import annotations
 
@@ -71,11 +76,21 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--subject", required=True)
     ap.add_argument("--body", default="See attached.")
+    ap.add_argument("--body-file", default=None, help="Read body text from this file; takes precedence over --body when present and non-empty.")
     ap.add_argument("--attach", default=None)
     ap.add_argument("--from-addr", default=None)
     ap.add_argument("--to-addr", default=None)
     args = ap.parse_args()
-    send_email(args.subject, args.body, args.attach, args.from_addr, args.to_addr)
+
+    body = args.body
+    if args.body_file:
+        p = Path(args.body_file)
+        if p.exists() and p.stat().st_size > 0:
+            body = p.read_text(encoding="utf-8")
+        else:
+            print(f"[WARN] --body-file {p} missing or empty; falling back to --body")
+
+    send_email(args.subject, body, args.attach, args.from_addr, args.to_addr)
 
 
 if __name__ == "__main__":
