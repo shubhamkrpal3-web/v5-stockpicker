@@ -430,3 +430,27 @@
 [2026-07-10 17:54:48] [450/500] ok=412 fail=38  elapsed=1.2m  ETA=0.1m
 [2026-07-10 17:54:48] [475/500] ok=437 fail=38  elapsed=1.2m  ETA=0.1m
 [2026-07-10 17:54:48] [500/500] ok=462 fail=38  elapsed=1.2m  ETA=0.0m
+[2026-07-12 12:18:54] [25/500] ok=24 fail=1  elapsed=0.9m  ETA=16.4m
+[2026-07-12 12:19:47] [50/500] ok=49 fail=1  elapsed=1.8m  ETA=15.8m
+[2026-07-12 12:20:42] [75/500] ok=71 fail=4  elapsed=2.7m  ETA=15.1m
+[2026-07-12 12:21:37] [100/500] ok=94 fail=6  elapsed=3.6m  ETA=14.3m
+[2026-07-12 12:22:30] [125/500] ok=115 fail=10  elapsed=4.5m  ETA=13.4m
+[2026-07-12 12:23:23] GET https://www.screener.in/company/DUMMYVEDL1/consolidated/ -> 404 (giving up)
+[2026-07-12 12:23:23] [150/500] ok=138 fail=12  elapsed=5.4m  ETA=12.5m
+[2026-07-12 12:23:25] GET https://www.screener.in/company/DUMMYVEDL2/consolidated/ -> 404 (giving up)
+[2026-07-12 12:23:27] GET https://www.screener.in/company/DUMMYVEDL3/consolidated/ -> 404 (giving up)
+[2026-07-12 12:23:30] GET https://www.screener.in/company/DUMMYVEDL4/consolidated/ -> 404 (giving up)
+[2026-07-12 12:24:17] [175/500] ok=160 fail=15  elapsed=6.3m  ETA=11.6m
+[2026-07-12 12:25:11] [200/500] ok=181 fail=19  elapsed=7.2m  ETA=10.7m
+[2026-07-12 12:26:04] [225/500] ok=203 fail=22  elapsed=8.0m  ETA=9.8m
+[2026-07-12 12:26:58] [250/500] ok=225 fail=25  elapsed=8.9m  ETA=8.9m
+[2026-07-12 12:27:51] [275/500] ok=250 fail=25  elapsed=9.8m  ETA=8.0m
+[2026-07-12 12:28:46] [300/500] ok=273 fail=27  elapsed=10.7m  ETA=7.2m
+[2026-07-12 12:29:41] [325/500] ok=298 fail=27  elapsed=11.7m  ETA=6.3m
+[2026-07-12 12:30:34] [350/500] ok=319 fail=31  elapsed=12.5m  ETA=5.4m
+[2026-07-12 12:31:28] [375/500] ok=343 fail=32  elapsed=13.4m  ETA=4.5m
+[2026-07-12 12:32:21] [400/500] ok=368 fail=32  elapsed=14.3m  ETA=3.6m
+[2026-07-12 12:33:14] [425/500] ok=389 fail=36  elapsed=15.2m  ETA=2.7m
+[2026-07-12 12:34:08] [450/500] ok=412 fail=38  elapsed=16.1m  ETA=1.8m
+[2026-07-12 12:35:02] [475/500] ok=437 fail=38  elapsed=17.0m  ETA=0.9m
+[2026-07-12 12:35:55] [500/500] ok=462 fail=38  elapsed=17.9m  ETA=0.0m
