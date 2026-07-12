@@ -208,13 +208,31 @@ def _check_exits(positions: pd.DataFrame, today_bar: pd.DataFrame,
 
 def _open_new_positions(positions: pd.DataFrame, signal: pd.DataFrame,
                          today_bar: pd.DataFrame, today_date: pd.Timestamp,
-                         master: pd.DataFrame) -> pd.DataFrame:
-    """On Monday, open new positions at today's open for any signal pick not already held."""
+                         master: pd.DataFrame, max_open_positions: int = 15) -> pd.DataFrame:
+    """On Monday, open new positions at today's open for signal picks not already held.
+
+    Enforces a hard cap on the number of open positions so the book can't balloon
+    (it previously ran to 24 names / ~86% invested, well past the ~15-name / gross
+    target design). Only the highest-confidence picks fill the available slots.
+    Existing holdings are never force-sold — the book cycles down naturally via exits.
+    """
     if signal.empty:
         return positions
     open_syms = set(positions.loc[positions["status"] == "open", "symbol"].astype(str).str.upper())
+
+    slots = max_open_positions - len(open_syms)
+    if slots <= 0:
+        print(f"[INFO] position cap reached ({len(open_syms)}/{max_open_positions}) — no new entries today.")
+        return positions
+
+    # Fill the limited slots with the best picks first.
+    if "CONFIDENCE" in signal.columns:
+        signal = signal.sort_values("CONFIDENCE", ascending=False)
+
     new_rows = []
     for _, pick in signal.iterrows():
+        if slots <= 0:
+            break
         sym = str(pick.get("SYMBOL", "")).upper()
         if not sym or sym in open_syms:
             continue
@@ -230,6 +248,8 @@ def _open_new_positions(positions: pd.DataFrame, signal: pd.DataFrame,
             continue
         signal_stop = float(pick.get("STOP_PRICE", 0))
         atr = _compute_atr14(master, sym, today_date) or 0
+        open_syms.add(sym)
+        slots -= 1
         new_rows.append({
             "symbol": sym,
             "signal_date": pick.get("DATE", ""),
@@ -301,6 +321,9 @@ def main():
     ap.add_argument("--entry-day", default="mon",
                     help="Day-of-week when new positions are opened. mon/tue/wed/thu/fri or 'any' for daily")
     ap.add_argument("--max-holding-days", type=int, default=25)
+    ap.add_argument("--max-open-positions", type=int, default=15,
+                    help="Hard cap on concurrent open positions (matches top-N / gross target). "
+                         "New Monday picks fill only the free slots, best confidence first.")
     args = ap.parse_args()
 
     master = _load_master_recent(Path(args.master))
@@ -330,7 +353,8 @@ def main():
         signal.columns = [c.strip().upper() for c in signal.columns]
         if not signal.empty:
             n_before = len(positions[positions["status"] == "open"])
-            positions = _open_new_positions(positions, signal, today_bar, today_date, master)
+            positions = _open_new_positions(positions, signal, today_bar, today_date, master,
+                                            max_open_positions=args.max_open_positions)
             n_after = len(positions[positions["status"] == "open"])
             n_new = n_after - n_before
             print(f"[INFO] opened {n_new} new positions today from signal")

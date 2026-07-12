@@ -173,8 +173,15 @@ def update_benchmark_history(bench_csv: Path, max_back_days: int = 7,
 # =========================================================
 # Compare
 # =========================================================
-def compute_comparison(bench_csv: Path, equity_log: Path, portfolio_inr: float) -> dict:
-    """Align benchmark to portfolio equity dates, rebase, and compute return/alpha/IR."""
+def compute_comparison(bench_csv: Path, equity_log: Path, portfolio_inr: float,
+                       from_first_position: bool = True) -> dict:
+    """Align benchmark to portfolio equity dates, rebase, and compute return/alpha/IR.
+
+    from_first_position=True (default): start the comparison on the first day the
+    portfolio actually held a position (N_OPEN > 0), so the pre-trade cash period
+    (when the strategy wasn't invested yet) doesn't unfairly distort the headline
+    vs a fully-invested index.
+    """
     summary = {"as_of": None, "status": "no_data"}
     if not equity_log.exists() or not bench_csv.exists():
         return summary
@@ -184,6 +191,12 @@ def compute_comparison(bench_csv: Path, equity_log: Path, portfolio_inr: float) 
         return summary
     eq["DATE"] = pd.to_datetime(eq["DATE"], errors="coerce")
     eq = eq.dropna(subset=["DATE"]).sort_values("DATE")
+
+    # Fair start: drop the pre-trade cash days so we compare invested-vs-index.
+    if from_first_position and "N_OPEN" in eq.columns:
+        invested = eq[pd.to_numeric(eq["N_OPEN"], errors="coerce").fillna(0) > 0]
+        if not invested.empty:
+            eq = eq[eq["DATE"] >= invested["DATE"].iloc[0]]
 
     bench = pd.read_csv(bench_csv)
     bench.columns = [c.strip().upper() for c in bench.columns]
@@ -251,6 +264,8 @@ def main():
     ap.add_argument("--backfill-days", type=int, default=45,
                     help="On the first run (empty history), fetch this many days back to seed the full period.")
     ap.add_argument("--no-fetch", action="store_true", help="Skip the network fetch; only recompute from stored history.")
+    ap.add_argument("--include-cash-startup", action="store_true",
+                    help="Include the pre-trade cash days in the comparison (default: start from first position for a fair vs-index test).")
     args = ap.parse_args()
 
     outdir = Path(args.output_dir)
@@ -266,7 +281,8 @@ def main():
 
     # --- compare (guarded) ---
     try:
-        summary = compute_comparison(Path(args.benchmark_csv), Path(args.equity_log), args.portfolio_inr)
+        summary = compute_comparison(Path(args.benchmark_csv), Path(args.equity_log), args.portfolio_inr,
+                                     from_first_position=not args.include_cash_startup)
     except Exception as e:
         print(f"[WARN] benchmark comparison failed (non-fatal): {e}")
         summary = {"status": "error", "error": str(e)}
