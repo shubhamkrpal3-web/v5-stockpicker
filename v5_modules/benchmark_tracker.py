@@ -101,11 +101,11 @@ def parse_nifty500_close(csv_text: str) -> float | None:
         return None
 
 
-def fetch_one_day(d: date) -> float | None:
+def fetch_one_day(d: date, session=None) -> float | None:
     if requests is None:
         return None
     url = NSE_INDEX_URL.format(ddmmyyyy=d.strftime("%d%m%Y"))
-    s = _session()
+    s = session or _session()
     for attempt in range(3):
         try:
             r = s.get(url, timeout=30)
@@ -119,8 +119,14 @@ def fetch_one_day(d: date) -> float | None:
     return None
 
 
-def update_benchmark_history(bench_csv: Path, max_back_days: int = 7) -> int:
-    """Append any missing recent NIFTY 500 closes to benchmark_history.csv. Returns rows added."""
+def update_benchmark_history(bench_csv: Path, max_back_days: int = 7,
+                             backfill_days: int = 45, min_history: int = 5) -> int:
+    """Append any missing recent NIFTY 500 closes to benchmark_history.csv. Returns rows added.
+
+    On the FIRST run (history missing or shorter than `min_history` rows), automatically
+    widens the lookback to `backfill_days` so the whole paper-trade period is seeded in
+    one go. Every run after that uses the normal `max_back_days` top-up.
+    """
     bench_csv.parent.mkdir(parents=True, exist_ok=True)
     if bench_csv.exists():
         hist = pd.read_csv(bench_csv)
@@ -130,18 +136,27 @@ def update_benchmark_history(bench_csv: Path, max_back_days: int = 7) -> int:
         hist = pd.DataFrame(columns=["DATE", "NIFTY500_CLOSE"])
         have = set()
 
+    lookback = max_back_days
+    if len(have) < min_history:
+        lookback = max(max_back_days, backfill_days)
+        print(f"[INFO] benchmark history is new/short ({len(have)} rows) — one-time backfill of {lookback} days.")
+
+    # Reuse a single NSE session across the whole (possibly long) backfill loop.
+    sess = _session() if requests is not None else None
+
     new_rows = []
-    for offset in range(max_back_days):
+    for offset in range(lookback):
         d = date.today() - timedelta(days=offset)
         if d.weekday() >= 5:  # skip Sat/Sun
             continue
         key = d.strftime("%Y%m%d")
         if key in have:
             continue
-        close = fetch_one_day(d)
+        close = fetch_one_day(d, session=sess)
         if close is not None and close > 0:
             new_rows.append({"DATE": key, "NIFTY500_CLOSE": close})
             print(f"[INFO] NIFTY 500 {d.isoformat()} close = {close:,.2f}")
+        time.sleep(0.4)  # be polite to NSE during a long backfill
 
     if not new_rows:
         print("[INFO] benchmark: no new NIFTY 500 rows added (already current, holiday, or fetch unavailable).")
@@ -233,6 +248,8 @@ def main():
     ap.add_argument("--output-dir", default="./data/live_signals")
     ap.add_argument("--portfolio-inr", type=float, default=200000.0)
     ap.add_argument("--max-back-days", type=int, default=7)
+    ap.add_argument("--backfill-days", type=int, default=45,
+                    help="On the first run (empty history), fetch this many days back to seed the full period.")
     ap.add_argument("--no-fetch", action="store_true", help="Skip the network fetch; only recompute from stored history.")
     args = ap.parse_args()
 
@@ -242,7 +259,8 @@ def main():
     # --- fetch (guarded) ---
     if not args.no_fetch:
         try:
-            update_benchmark_history(Path(args.benchmark_csv), args.max_back_days)
+            update_benchmark_history(Path(args.benchmark_csv), args.max_back_days,
+                                     backfill_days=args.backfill_days)
         except Exception as e:
             print(f"[WARN] benchmark fetch failed (non-fatal): {e}")
 
