@@ -76,6 +76,31 @@ def _latest_closes(master_path: Path, symbols: set, lookback_days: int = 10) -> 
     return last.to_dict()
 
 
+def _benchmark_lines(benchmark_json: Path | None) -> list:
+    """Return a 'vs Nifty 500' block for the email, or [] if unavailable."""
+    if not benchmark_json or not benchmark_json.exists():
+        return []
+    try:
+        with open(benchmark_json) as f:
+            b = json.load(f)
+    except Exception:
+        return []
+    if b.get("status") != "ok":
+        return []
+    verdict = "AHEAD of" if b.get("beating_market") else "BEHIND"
+    ir = b.get("information_ratio")
+    ir_str = f"{ir:+.2f}" if isinstance(ir, (int, float)) else "n/a"
+    out = [
+        "VS NIFTY 500 (the go-live test)",
+        f"  You {b['portfolio_return_pct']:+.2f}%  vs  market {b['benchmark_return_pct']:+.2f}%"
+        f"  ->  {verdict} by {abs(b['excess_return_pct']):.2f}%",
+        f"  Information Ratio: {ir_str}  (needs to be positive to beat the market)",
+        f"  measured since {b.get('start_date','?')} ({b.get('n_days','?')} days)",
+        "",
+    ]
+    return out
+
+
 def build_body(
     equity_log: Path,
     positions: Path,
@@ -83,6 +108,7 @@ def build_body(
     signal: Path,
     regime_json: Path,
     master: Path | None = None,
+    benchmark_json: Path | None = None,
 ) -> str:
     today = pd.Timestamp.now()
     today_str = today.strftime("%a %d %b %Y")
@@ -139,6 +165,9 @@ def build_body(
         lines.append("PORTFOLIO")
         lines.append("  Paper trading hasn't started yet — ledger is empty.")
     lines.append("")
+
+    # ---- benchmark: vs Nifty 500 ----
+    lines.extend(_benchmark_lines(benchmark_json))
 
     # ---- today's exits (from realized_trades) ----
     if realized and realized.exists():
@@ -221,6 +250,8 @@ def main():
     ap.add_argument("--regime-json", default="./data/live_signals/daily_regime.json")
     ap.add_argument("--master", default=None,
                     help="Optional master_history.csv to mark open positions to today's close.")
+    ap.add_argument("--benchmark-json", default="./data/live_signals/benchmark_summary.json",
+                    help="Optional benchmark_summary.json for the 'vs Nifty 500' line.")
     args = ap.parse_args()
 
     body = build_body(
@@ -230,6 +261,7 @@ def main():
         signal=Path(args.signal),
         regime_json=Path(args.regime_json),
         master=Path(args.master) if args.master else None,
+        benchmark_json=Path(args.benchmark_json) if args.benchmark_json else None,
     )
     print(body)
 

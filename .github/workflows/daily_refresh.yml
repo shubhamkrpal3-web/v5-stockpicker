@@ -118,6 +118,16 @@ jobs:
             --output-dir . \
             --filename V5_Live_Tracker.xlsx
 
+      - name: Update Nifty 500 benchmark and compare (non-fatal — never blocks the run)
+        continue-on-error: true
+        run: |
+          python v5_modules/benchmark_tracker.py \
+            --benchmark-csv data/market_database/benchmark_history.csv \
+            --equity-log data/live_signals/equity_log.csv \
+            --output-dir data/live_signals \
+            --portfolio-inr 200000 \
+            --max-back-days 7 || echo "Benchmark step failed — skipping (does not affect the rest of the run)."
+
       - name: Build readable email body (dashboard + picks as plain text)
         run: |
           python v5_modules/email_body_builder.py \
@@ -126,6 +136,7 @@ jobs:
             --realized data/live_signals/realized_trades.csv \
             --signal data/live_signals/daily_live_portfolio.csv \
             --regime-json data/live_signals/daily_regime.json \
+            --benchmark-json data/live_signals/benchmark_summary.json \
             --master data/market_database/master_history.csv \
             > /tmp/email_body.txt || echo "Body build failed — email_sender will fall back to --body."
           echo "----- email body preview -----"

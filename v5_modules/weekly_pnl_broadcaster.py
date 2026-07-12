@@ -43,6 +43,7 @@ def main():
     ap.add_argument("--positions", default="./data/live_signals/positions.csv")
     ap.add_argument("--realized", default="./data/live_signals/realized_trades.csv")
     ap.add_argument("--regime-json", default="./data/live_signals/daily_regime.json")
+    ap.add_argument("--benchmark-json", default="./data/live_signals/benchmark_summary.json")
     ap.add_argument("--portfolio-inr", type=float, default=200000.0)
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
@@ -121,12 +122,32 @@ def main():
                 rj = json.load(f)
             regime_state = rj.get("state", "UNKNOWN")
 
+        # Benchmark: vs Nifty 500 (the go-live test)
+        bench_line = None
+        if Path(args.benchmark_json).exists():
+            try:
+                with open(args.benchmark_json) as f:
+                    b = json.load(f)
+                if b.get("status") == "ok":
+                    verdict = "ahead" if b.get("beating_market") else "behind"
+                    ir = b.get("information_ratio")
+                    ir_str = f"{ir:+.2f}" if isinstance(ir, (int, float)) else "n/a"
+                    bench_line = (
+                        f"_vs Nifty 500:_ you {b['portfolio_return_pct']:+.2f}% vs "
+                        f"market {b['benchmark_return_pct']:+.2f}% → *{verdict} {abs(b['excess_return_pct']):.2f}%*"
+                        f"  (IR {ir_str})"
+                    )
+            except Exception:
+                bench_line = None
+
         lines = []
         lines.append(f"*V5 WEEKLY SUMMARY — {today}*")
         lines.append("")
         lines.append(f"_Equity:_ {fmt_inr(latest_equity)}  ({week_ret * 100:+.2f}% this wk)")
         lines.append(f"_YTD:_ {ytd_ret * 100:+.2f}%   _DD from peak:_ {dd * 100:+.2f}%")
         lines.append(f"_Regime:_ `{regime_state}`")
+        if bench_line:
+            lines.append(bench_line)
         lines.append("")
         lines.append(f"*Open positions:* {n_open}")
         if top_symbols != "—":
