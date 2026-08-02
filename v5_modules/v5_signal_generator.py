@@ -176,18 +176,91 @@ def apply_quality_gate(universe: pd.DataFrame, fdf: pd.DataFrame) -> tuple[pd.Da
 # =========================================================
 # 4. Regime detector
 # =========================================================
-def detect_regime(master: pd.DataFrame, snap_date: pd.Timestamp) -> tuple[str, dict]:
+def _index_volatility(master: pd.DataFrame, symbols: set, snap_date: pd.Timestamp,
+                      window: int = 20) -> Optional[float]:
+    """Annualised volatility of an EQUAL-WEIGHTED INDEX built from `symbols`.
+
+    This is the correct like-for-like measure for a VIX-style threshold. The old
+    code averaged the volatility of INDIVIDUAL stocks (~35-44% annualised) and
+    compared it to 22%, which is an index-level number — a units mismatch that
+    made the trigger mathematically impossible to pass (0/50 sessions), so
+    RISK_ON was unreachable. A diversified index is far less volatile than its
+    average constituent; measuring the index itself fixes the comparison.
+    """
+    sub = master[master["SYMBOL"].isin(symbols) & (master["DATE_DT"] <= snap_date)]
+    if sub.empty:
+        return None
+    wide = sub.pivot_table(index="DATE_DT", columns="SYMBOL", values="CLOSE")
+    if len(wide) < window + 2:
+        return None
+    # Equal-weighted index daily return = mean of constituent daily returns
+    idx_ret = wide.pct_change(fill_method=None).mean(axis=1)
+    vol = idx_ret.rolling(window, min_periods=max(10, window // 2)).std().iloc[-1]
+    if vol != vol:  # NaN
+        return None
+    return float(vol * np.sqrt(252))
+
+
+def _apply_debounce(raw_state: str, regime_json_path: Optional[Path],
+                    persist: int = 2) -> tuple[str, dict]:
+    """Require a new regime to persist `persist` consecutive readings before adopting it.
+
+    The three triggers sit close to their thresholds (breadth in particular hovers
+    around 0.55), so the raw state can flip day to day and whipsaw position sizing.
+    Debouncing holds the adopted state until the new one has been seen `persist`
+    times in a row. Returns (adopted_state, debounce_info).
+    """
+    prev_state, pending_state, pending_count = None, None, 0
+    if regime_json_path and Path(regime_json_path).exists():
+        try:
+            with open(regime_json_path) as f:
+                prev = json.load(f)
+            prev_state = prev.get("state")
+            pending_state = prev.get("pending_state")
+            pending_count = int(prev.get("pending_count", 0) or 0)
+        except Exception:
+            pass
+
+    if prev_state is None:                       # first ever run — adopt immediately
+        return raw_state, {"adopted": raw_state, "pending_state": None, "pending_count": 0,
+                           "debounce_note": "first run; adopted immediately"}
+
+    if raw_state == prev_state:                  # nothing changing
+        return prev_state, {"adopted": prev_state, "pending_state": None, "pending_count": 0,
+                            "debounce_note": "stable"}
+
+    # raw differs from the adopted state
+    if raw_state == pending_state:
+        pending_count += 1
+    else:
+        pending_state, pending_count = raw_state, 1
+
+    if pending_count >= persist:                 # persisted long enough — adopt
+        return raw_state, {"adopted": raw_state, "pending_state": None, "pending_count": 0,
+                           "debounce_note": f"{raw_state} persisted {pending_count} readings; adopted"}
+
+    return prev_state, {"adopted": prev_state, "pending_state": pending_state,
+                        "pending_count": pending_count,
+                        "debounce_note": f"holding {prev_state}; {raw_state} pending "
+                                         f"({pending_count}/{persist})"}
+
+
+def detect_regime(master: pd.DataFrame, snap_date: pd.Timestamp,
+                  regime_json_path: Optional[Path] = None,
+                  debounce_periods: int = 2) -> tuple[str, dict]:
     """
     Proxy regime detector using only OHLCV data (no external API needed):
       Trend  : (mean close of top-100 traded value stocks) > 200-DMA?
       Breadth: pct of all stocks with CLOSE > 50-DMA?  > 55% → ok
-      Vol    : top-100 stocks' avg 20-day return std × √252 < 22% → ok
+      Vol    : INDEX-level 20-day volatility (equal-weighted top-100) × √252 < 22% → ok
+
+    The resulting raw state is then debounced: a change must persist for
+    `debounce_periods` consecutive readings before it is adopted.
     """
-    g = master.groupby("SYMBOL", sort=False)
     master = master.copy()
+    g = master.groupby("SYMBOL", sort=False)
     master["SMA50"] = g["CLOSE"].transform(lambda x: x.rolling(50, min_periods=30).mean())
     master["SMA200"] = g["CLOSE"].transform(lambda x: x.rolling(200, min_periods=120).mean())
-    master["VOL_20D_DAILY"] = g["CLOSE"].pct_change(1).rolling(20, min_periods=10).std().reset_index(level=0, drop=True)
 
     today = master[master["DATE_DT"] == snap_date].copy()
     if today.empty:
@@ -202,16 +275,20 @@ def detect_regime(master: pd.DataFrame, snap_date: pd.Timestamp) -> tuple[str, d
     breadth_above = (today.loc[has_50, "CLOSE"] > today.loc[has_50, "SMA50"]).mean() if has_50.sum() > 100 else 0.5
     breadth_ok = bool(breadth_above > 0.55)
 
-    vol_proxy = float(today_liquid["VOL_20D_DAILY"].mean() * np.sqrt(252))
-    vol_ok = bool(vol_proxy < 0.22)
+    # INDEX-level volatility (see _index_volatility for why this replaces the
+    # old average-of-single-stock-vols measure).
+    vol_proxy = _index_volatility(master, set(today_liquid["SYMBOL"]), snap_date)
+    vol_ok = bool(vol_proxy is not None and vol_proxy < 0.22)
 
     score = int(trend_ok) + int(breadth_ok) + int(vol_ok)
     if score == 3:
-        state = "RISK_ON"
+        raw_state = "RISK_ON"
     elif score == 2:
-        state = "RISK_NEU"
+        raw_state = "RISK_NEU"
     else:
-        state = "RISK_OFF"
+        raw_state = "RISK_OFF"
+
+    state, dbinfo = _apply_debounce(raw_state, regime_json_path, persist=debounce_periods)
 
     triggers = {
         "Trend":   "✓" if trend_ok else "✗",
@@ -219,9 +296,12 @@ def detect_regime(master: pd.DataFrame, snap_date: pd.Timestamp) -> tuple[str, d
         "VIX":     "✓" if vol_ok else "✗",
     }
     detail = {
-        "state": state, "score": score, "triggers": triggers,
+        "state": state, "raw_state": raw_state, "score": score, "triggers": triggers,
         "mean_close": mean_close, "mean_200dma": mean_200dma,
         "breadth_above_50dma": breadth_above, "vol_proxy_ann": vol_proxy,
+        "vol_measure": "index_level_equal_weighted_top100",
+        "pending_state": dbinfo["pending_state"], "pending_count": dbinfo["pending_count"],
+        "debounce_note": dbinfo["debounce_note"],
     }
     return state, detail
 
@@ -289,6 +369,8 @@ def main():
     ap.add_argument("--max-stock-w", type=float, default=0.10)
     ap.add_argument("--min-close", type=float, default=20.0)
     ap.add_argument("--min-traded-value", type=float, default=10_000_000.0)
+    ap.add_argument("--debounce-periods", type=int, default=2,
+                    help="Consecutive readings a new regime must persist before it is adopted (1 = off).")
     args = ap.parse_args()
 
     outdir = Path(args.output_dir)
@@ -321,7 +403,10 @@ def main():
     diag["universe_after_quality_gate"] = len(snap)
 
     # Regime detection
-    state, regime_detail = detect_regime(master, snap_date)
+    # Pass the existing regime file so the debounce can read yesterday's adopted state.
+    state, regime_detail = detect_regime(master, snap_date,
+                                         regime_json_path=outdir / "daily_regime.json",
+                                         debounce_periods=args.debounce_periods)
     diag["regime"] = regime_detail
     sizing_params = regime_sizing(state)
 
