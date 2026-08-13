@@ -1,5 +1,5 @@
 {
-  "state": "RISK_ON",
+  "state": "RISK_NEU",
   "raw_state": "RISK_NEU",
   "score": 2,
   "triggers": {
@@ -7,12 +7,12 @@
     "Breadth": "\u2717",
     "VIX": "\u2713"
   },
-  "mean_close": 3091.1067999999996,
-  "mean_200dma": 2732.1491900577134,
-  "breadth_above_50dma": 0.5475695886996261,
-  "vol_proxy_ann": 0.09409417637902973,
+  "mean_close": 2713.8645,
+  "mean_200dma": 2462.645165578434,
+  "breadth_above_50dma": 0.5473727761688043,
+  "vol_proxy_ann": 0.09748120425238582,
   "vol_measure": "index_level_equal_weighted_top100",
-  "pending_state": "RISK_NEU",
-  "pending_count": 1,
-  "debounce_note": "holding RISK_ON; RISK_NEU pending (1/2)"
+  "pending_state": null,
+  "pending_count": 0,
+  "debounce_note": "RISK_NEU persisted 2 readings; adopted"
 }
