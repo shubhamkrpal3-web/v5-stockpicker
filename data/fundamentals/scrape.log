@@ -818,3 +818,190 @@
 [2026-07-31 18:04:41] [450/500] ok=412 fail=38  elapsed=16.1m  ETA=1.8m
 [2026-07-31 18:05:34] [475/500] ok=437 fail=38  elapsed=17.0m  ETA=0.9m
 [2026-07-31 18:06:28] [500/500] ok=462 fail=38  elapsed=17.9m  ETA=0.0m
+[2026-08-03 17:59:39] [25/500] ok=24 fail=1  elapsed=0.9m  ETA=16.4m
+[2026-08-03 18:00:32] [50/500] ok=49 fail=1  elapsed=1.7m  ETA=15.7m
+[2026-08-03 18:01:27] [75/500] ok=71 fail=4  elapsed=2.7m  ETA=15.0m
+[2026-08-03 18:02:20] [100/500] ok=94 fail=6  elapsed=3.6m  ETA=14.2m
+[2026-08-03 18:03:14] [125/500] ok=115 fail=10  elapsed=4.4m  ETA=13.3m
+[2026-08-03 18:04:07] GET https://www.screener.in/company/DUMMYVEDL1/consolidated/ -> 404 (giving up)
+[2026-08-03 18:04:07] [150/500] ok=138 fail=12  elapsed=5.3m  ETA=12.4m
+[2026-08-03 18:04:09] GET https://www.screener.in/company/DUMMYVEDL2/consolidated/ -> 404 (giving up)
+[2026-08-03 18:04:11] GET https://www.screener.in/company/DUMMYVEDL3/consolidated/ -> 404 (giving up)
+[2026-08-03 18:04:13] GET https://www.screener.in/company/DUMMYVEDL4/consolidated/ -> 404 (giving up)
+[2026-08-03 18:05:01] [175/500] ok=160 fail=15  elapsed=6.2m  ETA=11.6m
+[2026-08-03 18:05:55] [200/500] ok=181 fail=19  elapsed=7.1m  ETA=10.7m
+[2026-08-03 18:06:48] [225/500] ok=203 fail=22  elapsed=8.0m  ETA=9.8m
+[2026-08-03 18:07:42] [250/500] ok=225 fail=25  elapsed=8.9m  ETA=8.9m
+[2026-08-03 18:08:37] [275/500] ok=250 fail=25  elapsed=9.8m  ETA=8.0m
+[2026-08-03 18:09:30] [300/500] ok=273 fail=27  elapsed=10.7m  ETA=7.1m
+[2026-08-03 18:10:25] [325/500] ok=298 fail=27  elapsed=11.6m  ETA=6.3m
+[2026-08-03 18:11:18] GET https://www.screener.in/company/NIVABUPA/consolidated/ exception: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+[2026-08-03 18:11:21] GET https://www.screener.in/company/NIVABUPA/consolidated/ -> 503, sleep 2.8s
+[2026-08-03 18:11:24] GET https://www.screener.in/company/NIVABUPA/consolidated/ -> 503, sleep 4.2s
+[2026-08-03 18:11:29] [350/500] ok=319 fail=31  elapsed=12.7m  ETA=5.4m
+[2026-08-03 18:12:23] [375/500] ok=343 fail=32  elapsed=13.6m  ETA=4.5m
+[2026-08-03 18:13:17] [400/500] ok=368 fail=32  elapsed=14.5m  ETA=3.6m
+[2026-08-03 18:14:11] [425/500] ok=389 fail=36  elapsed=15.4m  ETA=2.7m
+[2026-08-03 18:15:04] [450/500] ok=412 fail=38  elapsed=16.3m  ETA=1.8m
+[2026-08-03 18:15:58] [475/500] ok=437 fail=38  elapsed=17.2m  ETA=0.9m
+[2026-08-03 18:16:51] [500/500] ok=462 fail=38  elapsed=18.1m  ETA=0.0m
+[2026-08-04 17:57:35] [25/500] ok=24 fail=1  elapsed=0.0m  ETA=0.3m
+[2026-08-04 17:57:35] [50/500] ok=49 fail=1  elapsed=0.0m  ETA=0.1m
+[2026-08-04 17:57:41] [75/500] ok=71 fail=4  elapsed=0.1m  ETA=0.7m
+[2026-08-04 17:57:45] [100/500] ok=94 fail=6  elapsed=0.2m  ETA=0.7m
+[2026-08-04 17:57:54] [125/500] ok=115 fail=10  elapsed=0.3m  ETA=1.0m
+[2026-08-04 17:57:56] [150/500] ok=138 fail=12  elapsed=0.4m  ETA=0.9m
+[2026-08-04 17:57:56] [175/500] ok=160 fail=15  elapsed=0.4m  ETA=0.7m
+[2026-08-04 17:58:05] [200/500] ok=181 fail=19  elapsed=0.5m  ETA=0.8m
+[2026-08-04 17:58:11] [225/500] ok=203 fail=22  elapsed=0.6m  ETA=0.8m
+[2026-08-04 17:58:18] [250/500] ok=225 fail=25  elapsed=0.7m  ETA=0.7m
+[2026-08-04 17:58:18] [275/500] ok=250 fail=25  elapsed=0.7m  ETA=0.6m
+[2026-08-04 17:58:22] [300/500] ok=273 fail=27  elapsed=0.8m  ETA=0.5m
+[2026-08-04 17:58:22] [325/500] ok=298 fail=27  elapsed=0.8m  ETA=0.4m
+[2026-08-04 17:58:31] [350/500] ok=319 fail=31  elapsed=0.9m  ETA=0.4m
+[2026-08-04 17:58:33] [375/500] ok=343 fail=32  elapsed=1.0m  ETA=0.3m
+[2026-08-04 17:58:33] [400/500] ok=368 fail=32  elapsed=1.0m  ETA=0.2m
+[2026-08-04 17:58:41] [425/500] ok=389 fail=36  elapsed=1.1m  ETA=0.2m
+[2026-08-04 17:58:46] [450/500] ok=412 fail=38  elapsed=1.2m  ETA=0.1m
+[2026-08-04 17:58:46] [475/500] ok=437 fail=38  elapsed=1.2m  ETA=0.1m
+[2026-08-04 17:58:46] [500/500] ok=462 fail=38  elapsed=1.2m  ETA=0.0m
+[2026-08-05 17:49:54] [25/500] ok=24 fail=1  elapsed=0.9m  ETA=16.6m
+[2026-08-05 17:50:48] [50/500] ok=49 fail=1  elapsed=1.8m  ETA=15.9m
+[2026-08-05 17:51:42] [75/500] ok=71 fail=4  elapsed=2.7m  ETA=15.2m
+[2026-08-05 17:52:37] [100/500] ok=94 fail=6  elapsed=3.6m  ETA=14.3m
+[2026-08-05 17:53:31] [125/500] ok=115 fail=10  elapsed=4.5m  ETA=13.5m
+[2026-08-05 17:54:25] GET https://www.screener.in/company/DUMMYVEDL1/consolidated/ -> 404 (giving up)
+[2026-08-05 17:54:25] [150/500] ok=138 fail=12  elapsed=5.4m  ETA=12.6m
+[2026-08-05 17:54:27] GET https://www.screener.in/company/DUMMYVEDL2/consolidated/ -> 404 (giving up)
+[2026-08-05 17:54:29] GET https://www.screener.in/company/DUMMYVEDL3/consolidated/ -> 404 (giving up)
+[2026-08-05 17:54:31] GET https://www.screener.in/company/DUMMYVEDL4/consolidated/ -> 404 (giving up)
+[2026-08-05 17:55:19] [175/500] ok=160 fail=15  elapsed=6.3m  ETA=11.7m
+[2026-08-05 17:56:13] [200/500] ok=181 fail=19  elapsed=7.2m  ETA=10.8m
+[2026-08-05 17:57:06] [225/500] ok=203 fail=22  elapsed=8.1m  ETA=9.9m
+[2026-08-05 17:58:01] [250/500] ok=225 fail=25  elapsed=9.0m  ETA=9.0m
+[2026-08-05 17:58:55] [275/500] ok=250 fail=25  elapsed=9.9m  ETA=8.1m
+[2026-08-05 17:59:49] [300/500] ok=273 fail=27  elapsed=10.8m  ETA=7.2m
+[2026-08-05 18:00:43] [325/500] ok=298 fail=27  elapsed=11.7m  ETA=6.3m
+[2026-08-05 18:01:36] [350/500] ok=319 fail=31  elapsed=12.6m  ETA=5.4m
+[2026-08-05 18:02:29] [375/500] ok=343 fail=32  elapsed=13.5m  ETA=4.5m
+[2026-08-05 18:03:23] [400/500] ok=368 fail=32  elapsed=14.4m  ETA=3.6m
+[2026-08-05 18:04:17] [425/500] ok=389 fail=36  elapsed=15.3m  ETA=2.7m
+[2026-08-05 18:05:10] [450/500] ok=412 fail=38  elapsed=16.1m  ETA=1.8m
+[2026-08-05 18:06:04] [475/500] ok=437 fail=38  elapsed=17.0m  ETA=0.9m
+[2026-08-05 18:06:58] [500/500] ok=462 fail=38  elapsed=17.9m  ETA=0.0m
+[2026-08-07 17:00:48] [25/500] ok=24 fail=1  elapsed=0.9m  ETA=16.6m
+[2026-08-07 17:01:41] [50/500] ok=49 fail=1  elapsed=1.8m  ETA=15.8m
+[2026-08-07 17:02:35] [75/500] ok=71 fail=4  elapsed=2.7m  ETA=15.1m
+[2026-08-07 17:03:29] [100/500] ok=94 fail=6  elapsed=3.6m  ETA=14.3m
+[2026-08-07 17:04:23] [125/500] ok=115 fail=10  elapsed=4.5m  ETA=13.4m
+[2026-08-07 17:05:16] GET https://www.screener.in/company/DUMMYVEDL1/consolidated/ -> 404 (giving up)
+[2026-08-07 17:05:16] [150/500] ok=138 fail=12  elapsed=5.3m  ETA=12.5m
+[2026-08-07 17:05:18] GET https://www.screener.in/company/DUMMYVEDL2/consolidated/ -> 404 (giving up)
+[2026-08-07 17:05:21] GET https://www.screener.in/company/DUMMYVEDL3/consolidated/ -> 404 (giving up)
+[2026-08-07 17:05:23] GET https://www.screener.in/company/DUMMYVEDL4/consolidated/ -> 404 (giving up)
+[2026-08-07 17:06:11] [175/500] ok=160 fail=15  elapsed=6.3m  ETA=11.6m
+[2026-08-07 17:07:05] [200/500] ok=181 fail=19  elapsed=7.2m  ETA=10.7m
+[2026-08-07 17:07:58] [225/500] ok=203 fail=22  elapsed=8.1m  ETA=9.8m
+[2026-08-07 17:08:51] [250/500] ok=225 fail=25  elapsed=8.9m  ETA=8.9m
+[2026-08-07 17:09:45] [275/500] ok=250 fail=25  elapsed=9.8m  ETA=8.0m
+[2026-08-07 17:10:39] [300/500] ok=273 fail=27  elapsed=10.7m  ETA=7.2m
+[2026-08-07 17:11:33] [325/500] ok=298 fail=27  elapsed=11.6m  ETA=6.3m
+[2026-08-07 17:12:27] [350/500] ok=319 fail=31  elapsed=12.5m  ETA=5.4m
+[2026-08-07 17:13:21] [375/500] ok=343 fail=32  elapsed=13.4m  ETA=4.5m
+[2026-08-07 17:14:14] [400/500] ok=368 fail=32  elapsed=14.3m  ETA=3.6m
+[2026-08-07 17:15:10] [425/500] ok=389 fail=36  elapsed=15.2m  ETA=2.7m
+[2026-08-07 17:16:03] [450/500] ok=412 fail=38  elapsed=16.1m  ETA=1.8m
+[2026-08-07 17:16:57] [475/500] ok=437 fail=38  elapsed=17.0m  ETA=0.9m
+[2026-08-07 17:17:51] [500/500] ok=462 fail=38  elapsed=17.9m  ETA=0.0m
+[2026-08-10 17:02:01] [25/500] ok=24 fail=1  elapsed=0.9m  ETA=16.6m
+[2026-08-10 17:02:55] [50/500] ok=49 fail=1  elapsed=1.8m  ETA=16.0m
+[2026-08-10 17:03:48] [75/500] ok=71 fail=4  elapsed=2.7m  ETA=15.1m
+[2026-08-10 17:04:43] [100/500] ok=94 fail=6  elapsed=3.6m  ETA=14.3m
+[2026-08-10 17:05:36] [125/500] ok=115 fail=10  elapsed=4.5m  ETA=13.4m
+[2026-08-10 17:06:30] GET https://www.screener.in/company/DUMMYVEDL1/consolidated/ -> 404 (giving up)
+[2026-08-10 17:06:30] [150/500] ok=138 fail=12  elapsed=5.4m  ETA=12.5m
+[2026-08-10 17:06:32] GET https://www.screener.in/company/DUMMYVEDL2/consolidated/ -> 404 (giving up)
+[2026-08-10 17:06:34] GET https://www.screener.in/company/DUMMYVEDL3/consolidated/ -> 404 (giving up)
+[2026-08-10 17:06:36] GET https://www.screener.in/company/DUMMYVEDL4/consolidated/ -> 404 (giving up)
+[2026-08-10 17:07:24] [175/500] ok=160 fail=15  elapsed=6.3m  ETA=11.6m
+[2026-08-10 17:08:18] [200/500] ok=181 fail=19  elapsed=7.2m  ETA=10.7m
+[2026-08-10 17:09:11] [225/500] ok=203 fail=22  elapsed=8.0m  ETA=9.8m
+[2026-08-10 17:10:04] [250/500] ok=225 fail=25  elapsed=8.9m  ETA=8.9m
+[2026-08-10 17:10:58] [275/500] ok=250 fail=25  elapsed=9.8m  ETA=8.0m
+[2026-08-10 17:11:51] [300/500] ok=273 fail=27  elapsed=10.7m  ETA=7.1m
+[2026-08-10 17:12:44] [325/500] ok=298 fail=27  elapsed=11.6m  ETA=6.2m
+[2026-08-10 17:13:38] [350/500] ok=319 fail=31  elapsed=12.5m  ETA=5.3m
+[2026-08-10 17:14:32] [375/500] ok=343 fail=32  elapsed=13.4m  ETA=4.5m
+[2026-08-10 17:15:25] [400/500] ok=368 fail=32  elapsed=14.3m  ETA=3.6m
+[2026-08-10 17:16:18] [425/500] ok=389 fail=36  elapsed=15.2m  ETA=2.7m
+[2026-08-10 17:17:12] [450/500] ok=412 fail=38  elapsed=16.1m  ETA=1.8m
+[2026-08-10 17:18:06] [475/500] ok=437 fail=38  elapsed=17.0m  ETA=0.9m
+[2026-08-10 17:19:00] [500/500] ok=462 fail=38  elapsed=17.9m  ETA=0.0m
+[2026-08-11 17:05:51] [25/500] ok=24 fail=1  elapsed=0.9m  ETA=16.6m
+[2026-08-11 17:06:46] [50/500] ok=49 fail=1  elapsed=1.8m  ETA=16.1m
+[2026-08-11 17:07:41] [75/500] ok=71 fail=4  elapsed=2.7m  ETA=15.3m
+[2026-08-11 17:08:35] [100/500] ok=94 fail=6  elapsed=3.6m  ETA=14.4m
+[2026-08-11 17:09:29] [125/500] ok=115 fail=10  elapsed=4.5m  ETA=13.5m
+[2026-08-11 17:10:23] GET https://www.screener.in/company/DUMMYVEDL1/consolidated/ -> 404 (giving up)
+[2026-08-11 17:10:23] [150/500] ok=138 fail=12  elapsed=5.4m  ETA=12.6m
+[2026-08-11 17:10:25] GET https://www.screener.in/company/DUMMYVEDL2/consolidated/ -> 404 (giving up)
+[2026-08-11 17:10:27] GET https://www.screener.in/company/DUMMYVEDL3/consolidated/ -> 404 (giving up)
+[2026-08-11 17:10:29] GET https://www.screener.in/company/DUMMYVEDL4/consolidated/ -> 404 (giving up)
+[2026-08-11 17:11:17] [175/500] ok=160 fail=15  elapsed=6.3m  ETA=11.7m
+[2026-08-11 17:12:11] [200/500] ok=181 fail=19  elapsed=7.2m  ETA=10.8m
+[2026-08-11 17:13:05] [225/500] ok=203 fail=22  elapsed=8.1m  ETA=9.9m
+[2026-08-11 17:13:59] [250/500] ok=225 fail=25  elapsed=9.0m  ETA=9.0m
+[2026-08-11 17:14:53] [275/500] ok=250 fail=25  elapsed=9.9m  ETA=8.1m
+[2026-08-11 17:15:46] [300/500] ok=273 fail=27  elapsed=10.8m  ETA=7.2m
+[2026-08-11 17:16:40] [325/500] ok=298 fail=27  elapsed=11.7m  ETA=6.3m
+[2026-08-11 17:17:34] [350/500] ok=319 fail=31  elapsed=12.6m  ETA=5.4m
+[2026-08-11 17:18:28] [375/500] ok=343 fail=32  elapsed=13.5m  ETA=4.5m
+[2026-08-11 17:19:22] [400/500] ok=368 fail=32  elapsed=14.4m  ETA=3.6m
+[2026-08-11 17:20:15] [425/500] ok=389 fail=36  elapsed=15.3m  ETA=2.7m
+[2026-08-11 17:21:08] [450/500] ok=412 fail=38  elapsed=16.2m  ETA=1.8m
+[2026-08-11 17:22:01] [475/500] ok=437 fail=38  elapsed=17.0m  ETA=0.9m
+[2026-08-11 17:22:55] [500/500] ok=462 fail=38  elapsed=17.9m  ETA=0.0m
+[2026-08-12 17:04:44] [25/500] ok=24 fail=1  elapsed=0.0m  ETA=0.3m
+[2026-08-12 17:04:44] [50/500] ok=49 fail=1  elapsed=0.0m  ETA=0.2m
+[2026-08-12 17:04:50] [75/500] ok=71 fail=4  elapsed=0.1m  ETA=0.7m
+[2026-08-12 17:04:54] [100/500] ok=94 fail=6  elapsed=0.2m  ETA=0.8m
+[2026-08-12 17:05:03] [125/500] ok=115 fail=10  elapsed=0.3m  ETA=1.0m
+[2026-08-12 17:05:05] [150/500] ok=138 fail=12  elapsed=0.4m  ETA=0.9m
+[2026-08-12 17:05:05] [175/500] ok=160 fail=15  elapsed=0.4m  ETA=0.7m
+[2026-08-12 17:05:13] [200/500] ok=181 fail=19  elapsed=0.5m  ETA=0.8m
+[2026-08-12 17:05:20] [225/500] ok=203 fail=22  elapsed=0.6m  ETA=0.8m
+[2026-08-12 17:05:26] [250/500] ok=225 fail=25  elapsed=0.7m  ETA=0.7m
+[2026-08-12 17:05:26] [275/500] ok=250 fail=25  elapsed=0.7m  ETA=0.6m
+[2026-08-12 17:05:31] [300/500] ok=273 fail=27  elapsed=0.8m  ETA=0.5m
+[2026-08-12 17:05:31] [325/500] ok=298 fail=27  elapsed=0.8m  ETA=0.4m
+[2026-08-12 17:05:40] [350/500] ok=319 fail=31  elapsed=0.9m  ETA=0.4m
+[2026-08-12 17:05:42] [375/500] ok=343 fail=32  elapsed=1.0m  ETA=0.3m
+[2026-08-12 17:05:42] [400/500] ok=368 fail=32  elapsed=1.0m  ETA=0.2m
+[2026-08-12 17:05:50] [425/500] ok=389 fail=36  elapsed=1.1m  ETA=0.2m
+[2026-08-12 17:05:55] [450/500] ok=412 fail=38  elapsed=1.2m  ETA=0.1m
+[2026-08-12 17:05:55] [475/500] ok=437 fail=38  elapsed=1.2m  ETA=0.1m
+[2026-08-12 17:05:55] [500/500] ok=462 fail=38  elapsed=1.2m  ETA=0.0m
+[2026-08-13 17:04:15] [25/500] ok=24 fail=1  elapsed=0.9m  ETA=16.7m
+[2026-08-13 17:05:09] [50/500] ok=49 fail=1  elapsed=1.8m  ETA=16.0m
+[2026-08-13 17:06:03] [75/500] ok=71 fail=4  elapsed=2.7m  ETA=15.2m
+[2026-08-13 17:06:57] [100/500] ok=94 fail=6  elapsed=3.6m  ETA=14.3m
+[2026-08-13 17:07:50] [125/500] ok=115 fail=10  elapsed=4.5m  ETA=13.4m
+[2026-08-13 17:08:44] GET https://www.screener.in/company/DUMMYVEDL1/consolidated/ -> 404 (giving up)
+[2026-08-13 17:08:44] [150/500] ok=138 fail=12  elapsed=5.4m  ETA=12.5m
+[2026-08-13 17:08:46] GET https://www.screener.in/company/DUMMYVEDL2/consolidated/ -> 404 (giving up)
+[2026-08-13 17:08:48] GET https://www.screener.in/company/DUMMYVEDL3/consolidated/ -> 404 (giving up)
+[2026-08-13 17:08:50] GET https://www.screener.in/company/DUMMYVEDL4/consolidated/ -> 404 (giving up)
+[2026-08-13 17:09:38] [175/500] ok=160 fail=15  elapsed=6.3m  ETA=11.6m
+[2026-08-13 17:10:32] [200/500] ok=181 fail=19  elapsed=7.2m  ETA=10.7m
+[2026-08-13 17:11:26] [225/500] ok=203 fail=22  elapsed=8.1m  ETA=9.8m
+[2026-08-13 17:12:19] [250/500] ok=225 fail=25  elapsed=8.9m  ETA=8.9m
+[2026-08-13 17:13:11] [275/500] ok=250 fail=25  elapsed=9.8m  ETA=8.0m
+[2026-08-13 17:14:05] [300/500] ok=273 fail=27  elapsed=10.7m  ETA=7.1m
+[2026-08-13 17:14:58] [325/500] ok=298 fail=27  elapsed=11.6m  ETA=6.2m
+[2026-08-13 17:15:52] [350/500] ok=319 fail=31  elapsed=12.5m  ETA=5.4m
+[2026-08-13 17:16:46] [375/500] ok=343 fail=32  elapsed=13.4m  ETA=4.5m
+[2026-08-13 17:17:40] [400/500] ok=368 fail=32  elapsed=14.3m  ETA=3.6m
+[2026-08-13 17:18:33] [425/500] ok=389 fail=36  elapsed=15.2m  ETA=2.7m
+[2026-08-13 17:19:27] [450/500] ok=412 fail=38  elapsed=16.1m  ETA=1.8m
+[2026-08-13 17:20:20] [475/500] ok=437 fail=38  elapsed=17.0m  ETA=0.9m
+[2026-08-13 17:21:14] [500/500] ok=462 fail=38  elapsed=17.9m  ETA=0.0m
