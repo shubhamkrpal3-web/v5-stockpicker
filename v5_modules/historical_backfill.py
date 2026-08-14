@@ -94,6 +94,29 @@ def make_session():
 # ------------------------------------------------------------------
 # Parsers
 # ------------------------------------------------------------------
+def _verify_file_date(df: pd.DataFrame, d: date, col_candidates: list) -> bool:
+    """Confirm the file's OWN date matches the date we asked for.
+
+    On NSE holidays the archive can serve the PREVIOUS trading day's file with a
+    200 response. If we stamp it with the requested date we invent a "phantom"
+    session that is a byte-for-byte copy of the prior day — zero returns, which
+    silently deflates volatility and corrupts moving averages. So we trust the
+    file's own date column and reject any mismatch.
+    """
+    for c in col_candidates:
+        if c in df.columns:
+            parsed = pd.to_datetime(df[c].astype(str).str.strip(), errors="coerce", dayfirst=True)
+            got = parsed.dropna()
+            if got.empty:
+                continue
+            file_date = got.mode().iloc[0].date()
+            if file_date != d:
+                print(f"      [skip] {d}: file actually contains {file_date} (holiday/stale) — not stored")
+                return False
+            return True
+    return True   # no date column found; accept (legacy files always have one)
+
+
 def parse_full(text: str, d: date) -> pd.DataFrame | None:
     """Parse the modern sec_bhavdata_full CSV."""
     try:
@@ -102,6 +125,8 @@ def parse_full(text: str, d: date) -> pd.DataFrame | None:
         return None
     df.columns = [str(c).strip().upper().replace(" ", "_") for c in df.columns]
     if "SYMBOL" not in df.columns:
+        return None
+    if not _verify_file_date(df, d, ["DATE1", "TRADE_DATE", "TIMESTAMP"]):
         return None
     ren = {"OPEN_PRICE": "OPEN", "HIGH_PRICE": "HIGH", "LOW_PRICE": "LOW",
            "CLOSE_PRICE": "CLOSE", "TTL_TRD_QNTY": "VOLUME", "TURNOVER_LACS": "TRADED_VALUE"}
@@ -125,6 +150,8 @@ def parse_legacy(content: bytes, d: date) -> pd.DataFrame | None:
         return None
     df.columns = [str(c).strip().upper() for c in df.columns]
     if "SYMBOL" not in df.columns:
+        return None
+    if not _verify_file_date(df, d, ["TIMESTAMP", "TRADE_DATE", "DATE1"]):
         return None
     ren = {"TOTTRDQTY": "VOLUME", "TOTTRDVAL": "TRADED_VALUE"}
     for a, b in ren.items():

@@ -65,6 +65,21 @@ def fetch_one(d: date) -> pd.DataFrame | None:
             if r.status_code == 200 and len(r.text) > 500:
                 df = pd.read_csv(io.StringIO(r.text))
                 df.columns = [c.strip().upper().replace(" ", "_") for c in df.columns]
+
+                # Guard against "phantom sessions": on NSE holidays the archive can
+                # return the PREVIOUS trading day's file with a 200 response. Stamping
+                # it with the requested date would create a duplicate session with zero
+                # returns, which deflates volatility and skews moving averages. Trust
+                # the file's own date column and reject any mismatch.
+                _date_col = next((c for c in ("DATE1", "TRADE_DATE", "TIMESTAMP") if c in df.columns), None)
+                if _date_col is not None:
+                    _parsed = pd.to_datetime(df[_date_col].astype(str).str.strip(),
+                                             errors="coerce", dayfirst=True).dropna()
+                    if not _parsed.empty and _parsed.mode().iloc[0].date() != d:
+                        print(f"[SKIP] {d}: file actually contains "
+                              f"{_parsed.mode().iloc[0].date()} (holiday/stale) — not appended")
+                        return None
+
                 # Normalize the columns to what the master schema expects
                 if "TRADE_DATE" in df.columns:
                     df["DATE"] = pd.to_datetime(df["TRADE_DATE"], errors="coerce").dt.strftime("%Y%m%d")
