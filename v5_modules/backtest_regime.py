@@ -176,9 +176,10 @@ GROSS = {"RISK_ON": 1.00, "RISK_NEU": 0.70, "RISK_OFF": 0.40}
 # ---------------------------------------------------------------
 def simulate(W: dict, F: dict, reg: pd.DataFrame, start: str,
              top_n: int = 15, max_pos: int = 15, risk_pct: float = 0.01,
-             max_w: float = 0.10, cost_bps: float = 25.0,
+             max_w: float = 0.10, cost_bps: float = 35.0,
              min_close: float = 20.0, min_tv: float = 1e7,
-             time_stop: int = 25, capital: float = 200000.0) -> dict:
+             time_stop: int | None = None, chandelier: float = 4.0,
+             use_low22: bool = False, capital: float = 200000.0) -> dict:
     C, O, H, L, TV = W["CLOSE"], W["OPEN"], W["HIGH"], W["LOW"], W["TRADED_VALUE"]
     dates = [d for d in C.index if d >= pd.Timestamp(start)]
     cost = cost_bps / 10000.0
@@ -206,16 +207,17 @@ def simulate(W: dict, F: dict, reg: pd.DataFrame, start: str,
             atr = F["ATR14"].at[d, sym] if d in F["ATR14"].index else np.nan
             cands = [p["stop"]]
             if atr == atr:
-                cands.append(p["hi"] - 3.0 * atr)
-            l22 = F["LOW22"].at[d, sym] if d in F["LOW22"].index else np.nan
-            if l22 == l22:
-                cands.append(l22)
+                cands.append(p["hi"] - chandelier * atr)
+            if use_low22:
+                l22 = F["LOW22"].at[d, sym] if d in F["LOW22"].index else np.nan
+                if l22 == l22:
+                    cands.append(l22)
             p["stop"] = max([x for x in cands if x == x])
 
             exit_px, reason = None, None
             if lo == lo and lo <= p["stop"]:
                 exit_px, reason = p["stop"], "STOP_LOSS"
-            elif p["days"] >= time_stop:
+            elif time_stop is not None and p["days"] >= time_stop:
                 exit_px, reason = c, "TIME_STOP"
             if exit_px is not None:
                 proceeds = exit_px * p["qty"] * (1 - cost)
@@ -331,7 +333,12 @@ def main():
     ap.add_argument("--start", default="2023-06-01")
     ap.add_argument("--top-n", type=int, default=15)
     ap.add_argument("--max-pos", type=int, default=15)
-    ap.add_argument("--cost-bps", type=float, default=25.0)
+    ap.add_argument("--cost-bps", type=float, default=35.0)
+    ap.add_argument("--time-stop", type=int, default=0,
+                    help="0 = disabled (new default). Old behaviour was 25.")
+    ap.add_argument("--chandelier", type=float, default=4.0)
+    ap.add_argument("--use-low22", action="store_true",
+                    help="Re-enable the 22-day-low stop ratchet (old behaviour).")
     ap.add_argument("--capital", type=float, default=200000.0)
     args = ap.parse_args()
 
@@ -345,7 +352,9 @@ def main():
         print(f"\n[INFO] === regime variant: {variant} ===")
         reg = regime_series(W, F, variant)
         sim = simulate(W, F, reg, args.start, top_n=args.top_n, max_pos=args.max_pos,
-                       cost_bps=args.cost_bps, capital=args.capital)
+                       cost_bps=args.cost_bps, capital=args.capital,
+                       time_stop=(args.time_stop or None),
+                       chandelier=args.chandelier, use_low22=args.use_low22)
         st = stats(sim["equity"], bench)
         dist = sim["exposure"]["state"].value_counts().to_dict()
         st["regime_days"] = dist
