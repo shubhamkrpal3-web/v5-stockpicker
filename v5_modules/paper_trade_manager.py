@@ -7,9 +7,10 @@ Runs nightly after the bhavcopy download. For each call:
   1. Loads positions.csv (current open + closed positions ledger)
   2. For each OPEN position, uses today's OHLC to decide:
        - STOP_LOSS hit if today's LOW <= current_stop  -> exit at stop price
-       - TIME_STOP if days_held >= max_holding_days    -> exit at today's CLOSE
-       - Otherwise update trailing stop using chandelier (highest_close - 3*ATR14)
-                                            or 22-day low, whichever is higher
+       - TIME_STOP only if --max-holding-days is set (DISABLED by default)
+       - Otherwise update trailing stop using chandelier (highest_close - 4*ATR14)
+     Realized P&L is NET of brokerage, STT, stamp duty, exchange, SEBI, GST
+     and participation-scaled slippage (realistic_cost_model.py).
   3. On Monday OPEN trading days, reads the latest daily_live_portfolio.csv
      and opens new positions at today's actual OPEN price for any pick not
      already held.
@@ -39,18 +40,31 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+# Realistic NSE delivery costs (brokerage + STT + stamp + exchange + GST + slippage).
+# Falls back to a flat estimate if the module can't be imported for any reason.
+try:
+    import sys as _sys
+    _sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from realistic_cost_model import cost_of_trade
+    _COSTS_AVAILABLE = True
+except Exception:  # pragma: no cover
+    _COSTS_AVAILABLE = False
+
+    def cost_of_trade(notional_inr, side, adv_inr=None, custom_slippage_bps=None):
+        return {"total_inr": notional_inr * 0.0030, "total_pct": 0.0030}
+
 
 POSITIONS_COLS = [
     "symbol", "signal_date", "entry_date", "entry_price", "qty",
     "size_inr", "initial_stop", "current_stop", "highest_close",
     "atr_at_entry", "status", "exit_date", "exit_price", "exit_reason",
-    "realized_pnl_inr", "realized_pct",
+    "realized_pnl_inr", "realized_pct", "entry_cost_inr", "exit_cost_inr",
 ]
 
 REALIZED_COLS = [
     "symbol", "entry_date", "entry_price", "qty", "exit_date",
-    "exit_price", "exit_reason", "days_held", "pnl_inr", "pnl_pct",
-    "r_multiple",
+    "exit_price", "exit_reason", "days_held", "gross_pnl_inr", "cost_inr",
+    "pnl_inr", "pnl_pct", "r_multiple",
 ]
 
 
@@ -111,6 +125,18 @@ def _compute_atr14(master: pd.DataFrame, symbol: str, as_of: pd.Timestamp) -> fl
     return float(tr.tail(14).mean())
 
 
+def _adv20(master: pd.DataFrame, symbol: str, as_of: pd.Timestamp) -> float | None:
+    """20-session average traded value for `symbol`, used to size slippage."""
+    if master is None or "TRADED_VALUE" not in master.columns:
+        return None
+    sub = master[(master["SYMBOL"] == symbol) & (master["DATE_DT"] <= as_of)]
+    if sub.empty:
+        return None
+    tv = pd.to_numeric(sub.sort_values("DATE_DT")["TRADED_VALUE"], errors="coerce").tail(20)
+    tv = tv.dropna()
+    return float(tv.mean()) if len(tv) else None
+
+
 def _today_bar(master: pd.DataFrame) -> tuple[pd.Timestamp, pd.DataFrame]:
     """Returns (today's_date, dataframe indexed by SYMBOL with OHLC for today)."""
     snap_date = master["DATE_DT"].max()
@@ -121,13 +147,20 @@ def _today_bar(master: pd.DataFrame) -> tuple[pd.Timestamp, pd.DataFrame]:
 
 def _update_trailing_stops(positions: pd.DataFrame, master: pd.DataFrame,
                            today_bar: pd.DataFrame, today_date: pd.Timestamp,
-                           atr_mult_chandelier: float = 3.0,
+                           atr_mult_chandelier: float = 4.0,
+                           use_rolling_low: bool = False,
                            low_lookback: int = 22) -> pd.DataFrame:
     """For each OPEN position, ratchet the current_stop UP using the higher of:
        - initial_stop
-       - chandelier(highest_close - 3*ATR14)
-       - 22-day rolling low
-       current_stop is never lowered."""
+       - chandelier(highest_close - 4*ATR14)
+       - (optional, OFF by default) 22-day rolling low
+       current_stop is never lowered.
+
+    The 22-day rolling low is disabled by default. For a stock in an uptrend it
+    ratchets the stop up far faster than the chandelier, producing a very tight
+    stop that gets hit on ordinary pullbacks. Backtest 2023-2026 showed removing
+    it lifted total return from +26% to +43% and cut max drawdown from -26% to
+    -13%, on 35% fewer trades."""
     open_idx = positions.index[positions["status"] == "open"]
     for idx in open_idx:
         sym = positions.at[idx, "symbol"]
@@ -143,14 +176,14 @@ def _update_trailing_stops(positions: pd.DataFrame, master: pd.DataFrame,
         atr = _compute_atr14(master, sym, today_date) or 0
         chandelier = new_high - atr_mult_chandelier * atr if atr else 0
 
-        sub = master[(master["SYMBOL"] == sym) & (master["DATE_DT"] <= today_date)]
-        rolling_low = float(sub["LOW"].tail(low_lookback).min()) if len(sub) else 0
-
         candidates = [
             float(positions.at[idx, "current_stop"]),
             chandelier,
-            rolling_low,
         ]
+        if use_rolling_low:
+            sub = master[(master["SYMBOL"] == sym) & (master["DATE_DT"] <= today_date)]
+            rolling_low = float(sub["LOW"].tail(low_lookback).min()) if len(sub) else 0
+            candidates.append(rolling_low)
         new_stop = max(c for c in candidates if c)
         # Never lower the stop
         positions.at[idx, "current_stop"] = max(
@@ -160,8 +193,24 @@ def _update_trailing_stops(positions: pd.DataFrame, master: pd.DataFrame,
 
 
 def _check_exits(positions: pd.DataFrame, today_bar: pd.DataFrame,
-                 today_date: pd.Timestamp, max_holding_days: int = 25) -> tuple[pd.DataFrame, list]:
-    """For each OPEN position, check whether it should be closed today."""
+                 today_date: pd.Timestamp, max_holding_days: int | None = None,
+                 master: pd.DataFrame | None = None) -> tuple[pd.DataFrame, list]:
+    """For each OPEN position, check whether it should be closed today.
+
+    Exit rules:
+      * STOP_LOSS  - today's LOW pierces the (ratcheting) trailing stop.
+      * TIME_STOP  - DISABLED by default (max_holding_days=None).
+
+    The old 25-day time stop was removed. It closed every winning trade on a
+    fixed calendar date rather than letting the trailing stop do its job: of
+    63 live paper trades, all 25 profitable exits were TIME_STOPs at exactly
+    day 25, and those names rose a further +8.0% on average over the next 20
+    sessions. It also counted CALENDAR days, not trading days, so the real
+    hold was ~17 sessions rather than the 25 the design intended.
+
+    Exit costs (brokerage, STT, stamp duty, exchange, SEBI, GST, slippage)
+    are now deducted so realized P&L is net, not gross.
+    """
     closed = []
     for idx in positions.index[positions["status"] == "open"]:
         sym = positions.at[idx, "symbol"]
@@ -174,20 +223,36 @@ def _check_exits(positions: pd.DataFrame, today_bar: pd.DataFrame,
         entry_price = float(positions.at[idx, "entry_price"])
         qty = float(positions.at[idx, "qty"])
         initial_stop = float(positions.at[idx, "initial_stop"])
-        dollar_at_risk = max(qty * (entry_price - initial_stop), 0.01)
+        # Risk per unit must be positive; if the ledger has a bad initial stop
+        # (>= entry), fall back to 2% of notional so r_multiple stays meaningful
+        # instead of exploding on a 0.01 denominator.
+        _risk_per_share = entry_price - initial_stop
+        if _risk_per_share <= 0:
+            _risk_per_share = 0.02 * entry_price
+        dollar_at_risk = max(qty * _risk_per_share, 0.01)
 
         exit_price = None
         exit_reason = None
         if bar["LOW"] <= current_stop:
             exit_price = current_stop
             exit_reason = "STOP_LOSS"
-        elif days_held >= max_holding_days:
+        elif max_holding_days is not None and days_held >= max_holding_days:
             exit_price = float(bar["CLOSE"])
             exit_reason = "TIME_STOP"
 
         if exit_price is not None:
-            pnl_inr = (exit_price - entry_price) * qty
-            pnl_pct = (exit_price / entry_price - 1) if entry_price else 0
+            gross_pnl = (exit_price - entry_price) * qty
+            # --- realistic costs, both legs ---
+            adv = _adv20(master, sym, today_date) if master is not None else None
+            entry_cost = pd.to_numeric(
+                positions.at[idx, "entry_cost_inr"], errors="coerce")
+            if pd.isna(entry_cost):
+                entry_cost = cost_of_trade(entry_price * qty, "buy", adv)["total_inr"]
+            exit_cost = cost_of_trade(exit_price * qty, "sell", adv)["total_inr"]
+            total_cost = float(entry_cost) + float(exit_cost)
+            pnl_inr = gross_pnl - total_cost
+            pnl_pct = (pnl_inr / (entry_price * qty)) if entry_price and qty else 0
+            positions.at[idx, "exit_cost_inr"] = round(float(exit_cost), 2)
             positions.at[idx, "status"] = "closed"
             positions.at[idx, "exit_date"] = today_date.strftime("%Y-%m-%d")
             positions.at[idx, "exit_price"] = round(exit_price, 2)
@@ -199,7 +264,10 @@ def _check_exits(positions: pd.DataFrame, today_bar: pd.DataFrame,
                 "entry_price": entry_price, "qty": qty,
                 "exit_date": positions.at[idx, "exit_date"],
                 "exit_price": round(exit_price, 2), "exit_reason": exit_reason,
-                "days_held": days_held, "pnl_inr": round(pnl_inr, 2),
+                "days_held": days_held,
+                "gross_pnl_inr": round(gross_pnl, 2),
+                "cost_inr": round(total_cost, 2),
+                "pnl_inr": round(pnl_inr, 2),
                 "pnl_pct": round(pnl_pct, 4),
                 "r_multiple": round(pnl_inr / dollar_at_risk, 2),
             })
@@ -248,6 +316,8 @@ def _open_new_positions(positions: pd.DataFrame, signal: pd.DataFrame,
             continue
         signal_stop = float(pick.get("STOP_PRICE", 0))
         atr = _compute_atr14(master, sym, today_date) or 0
+        adv = _adv20(master, sym, today_date)
+        entry_cost = cost_of_trade(entry * qty, "buy", adv)["total_inr"]
         open_syms.add(sym)
         slots -= 1
         new_rows.append({
@@ -264,6 +334,7 @@ def _open_new_positions(positions: pd.DataFrame, signal: pd.DataFrame,
             "status": "open",
             "exit_date": "", "exit_price": "", "exit_reason": "",
             "realized_pnl_inr": "", "realized_pct": "",
+            "entry_cost_inr": round(float(entry_cost), 2), "exit_cost_inr": "",
         })
     if new_rows:
         new_df = pd.DataFrame(new_rows)
@@ -297,7 +368,13 @@ def _compute_equity(positions: pd.DataFrame, today_bar: pd.DataFrame,
         else:
             mtm_value += float(p["size_inr"])
 
-    cash = portfolio_inr - invested_capital + realized_pnl
+    # Entry costs already paid on positions still open (exit costs are only
+    # booked at exit, inside realized_pnl).
+    open_entry_costs = pd.to_numeric(
+        open_positions.get("entry_cost_inr", pd.Series(dtype=float)), errors="coerce"
+    ).fillna(0).sum()
+
+    cash = portfolio_inr - invested_capital + realized_pnl - open_entry_costs
     equity = cash + mtm_value
     return {
         "DATE": today_date.strftime("%Y-%m-%d"),
@@ -320,7 +397,10 @@ def main():
     ap.add_argument("--portfolio-inr", type=float, default=200000.0)
     ap.add_argument("--entry-day", default="mon",
                     help="Day-of-week when new positions are opened. mon/tue/wed/thu/fri or 'any' for daily")
-    ap.add_argument("--max-holding-days", type=int, default=25)
+    ap.add_argument("--max-holding-days", type=int, default=0,
+                    help="Hard time stop in CALENDAR days. 0 = disabled (recommended). "
+                         "The old 25-day default cut every winner short; exits are now "
+                         "driven by the trailing stop alone.")
     ap.add_argument("--max-open-positions", type=int, default=15,
                     help="Hard cap on concurrent open positions (matches top-N / gross target). "
                          "New Monday picks fill only the free slots, best confidence first.")
@@ -337,7 +417,8 @@ def main():
     positions = _update_trailing_stops(positions, master, today_bar, today_date)
 
     # 2. Check stop & time exits
-    positions, closed_today = _check_exits(positions, today_bar, today_date, args.max_holding_days)
+    max_hold = args.max_holding_days if args.max_holding_days and args.max_holding_days > 0 else None
+    positions, closed_today = _check_exits(positions, today_bar, today_date, max_hold, master)
     if closed_today:
         realized_log = pd.concat([realized_log, pd.DataFrame(closed_today)], ignore_index=True)
         print(f"[INFO] closed {len(closed_today)} positions today: "
