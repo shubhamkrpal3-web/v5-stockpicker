@@ -81,7 +81,7 @@ jobs:
             --realized data/live_signals/realized_trades.csv \
             --portfolio-inr 200000 \
             --entry-day mon \
-            --max-holding-days 25
+            --max-holding-days 0
 
       - name: Generate V5 signals (for tomorrow's reference / next Monday)
         run: |
