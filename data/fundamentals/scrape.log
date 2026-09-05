@@ -1493,3 +1493,26 @@
 [2026-09-04 19:02:50] [450/500] ok=400 fail=50  elapsed=5.6m  ETA=0.6m
 [2026-09-04 19:03:18] [475/500] ok=422 fail=53  elapsed=6.1m  ETA=0.3m
 [2026-09-04 19:03:51] [500/500] ok=442 fail=58  elapsed=6.6m  ETA=0.0m
+[2026-09-05 17:59:36] [25/500] ok=23 fail=2  elapsed=0.6m  ETA=11.6m
+[2026-09-05 18:00:22] [50/500] ok=47 fail=3  elapsed=1.4m  ETA=12.5m
+[2026-09-05 18:00:41] GET https://www.screener.in/company/TITAN/consolidated/ -> 503, sleep 1.6s
+[2026-09-05 18:00:43] GET https://www.screener.in/company/TITAN/consolidated/ -> 503, sleep 2.9s
+[2026-09-05 18:00:46] GET https://www.screener.in/company/TITAN/consolidated/ exception: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+[2026-09-05 18:01:19] [75/500] ok=67 fail=8  elapsed=2.3m  ETA=13.3m
+[2026-09-05 18:02:11] [100/500] ok=89 fail=11  elapsed=3.2m  ETA=12.8m
+[2026-09-05 18:02:55] [125/500] ok=113 fail=12  elapsed=3.9m  ETA=11.8m
+[2026-09-05 18:03:40] [150/500] ok=135 fail=15  elapsed=4.7m  ETA=10.9m
+[2026-09-05 18:04:26] [175/500] ok=158 fail=17  elapsed=5.4m  ETA=10.1m
+[2026-09-05 18:05:13] [200/500] ok=182 fail=18  elapsed=6.2m  ETA=9.4m
+[2026-09-05 18:05:56] [225/500] ok=204 fail=21  elapsed=7.0m  ETA=8.5m
+[2026-09-05 18:06:42] [250/500] ok=221 fail=29  elapsed=7.7m  ETA=7.7m
+[2026-09-05 18:07:27] [275/500] ok=245 fail=30  elapsed=8.5m  ETA=6.9m
+[2026-09-05 18:08:05] [300/500] ok=267 fail=33  elapsed=9.1m  ETA=6.1m
+[2026-09-05 18:08:42] [325/500] ok=291 fail=34  elapsed=9.7m  ETA=5.2m
+[2026-09-05 18:09:20] [350/500] ok=313 fail=37  elapsed=10.4m  ETA=4.4m
+[2026-09-05 18:09:53] [375/500] ok=336 fail=39  elapsed=10.9m  ETA=3.6m
+[2026-09-05 18:10:27] [400/500] ok=358 fail=42  elapsed=11.5m  ETA=2.9m
+[2026-09-05 18:11:00] [425/500] ok=379 fail=46  elapsed=12.0m  ETA=2.1m
+[2026-09-05 18:11:23] [450/500] ok=400 fail=50  elapsed=12.4m  ETA=1.4m
+[2026-09-05 18:11:56] [475/500] ok=422 fail=53  elapsed=12.9m  ETA=0.7m
+[2026-09-05 18:12:28] [500/500] ok=442 fail=58  elapsed=13.5m  ETA=0.0m
