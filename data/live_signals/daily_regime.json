@@ -1,18 +1,18 @@
 {
   "state": "RISK_NEU",
-  "raw_state": "RISK_NEU",
-  "score": 2,
+  "raw_state": "RISK_OFF",
+  "score": 1,
   "triggers": {
-    "Trend": "\u2713",
+    "Trend": "\u2717",
     "Breadth": "\u2717",
     "VIX": "\u2713"
   },
-  "mean_close": 2355.7713,
-  "mean_200dma": 2307.5017842391303,
-  "breadth_above_50dma": 0.28923948220064727,
-  "vol_proxy_ann": 0.10497900685238425,
+  "mean_close": 2203.7666999999997,
+  "mean_200dma": 2221.765483333333,
+  "breadth_above_50dma": 0.3016579053780833,
+  "vol_proxy_ann": 0.13158562478083288,
   "vol_measure": "index_level_equal_weighted_top100",
-  "pending_state": null,
-  "pending_count": 0,
-  "debounce_note": "stable"
+  "pending_state": "RISK_OFF",
+  "pending_count": 1,
+  "debounce_note": "holding RISK_NEU; RISK_OFF pending (1/2)"
 }
