@@ -1,0 +1,72 @@
+name: V5 PIT Fundamentals Snapshot
+
+# Archives a DATED vintage of the fundamentals cache so point-in-time history
+# accumulates. This is the only way a fundamental strategy can ever be tested
+# honestly — today's screener.sqlite knows how the past turned out, so ranking
+# 2019 stocks with it is look-ahead, not analysis.
+#
+# Runs quarterly (1st of Jan/Apr/Jul/Oct at 03:00 UTC = 08:30 IST) plus manual.
+# It only appends; it never modifies previous vintages or any live file.
+on:
+  schedule:
+    - cron: '0 3 1 1,4,7,10 *'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Replace an existing vintage for today (true/false)'
+        required: false
+        default: 'false'
+
+permissions:
+  contents: write
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Archive current fundamentals as a dated vintage
+        run: |
+          FORCE=""
+          if [ "${{ github.event.inputs.force }}" = "true" ]; then FORCE="--force"; fi
+          python v5_modules/pit_fundamentals.py \
+            --db data/fundamentals/screener.sqlite \
+            --store data/fundamentals/pit_fundamentals.parquet \
+            --archive $FORCE
+
+      - name: Show the inventory of vintages
+        run: |
+          python v5_modules/pit_fundamentals.py \
+            --store data/fundamentals/pit_fundamentals.parquet --list
+
+      - name: Commit the vintage
+        run: |
+          git config user.name "v5-automation"
+          git config user.email "v5-automation@users.noreply.github.com"
+          git add data/fundamentals/pit_fundamentals.parquet
+          git diff --cached --quiet || git commit -m "PIT fundamentals vintage $(date -u +%Y-%m-%d)"
+          git push
+
+      - name: Report failure
+        if: failure()
+        run: |
+          echo "Snapshot failed. This is non-critical - it only delays history collection."
+          echo "Most likely cause: screener.sqlite missing or empty."
+          echo "Re-run the Fundamentals Bootstrap workflow first, then retry this one."
