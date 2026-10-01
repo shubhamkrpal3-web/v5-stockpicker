@@ -7,12 +7,12 @@
     "Breadth": "\u2717",
     "VIX": "\u2713"
   },
-  "mean_close": 2275.4925,
-  "mean_200dma": 2325.308159239131,
-  "breadth_above_50dma": 0.2761394101876676,
-  "vol_proxy_ann": 0.13475315621686426,
+  "mean_close": 2394.3920000000003,
+  "mean_200dma": 2557.738141046905,
+  "breadth_above_50dma": 0.23964723926380369,
+  "vol_proxy_ann": 0.1377343267098217,
   "vol_measure": "index_level_equal_weighted_top100",
   "pending_state": null,
   "pending_count": 0,
-  "debounce_note": "RISK_OFF persisted 2 readings; adopted"
+  "debounce_note": "stable"
 }
