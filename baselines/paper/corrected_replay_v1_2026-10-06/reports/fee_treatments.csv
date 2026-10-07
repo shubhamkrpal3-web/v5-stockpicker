@@ -1,0 +1,5 @@
+treatment,what_it_represents,entry_fees_charged_at_entry,entry_fees_of_lots_open_at_start,entry_fees_charged_at_exit,exit_fees,total_fees_7_aug_to_6_oct,cash_6_oct,total_economic_value_6_oct
+original recorded ledger (its own trades),what the paper ledger actually booked: no fees before 3 Sep; from 3 Sep the cost model on entries and exits; lots entered before 3 Sep were charged their entry fee when they exited,275.76,0.0,131.36,154.24,561.36,100124.82,198638.68
+B1 historical basis (headline),"the fee the paper ledger charged at the time of each trade: zero before 3 Sep (verified evidence), the cost model from 3 Sep; no entry fee is charged at exit",294.84,0.0,0.0,190.62,485.46,98893.88,197618.07
+sensitivity: B1 trades with the original at-exit practice,"B1's trades, plus the original ledger's practice of charging older lots' entry fee at exit",294.84,0.0,209.94,190.62,695.4,98683.94,197408.13
+scenario: today's cost model on every leg (NOT history),"B1's trades priced as if today's cost model applied on every date, including the entry legs of the lots open at the start; never charged by the paper ledger",717.78,171.6,0.0,388.29,1277.67,98101.68,196825.87

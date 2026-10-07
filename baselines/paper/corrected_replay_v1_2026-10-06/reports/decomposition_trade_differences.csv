@@ -1,0 +1,38 @@
+step,cause,symbol,entry_date,before_qty,before_entry_price,before_status,before_exit_date,before_exit_price,before_exit_reason,before_pnl,after_qty,after_entry_price,after_status,after_exit_date,after_exit_price,after_exit_reason,after_pnl
++ 6 Aug session,6 Aug session (never processed by the recorded ledger),CIPLA,2026-07-27,3.0,1412.6,closed,2026-08-19,1417.16,STOP_LOSS,13.69,3.0,1412.6,closed,2026-08-19,1419.76,STOP_LOSS,21.49
++ corrected execution mechanics,corrected execution mechanics,JBCHEPHARM,2026-07-13,3.0,2415.2,open,,,,,3.0,2415.2,stale,,,,
++ corrected execution mechanics,corrected execution mechanics,APOLLOHOSP,2026-08-10,1.0,8945.0,closed,2026-08-11,8673.64,STOP_LOSS,-271.36,1.0,8945.0,closed,2026-08-11,8739.0,STOP_LOSS,-206.0
++ corrected execution mechanics,corrected execution mechanics,LUPIN,2026-08-10,5.0,2360.0,closed,2026-08-12,2250.39,STOP_LOSS,-548.05,5.0,2360.0,closed,2026-08-10,2250.39,STOP_LOSS_ENTRY_DAY,-548.05
++ corrected execution mechanics,corrected execution mechanics,OBEROIRLTY,2026-08-17,5.0,1849.0,closed,2026-09-11,1765.23,STOP_LOSS,-449.58,5.0,1849.0,closed,2026-09-10,1793.24,STOP_LOSS,-309.73
++ corrected execution mechanics,corrected execution mechanics,GRANULES,2026-08-24,10.0,856.5,closed,2026-09-02,816.0,STOP_LOSS,-405.0,10.0,856.5,closed,2026-10-01,816.0,STOP_LOSS,-433.45
++ corrected execution mechanics,corrected execution mechanics,SONACOMS,2026-08-24,11.0,817.6,closed,2026-09-02,773.4,STOP_LOSS,-486.2,11.0,817.6,closed,2026-09-16,773.4,STOP_LOSS,-516.0
++ corrected execution mechanics,corrected execution mechanics,DIVISLAB,2026-08-31,1.0,9239.0,open,,,,,1.0,9239.0,closed,2026-09-16,8955.61,STOP_LOSS,-314.27
++ corrected execution mechanics,corrected execution mechanics,UNITDSPR,2026-08-31,6.0,1510.0,closed,2026-09-01,1459.0,STOP_LOSS,-306.0,6.0,1510.0,closed,2026-09-01,1479.7,STOP_LOSS,-181.8
++ corrected execution mechanics,corrected execution mechanics,GRANULES,2026-09-07,11.0,844.5,closed,2026-10-05,805.2,STOP_LOSS,-463.16,,,,,,,
++ corrected execution mechanics,corrected execution mechanics,SJS,2026-09-07,4.0,2306.1,closed,2026-10-01,2152.33,STOP_LOSS,-645.5,,,,,,,
++ corrected execution mechanics,corrected execution mechanics,NESTLEIND,2026-09-21,6.0,1360.0,closed,2026-10-01,1305.76,STOP_LOSS,-352.62,6.0,1360.0,closed,2026-10-01,1301.9,STOP_GAP_AT_OPEN,-375.75
++ corrected execution mechanics,corrected execution mechanics,SJS,2026-09-21,,,,,,,,3.0,2422.8,closed,2026-10-01,2249.03,STOP_LOSS,-545.24
++ corrected execution mechanics,corrected execution mechanics,SUNDRMFAST,2026-09-21,,,,,,,,7.0,1228.2,closed,2026-09-29,1142.04,STOP_LOSS,-631.43
++ corrected execution mechanics,corrected execution mechanics,BLSE,2026-10-05,16.0,324.95,closed,2026-10-06,299.81,STOP_LOSS,-419.32,16.0,324.95,closed,2026-10-06,163.7,STOP_GAP_AT_OPEN,-2594.38
++ corrected execution mechanics,corrected execution mechanics,NYKAA,2026-10-05,15.0,335.0,open,,,,,16.0,335.0,open,,,,
++ B1 historical fee basis,fee basis,APOLLOHOSP,2026-08-17,1.0,8917.5,closed,2026-09-30,8537.14,STOP_LOSS,-410.03,1.0,8917.5,closed,2026-09-30,8537.14,STOP_LOSS,-390.95
++ B1 historical fee basis,fee basis,KAJARIACER,2026-08-17,7.0,1259.0,closed,2026-09-16,1182.47,STOP_LOSS,-564.84,7.0,1259.0,closed,2026-09-16,1182.47,STOP_LOSS,-545.98
++ B1 historical fee basis,fee basis,MINDACORP,2026-08-17,12.0,721.55,closed,2026-09-15,685.5,STOP_LOSS,-461.33,12.0,721.55,closed,2026-09-15,685.5,STOP_LOSS,-442.8
++ B1 historical fee basis,fee basis,OBEROIRLTY,2026-08-17,5.0,1849.0,closed,2026-09-10,1793.24,STOP_LOSS,-309.73,5.0,1849.0,closed,2026-09-10,1793.24,STOP_LOSS,-289.94
++ B1 historical fee basis,fee basis,GRANULES,2026-08-24,10.0,856.5,closed,2026-10-01,816.0,STOP_LOSS,-433.45,10.0,856.5,closed,2026-10-01,816.0,STOP_LOSS,-415.12
++ B1 historical fee basis,fee basis,NYKAA,2026-08-24,27.0,333.9,closed,2026-09-16,327.82,STOP_LOSS,-194.39,27.0,333.9,closed,2026-09-16,327.82,STOP_LOSS,-175.1
++ B1 historical fee basis,fee basis,SONACOMS,2026-08-24,11.0,817.6,closed,2026-09-16,773.4,STOP_LOSS,-516.0,11.0,817.6,closed,2026-09-16,773.4,STOP_LOSS,-496.75
++ B1 historical fee basis,fee basis,SUNPHARMA,2026-08-24,4.0,1902.4,closed,2026-09-07,1886.44,STOP_LOSS,-89.47,4.0,1902.4,closed,2026-09-07,1886.44,STOP_LOSS,-73.19
++ B1 historical fee basis,fee basis,DIVISLAB,2026-08-31,1.0,9239.0,closed,2026-09-16,8955.61,STOP_LOSS,-314.27,1.0,9239.0,closed,2026-09-16,8955.61,STOP_LOSS,-294.5
++ B1 historical fee basis,fee basis,MARICO,2026-08-31,11.0,830.0,closed,2026-09-03,820.0,STOP_LOSS,-140.73,11.0,830.0,closed,2026-09-03,820.0,STOP_LOSS,-121.19
++ BLSE split,BLSE split,BLSE,2026-10-05,16.0,324.95,closed,2026-10-06,163.7,STOP_GAP_AT_OPEN,-2594.38,32.0,162.47,open,,,,
++ JBCHEPHARM merger = B1,merger,JBCHEPHARM,2026-07-13,3.0,2415.2,stale,,,,,3.0,2415.2,converted,,,CONVERTED,
++ JBCHEPHARM merger = B1,merger,TORNTPHARM,2026-07-13,,,,,,,,1.0,4735.69,closed,2026-08-07,4924.0,TIME_STOP,188.31
++ JBCHEPHARM merger = B1,merger,TORNTPHARM (0.53 fraction),2026-07-17,,,,,,,,0.53,0.0,pending,,,,
++ JBCHEPHARM merger = B1,merger,GRANULES,2026-08-10,,,,,,,,15.0,874.9,closed,2026-10-01,816.0,STOP_LOSS,-898.68
++ JBCHEPHARM merger = B1,merger,GRANULES,2026-08-24,10.0,856.5,closed,2026-10-01,816.0,STOP_LOSS,-415.12,,,,,,,
++ JBCHEPHARM merger = B1,merger,UNITDSPR,2026-08-24,,,,,,,,5.0,1556.7,closed,2026-08-28,1502.46,STOP_LOSS,-271.2
++ JBCHEPHARM merger = B1,merger,ALKEM,2026-08-31,,,,,,,,1.0,5355.0,closed,2026-09-03,5175.0,STOP_LOSS,-186.42
++ JBCHEPHARM merger = B1,merger,SJS,2026-09-07,,,,,,,,4.0,2306.1,closed,2026-10-01,2152.33,STOP_LOSS,-645.5
++ JBCHEPHARM merger = B1,merger,SHINDL,2026-09-21,,,,,,,,57.0,162.6,open,,,,
++ JBCHEPHARM merger = B1,merger,SJS,2026-09-21,3.0,2422.8,closed,2026-10-01,2249.03,STOP_LOSS,-545.24,,,,,,,

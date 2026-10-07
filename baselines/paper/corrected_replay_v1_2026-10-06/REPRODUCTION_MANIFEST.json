@@ -1,0 +1,497 @@
+{
+  "name": "corrected_replay_v1_2026-10-06",
+  "label": "Corrected paper-ledger replay v1 (41 sessions, 2026-08-07 to 2026-10-06)",
+  "is": "a 41-session corrected reconstruction of the V5 paper ledger (2026-08-07..2026-10-06)",
+  "is_not": "a strategy-performance result, a backtest or evidence of trading alpha; it does not replace the recorded ledger",
+  "created": "2026-10-07",
+  "created_from": {
+    "branch": "fix/backtest-integrity",
+    "head": "2329573",
+    "origin_main": "52fd2fe",
+    "committed": false,
+    "tagged": false
+  },
+  "inputs": [
+    {
+      "archive_path": "v5_modules/corrected_replay.py",
+      "role": "code",
+      "origin": {
+        "kind": "working tree (not in any commit; archived here)",
+        "branch": "fix/backtest-integrity",
+        "head": "2329573",
+        "status": "untracked (uncommitted branch work)",
+        "path": "v5_modules/corrected_replay.py"
+      },
+      "git_blob": "f8a52a7746e30695d58fc00d97bbbc3ba0337345",
+      "sha256": "6c4dfc54b646a2d2a21a0473e1b4febb0e3df41f16cd4bf25cac17232f158e64",
+      "bytes": 7737,
+      "note": ""
+    },
+    {
+      "archive_path": "v5_modules/paper_trade_manager.py",
+      "role": "code",
+      "origin": {
+        "kind": "working tree (not in any commit; archived here)",
+        "branch": "fix/backtest-integrity",
+        "head": "2329573",
+        "status": "modified vs HEAD 2329573 (uncommitted)",
+        "path": "v5_modules/paper_trade_manager.py"
+      },
+      "git_blob": "442026517c5d06ca8154adf3106c5a3f7d3a407e",
+      "sha256": "b789687a2b9549cf3d02dce967973422fcf77b20f0c7fc783bedfc33e14f20e0",
+      "bytes": 44509,
+      "note": ""
+    },
+    {
+      "archive_path": "v5_modules/portfolio_accounting.py",
+      "role": "code",
+      "origin": {
+        "kind": "working tree (not in any commit; archived here)",
+        "branch": "fix/backtest-integrity",
+        "head": "2329573",
+        "status": "untracked (uncommitted branch work)",
+        "path": "v5_modules/portfolio_accounting.py"
+      },
+      "git_blob": "f1eb0cd16ca33095ab922b18754388501ec46da7",
+      "sha256": "d8cbd0f229c3db8058f1b25dec54a0ddd4d99d66f63117e283157a06ddbadb72",
+      "bytes": 32231,
+      "note": ""
+    },
+    {
+      "archive_path": "v5_modules/corporate_actions.py",
+      "role": "code",
+      "origin": {
+        "kind": "working tree (not in any commit; archived here)",
+        "branch": "fix/backtest-integrity",
+        "head": "2329573",
+        "status": "untracked (uncommitted branch work)",
+        "path": "v5_modules/corporate_actions.py"
+      },
+      "git_blob": "e263ce00940ff09464b4aaac2d65315b4c1006cb",
+      "sha256": "bf69f453eac77fdec8b3d6e1ade15e0d86b34884930146fef382626b17c5d7f2",
+      "bytes": 27624,
+      "note": ""
+    },
+    {
+      "archive_path": "v5_modules/security_master.py",
+      "role": "code",
+      "origin": {
+        "kind": "working tree (not in any commit; archived here)",
+        "branch": "fix/backtest-integrity",
+        "head": "2329573",
+        "status": "untracked (uncommitted branch work)",
+        "path": "v5_modules/security_master.py"
+      },
+      "git_blob": "5b1ff4dd1fe0a468e5ee02e635b73a08893bc512",
+      "sha256": "019fab608cbeb014889380a7e62f13bb90421329c75e348fbb36b94bc22856a4",
+      "bytes": 13199,
+      "note": ""
+    },
+    {
+      "archive_path": "v5_modules/data_integrity.py",
+      "role": "code",
+      "origin": {
+        "kind": "working tree (not in any commit; archived here)",
+        "branch": "fix/backtest-integrity",
+        "head": "2329573",
+        "status": "untracked (uncommitted branch work)",
+        "path": "v5_modules/data_integrity.py"
+      },
+      "git_blob": "a8eddca53b80fa0a1c9ecb10bddc006746001f87",
+      "sha256": "a7b445b7f7408afb3d922c4a157b163740f6b30e8f83dbbc07c2fce06f9d812f",
+      "bytes": 11111,
+      "note": ""
+    },
+    {
+      "archive_path": "v5_modules/realistic_cost_model.py",
+      "role": "code",
+      "origin": {
+        "kind": "working tree (not in any commit; archived here)",
+        "branch": "fix/backtest-integrity",
+        "head": "2329573",
+        "status": "as committed at HEAD 2329573",
+        "path": "v5_modules/realistic_cost_model.py"
+      },
+      "git_blob": "08673a4b01fb67fbb23c8f931726cddd1d2233f1",
+      "sha256": "1105719e0f295281fb86e8ae216fc46c0a9be0c96d7f5c859804e739a0a879f7",
+      "bytes": 6446,
+      "note": ""
+    },
+    {
+      "archive_path": "inputs/start_state/positions.csv",
+      "role": "starting state (recorded ledger after the 2026-08-05 session)",
+      "origin": {
+        "kind": "git",
+        "commit": "cea8737",
+        "path": "data/live_signals/positions.csv"
+      },
+      "git_blob": "6892931c6fde650e890885d8ff5addaf4c42baf7",
+      "sha256": "1075c8246cce0f1fb0676f267b750ef17d56445e86448b4a5951289daf2d8d1b",
+      "bytes": 6368,
+      "note": ""
+    },
+    {
+      "archive_path": "inputs/start_state/equity_log.csv",
+      "role": "starting state (recorded ledger after the 2026-08-05 session)",
+      "origin": {
+        "kind": "git",
+        "commit": "cea8737",
+        "path": "data/live_signals/equity_log.csv"
+      },
+      "git_blob": "32096e0a1a22ac2c650443ee3ad969428f69685f",
+      "sha256": "b25b0aca9160c7e9fba4947c29fbc47af8244c1b1f1bd986f297eb2b5ee3da9f",
+      "bytes": 2087,
+      "note": ""
+    },
+    {
+      "archive_path": "inputs/start_state/realized_trades.csv",
+      "role": "starting state (recorded ledger after the 2026-08-05 session)",
+      "origin": {
+        "kind": "git",
+        "commit": "cea8737",
+        "path": "data/live_signals/realized_trades.csv"
+      },
+      "git_blob": "171d0d906cdd52f1e0731e10b512c3b7182bbe64",
+      "sha256": "f7eb13d09ee1443c599a71b73db44454e9a4a3b84936018907b97633d8c7746e",
+      "bytes": 3247,
+      "note": ""
+    },
+    {
+      "archive_path": "inputs/signals/20260810.csv",
+      "role": "signal read by the 20260810 run",
+      "origin": {
+        "kind": "git",
+        "commit": "25467c2",
+        "path": "data/live_signals/daily_live_portfolio.csv"
+      },
+      "git_blob": "a45c5951b85bd5b75d3393ebce7309fea71bcb4c",
+      "sha256": "8878152e3323b7c088436f0a826555d7250ea5a4f51fbc4576cdd681129fe09a",
+      "bytes": 1340,
+      "note": "parent of run commit 25a2e57"
+    },
+    {
+      "archive_path": "inputs/signals/20260817.csv",
+      "role": "signal read by the 20260817 run",
+      "origin": {
+        "kind": "git",
+        "commit": "c00a09a",
+        "path": "data/live_signals/daily_live_portfolio.csv"
+      },
+      "git_blob": "30d53df01fbbb80c7282a7de216d768796a631ca",
+      "sha256": "9b731ad019f4b3703215f3d29874931dd4b64d7251930ad79ff9cee275cfad9c",
+      "bytes": 1350,
+      "note": "parent of run commit 253fef6"
+    },
+    {
+      "archive_path": "inputs/signals/20260824.csv",
+      "role": "signal read by the 20260824 run",
+      "origin": {
+        "kind": "git",
+        "commit": "6bcffe1",
+        "path": "data/live_signals/daily_live_portfolio.csv"
+      },
+      "git_blob": "8b185d96e661562d3991735a65feb44eae072a18",
+      "sha256": "620dd5b595e3de69b58dbfcd6f13cc14c8325db96eebaa3d60b7acb5c2ab0e77",
+      "bytes": 1354,
+      "note": "parent of run commit 3c3a331"
+    },
+    {
+      "archive_path": "inputs/signals/20260831.csv",
+      "role": "signal read by the 20260831 run",
+      "origin": {
+        "kind": "git",
+        "commit": "56dcc9d",
+        "path": "data/live_signals/daily_live_portfolio.csv"
+      },
+      "git_blob": "81cc654d4c1c4f9fb69691bec5c4b5b393b7122a",
+      "sha256": "8457eabfde9f3608207e015ca6c2e73a225121b76eea63d6ee9341ab003e09db",
+      "bytes": 1341,
+      "note": "parent of run commit bea0f02"
+    },
+    {
+      "archive_path": "inputs/signals/20260907.csv",
+      "role": "signal read by the 20260907 run",
+      "origin": {
+        "kind": "git",
+        "commit": "a0be7ad",
+        "path": "data/live_signals/daily_live_portfolio.csv"
+      },
+      "git_blob": "cfcae2b00e20e23a80c7da339f0bf5c598839ba9",
+      "sha256": "29dce52771282b8b4a8797ac2fe6235c2bac2e11f83c288fa3f0c70892ccd662",
+      "bytes": 1337,
+      "note": "parent of run commit fefcf39"
+    },
+    {
+      "archive_path": "inputs/signals/20260921.csv",
+      "role": "signal read by the 20260921 run",
+      "origin": {
+        "kind": "git",
+        "commit": "bc0e336",
+        "path": "data/live_signals/daily_live_portfolio.csv"
+      },
+      "git_blob": "1a05a786685bbc6819e3054f98357170bf22d5ba",
+      "sha256": "ff4e2fe5208e95e8efd6fbcbe2fce0614413c4f2a3dc5170bcde3324b3533360",
+      "bytes": 1353,
+      "note": "parent of run commit edad502"
+    },
+    {
+      "archive_path": "inputs/signals/20260928.csv",
+      "role": "signal read by the 20260928 run",
+      "origin": {
+        "kind": "git",
+        "commit": "48b221a",
+        "path": "data/live_signals/daily_live_portfolio.csv"
+      },
+      "git_blob": "7ab1ccfe0230fbf25ecffa2d81baf507e8fe0af1",
+      "sha256": "5d7473292de263dbfd91107380944af22b7688c8a82c7f497d7fdf81fbba8d34",
+      "bytes": 1334,
+      "note": "parent of run commit 7959eb1"
+    },
+    {
+      "archive_path": "inputs/signals/20261005.csv",
+      "role": "signal read by the 20261005 run",
+      "origin": {
+        "kind": "git",
+        "commit": "5f7643f",
+        "path": "data/live_signals/daily_live_portfolio.csv"
+      },
+      "git_blob": "5588f117b3a1dd29ec7568022a1e089a2d1074d2",
+      "sha256": "20a54608ae7eee537ff80e4059948e917f73a3772b781972410a5d1aeb407c9f",
+      "bytes": 1354,
+      "note": "parent of run commit 28d0feb"
+    },
+    {
+      "archive_path": "data/market_database/master_history.csv.gz",
+      "role": "prices (origin/main, sessions to 2026-10-06)",
+      "origin": {
+        "kind": "git",
+        "commit": "52fd2fe",
+        "path": "data/market_database/master_history.csv.gz"
+      },
+      "git_blob": "29f275eff83ea6805144a9c91598f44bd14bdad9",
+      "sha256": "6b42d69f3c9c8d34a9bf4eeae1c0de7a5e43634add93fce2b2b3d0bf64bd3d0c",
+      "bytes": 57940307,
+      "note": ""
+    },
+    {
+      "archive_path": "data/market_database/corporate_actions.csv",
+      "role": "corporate actions (split/bonus factors incl. BLSE 2026-10-06)",
+      "origin": {
+        "kind": "working tree (not in any commit; archived here)",
+        "branch": "fix/backtest-integrity",
+        "head": "2329573",
+        "status": "untracked (uncommitted branch work)",
+        "path": "data/market_database/corporate_actions.csv"
+      },
+      "git_blob": "19ae2e794253e7ee55d7e18377c25e8c22c21f3d",
+      "sha256": "99dee1dc476968bc9a4c79d6699d3df9dfc401e21db4e81d83037465a623b06c",
+      "bytes": 110285,
+      "note": ""
+    },
+    {
+      "archive_path": "data/market_database/derived/security_events.csv",
+      "role": "security events (JBCHEPHARM merger etc.)",
+      "origin": {
+        "kind": "working tree (not in any commit; archived here)",
+        "branch": "fix/backtest-integrity",
+        "head": "2329573",
+        "status": "untracked (uncommitted branch work)",
+        "path": "data/market_database/derived/security_events.csv"
+      },
+      "git_blob": "1309f644869358aa52057bd6457fa9f3705c409b",
+      "sha256": "8ee6d82e801df6b6e44f06f86cb3cdbaec3825fe99ead1b81821628f31e796f7",
+      "bytes": 65440,
+      "note": ""
+    },
+    {
+      "archive_path": "data/market_database/derived/supplementary_prices.csv",
+      "role": "supplementary prices (non-EQ series)",
+      "origin": {
+        "kind": "working tree (not in any commit; archived here)",
+        "branch": "fix/backtest-integrity",
+        "head": "2329573",
+        "status": "untracked (uncommitted branch work)",
+        "path": "data/market_database/derived/supplementary_prices.csv"
+      },
+      "git_blob": "223e52cda31c14d71d2a1f0caf2a90b6cb200047",
+      "sha256": "4eed7c2d05e249cbe7fa071910c52614604d189a0e6b6a6aba2ac4f1a865756f",
+      "bytes": 28096542,
+      "note": ""
+    },
+    {
+      "archive_path": "data/market_database/derived/quarantine.csv",
+      "role": "data-integrity quarantine list",
+      "origin": {
+        "kind": "working tree (not in any commit; archived here)",
+        "branch": "fix/backtest-integrity",
+        "head": "2329573",
+        "status": "untracked (uncommitted branch work)",
+        "path": "data/market_database/derived/quarantine.csv"
+      },
+      "git_blob": "3030aefb5fedd7338bf881a84eaff752d23de852",
+      "sha256": "a5b8fcea88245291652105873e08089744b0633fa23288736c4a0a75d20ad514",
+      "bytes": 2559,
+      "note": ""
+    },
+    {
+      "archive_path": "data/market_database/derived/corrections/20190930_all_series.csv",
+      "role": "data-integrity correction file",
+      "origin": {
+        "kind": "working tree (not in any commit; archived here)",
+        "branch": "fix/backtest-integrity",
+        "head": "2329573",
+        "status": "untracked (uncommitted branch work)",
+        "path": "data/market_database/derived/corrections/20190930_all_series.csv"
+      },
+      "git_blob": "38980c0615b4c32b837721fb6e38b5602ef2328f",
+      "sha256": "a7deb8e0f6def8e05ba6591eb2f1615282afb1f822533bfd10b19e7b01c7d21c",
+      "bytes": 305772,
+      "note": ""
+    },
+    {
+      "archive_path": "data/market_database/derived/symbol_changes.csv",
+      "role": "symbol changes (NSE)",
+      "origin": {
+        "kind": "working tree (not in any commit; archived here)",
+        "branch": "fix/backtest-integrity",
+        "head": "2329573",
+        "status": "untracked (uncommitted branch work)",
+        "path": "data/market_database/derived/symbol_changes.csv"
+      },
+      "git_blob": "451be0dc52bfc9c846894d4152297890713f7028",
+      "sha256": "d50a268a0b9c109aa9b1340f89cc7853a4be795e8fdc3da496525586345c3fb1",
+      "bytes": 150037,
+      "note": ""
+    },
+    {
+      "archive_path": "data/market_database/derived/symbol_changes_curated.csv",
+      "role": "symbol changes (curated)",
+      "origin": {
+        "kind": "working tree (not in any commit; archived here)",
+        "branch": "fix/backtest-integrity",
+        "head": "2329573",
+        "status": "untracked (uncommitted branch work)",
+        "path": "data/market_database/derived/symbol_changes_curated.csv"
+      },
+      "git_blob": "a27122b1ab55744eed330ffdb333240f773794ff",
+      "sha256": "3b5f4aaf8884e75553d823a44c582c78f9ed78fe0143bd422018eb366b802021",
+      "bytes": 553,
+      "note": ""
+    },
+    {
+      "archive_path": "data/ledger_evidence/historical_entry_fees.csv",
+      "role": "historical entry-fee evidence (18 verified rows)",
+      "origin": {
+        "kind": "working tree (not in any commit; archived here)",
+        "branch": "fix/backtest-integrity",
+        "head": "2329573",
+        "status": "untracked (uncommitted branch work)",
+        "path": "data/ledger_evidence/historical_entry_fees.csv"
+      },
+      "git_blob": "42362b25ed4b2fef3a8ed1ef7f9550ba65313f95",
+      "sha256": "879588f8035a3bf526512d2d2cd54156215afb09962eb1172e2a001224b1b639",
+      "bytes": 9294,
+      "note": ""
+    }
+  ],
+  "outputs": [
+    {
+      "archive_path": "outputs/positions.csv",
+      "sha256": "4e5f237143275c78386ad5e4144aeb1e81127f98a57324855d4e9e8140e80c29",
+      "bytes": 30235
+    },
+    {
+      "archive_path": "outputs/realized_trades.csv",
+      "sha256": "76cbfb23c53d774fe811a567f60731e965b356990b9bd2039e362757ed5fab64",
+      "bytes": 8752
+    },
+    {
+      "archive_path": "outputs/equity_log.csv",
+      "sha256": "bed0a7b15cd1f757693a7aed7ebd6b9f405a1f362033d9eff832d561a4740d66",
+      "bytes": 7375
+    }
+  ],
+  "reference": [
+    {
+      "archive_path": "reference/recorded_ledger_52fd2fe/positions.csv",
+      "origin": {
+        "kind": "git",
+        "commit": "52fd2fe",
+        "path": "data/live_signals/positions.csv"
+      },
+      "git_blob": "ae61eedc5de426f584e7907368401fbf472d83ff",
+      "sha256": "dbc67a2c46c9737b95d47d873b4fd362b75c674ed4185d9b5a259327fddfecab"
+    },
+    {
+      "archive_path": "reference/recorded_ledger_52fd2fe/realized_trades.csv",
+      "origin": {
+        "kind": "git",
+        "commit": "52fd2fe",
+        "path": "data/live_signals/realized_trades.csv"
+      },
+      "git_blob": "2cd83dae124dcaaa7c2a65c462ae94bfb8d38ec8",
+      "sha256": "6635769338916a87c485cb5233c3d10da295d98ccf2f510c3a99286bed6e26b5"
+    },
+    {
+      "archive_path": "reference/recorded_ledger_52fd2fe/equity_log.csv",
+      "origin": {
+        "kind": "git",
+        "commit": "52fd2fe",
+        "path": "data/live_signals/equity_log.csv"
+      },
+      "git_blob": "de8fe6fbf0839b66e18f6a75a0e9a25a305c8670",
+      "sha256": "4151af09727078617ad93c60d8c8fa91a7b14eb9e2d1db644233dbca2ad96b7d"
+    }
+  ],
+  "configuration": {
+    "command": "python v5_modules/corrected_replay.py --base inputs/start_state --master data/market_database/master_history.csv.gz --signals inputs/signals --out <new folder outside this archive> --start 20260807 --fee-evidence data/ledger_evidence/historical_entry_fees.csv --corporate-actions data/market_database/corporate_actions.csv",
+    "run_from": "this folder (the code resolves its data relative to v5_modules/../)",
+    "start": "20260807",
+    "end": "20261006 (last session in the price file)",
+    "sessions": 41,
+    "portfolio_inr": 200000.0,
+    "entry_day": "mon",
+    "max_open_positions": 15,
+    "max_holding_days_cli": 0,
+    "paper_rules": [
+      [
+        "00000000",
+        3.0,
+        22,
+        25
+      ],
+      [
+        "20260903",
+        4.0,
+        null,
+        null
+      ]
+    ],
+    "paper_rules_columns": [
+      "from session",
+      "chandelier x ATR14",
+      "rolling-low sessions",
+      "calendar-day time stop"
+    ],
+    "cost_model_from": "20260903",
+    "stale_after_sessions": 3
+  },
+  "environment": {
+    "python": "3.12.10",
+    "pandas": "3.0.3",
+    "numpy": "2.2.6",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "network": "not used"
+  },
+  "valuation_6_oct": {
+    "spendable_cash": 98893.88,
+    "listed_holdings": 96195.03,
+    "pending_entitlement_not_cash": {
+      "what": "0.53 TORNTPHARM (JBCHEPHARM merger fraction)",
+      "reference_price": 4772.0,
+      "value": 2529.16
+    },
+    "total_economic_value": 197618.07,
+    "ledger_reported_equity_excl_fraction": 195088.91
+  }
+}

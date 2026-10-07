@@ -1,0 +1,9 @@
+row,cause,cash,listed_holdings_at_6_oct_close,pending_entitlement_not_cash,total_economic_value,ledger_reported_equity,jb_carried_at_cost_in_ledger,step_change
+recorded ledger as reported (JB carried at cost),-,100124.82,91212.7,0.0,198583.12,198583.12,7245.6,
+recorded ledger (52fd2fe) - like for like: JB as its Torrent entitlement,-,100124.82,95984.7,2529.16,198638.68,198583.12,7245.6,
+"old-code emulator, recorded sessions - like for like: JB as its Torrent entitlement",validation (must equal recorded),100124.82,95984.7,2529.16,198638.68,198583.12,7245.6,0.0
++ 6 Aug session - like for like: JB as its Torrent entitlement,6 Aug session (never processed by the recorded ledger),100132.62,95984.7,2529.16,198646.48,198590.92,7245.6,7.8
++ corrected execution mechanics - like for like: JB as its Torrent entitlement,corrected execution mechanics,106726.59,86772.9,2529.16,196028.65,195954.19,7245.6,-2617.83
++ B1 historical fee basis - like for like: JB as its Torrent entitlement,fee basis,106915.31,86772.9,2529.16,196217.37,196142.91,7245.6,188.72
++ BLSE split - like for like: JB as its Torrent entitlement,BLSE split,104299.36,91921.7,2529.16,198750.22,198675.76,7245.6,2532.85
++ JBCHEPHARM merger = B1,merger,98893.88,96195.03,2529.16,197618.07,195088.91,,-1132.15

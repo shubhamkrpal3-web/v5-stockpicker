@@ -1,0 +1,3 @@
+# Archived baselines are byte-exact records pinned by their SHA256SUMS:
+# store and check out every file unchanged (no line-ending or text conversion).
+* -text

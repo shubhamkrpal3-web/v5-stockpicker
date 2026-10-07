@@ -1,0 +1,27 @@
+symbol,entry_date,recorded,corrected_B1,pnl_recorded,pnl_B1,cause,affects
+JBCHEPHARM,2026-07-13,3 @ 2415.2 -> open,3 @ 2415.2 -> converted,,,corrected execution mechanics + merger,"slots, open positions, cash"
+TORNTPHARM,2026-07-13,-,"1 @ 4735.69 -> 2026-08-07 TIME_STOP 4924, P&L +188.31",,188.31,merger,"slots, cash"
+TORNTPHARM (0.53 fraction),2026-07-17,-,0.53 @ 0 -> pending,,,merger,"pending entitlement only: no slot, outside cash and equity until paid"
+CIPLA,2026-07-27,"3 @ 1412.6 -> 2026-08-19 STOP_LOSS 1417.16, P&L +13.69","3 @ 1412.6 -> 2026-08-19 STOP_LOSS 1419.76, P&L +21.49",13.69,21.49,6 Aug session (never processed by the recorded ledger),cash
+APOLLOHOSP,2026-08-10,"1 @ 8945 -> 2026-08-11 STOP_LOSS 8673.64, P&L -271.36","1 @ 8945 -> 2026-08-11 STOP_LOSS 8739, P&L -206.00",-271.36,-206.0,corrected execution mechanics,cash
+GRANULES,2026-08-10,-,"15 @ 874.9 -> 2026-10-01 STOP_LOSS 816, P&L -898.68",,-898.68,merger,"slots, cash"
+LUPIN,2026-08-10,"5 @ 2360 -> 2026-08-12 STOP_LOSS 2250.39, P&L -548.05","5 @ 2360 -> 2026-08-10 STOP_LOSS_ENTRY_DAY 2250.39, P&L -548.05",-548.05,-548.05,corrected execution mechanics,slots
+APOLLOHOSP,2026-08-17,"1 @ 8917.5 -> 2026-09-30 STOP_LOSS 8537.14, P&L -410.03","1 @ 8917.5 -> 2026-09-30 STOP_LOSS 8537.14, P&L -390.95",-410.03,-390.95,fee basis,cash
+KAJARIACER,2026-08-17,"7 @ 1259 -> 2026-09-16 STOP_LOSS 1182.47, P&L -564.84","7 @ 1259 -> 2026-09-16 STOP_LOSS 1182.47, P&L -545.98",-564.84,-545.98,fee basis,cash
+MINDACORP,2026-08-17,"12 @ 721.55 -> 2026-09-15 STOP_LOSS 685.5, P&L -461.33","12 @ 721.55 -> 2026-09-15 STOP_LOSS 685.5, P&L -442.80",-461.33,-442.8,fee basis,cash
+OBEROIRLTY,2026-08-17,"5 @ 1849 -> 2026-09-11 STOP_LOSS 1765.23, P&L -449.58","5 @ 1849 -> 2026-09-10 STOP_LOSS 1793.24, P&L -289.94",-449.58,-289.94,corrected execution mechanics + fee basis,"slots, cash"
+GRANULES,2026-08-24,"10 @ 856.5 -> 2026-09-02 STOP_LOSS 816, P&L -405.00",-,-405.0,,corrected execution mechanics + fee basis + merger,"slots, cash"
+NYKAA,2026-08-24,"27 @ 333.9 -> 2026-09-16 STOP_LOSS 327.82, P&L -194.39","27 @ 333.9 -> 2026-09-16 STOP_LOSS 327.82, P&L -175.10",-194.39,-175.1,fee basis,cash
+SONACOMS,2026-08-24,"11 @ 817.6 -> 2026-09-02 STOP_LOSS 773.4, P&L -486.20","11 @ 817.6 -> 2026-09-16 STOP_LOSS 773.4, P&L -496.75",-486.2,-496.75,corrected execution mechanics + fee basis,"slots, cash"
+SUNPHARMA,2026-08-24,"4 @ 1902.4 -> 2026-09-07 STOP_LOSS 1886.44, P&L -89.47","4 @ 1902.4 -> 2026-09-07 STOP_LOSS 1886.44, P&L -73.19",-89.47,-73.19,fee basis,cash
+UNITDSPR,2026-08-24,-,"5 @ 1556.7 -> 2026-08-28 STOP_LOSS 1502.46, P&L -271.20",,-271.2,merger,"slots, cash"
+ALKEM,2026-08-31,-,"1 @ 5355 -> 2026-09-03 STOP_LOSS 5175, P&L -186.42",,-186.42,merger,"slots, cash"
+DIVISLAB,2026-08-31,1 @ 9239 -> open,"1 @ 9239 -> 2026-09-16 STOP_LOSS 8955.61, P&L -294.50",,-294.5,corrected execution mechanics + fee basis,"slots, open positions, cash"
+MARICO,2026-08-31,"11 @ 830 -> 2026-09-03 STOP_LOSS 820, P&L -140.73","11 @ 830 -> 2026-09-03 STOP_LOSS 820, P&L -121.19",-140.73,-121.19,fee basis,cash
+UNITDSPR,2026-08-31,"6 @ 1510 -> 2026-09-01 STOP_LOSS 1459, P&L -306.00","6 @ 1510 -> 2026-09-01 STOP_LOSS 1479.7, P&L -181.80",-306.0,-181.8,corrected execution mechanics,cash
+GRANULES,2026-09-07,"11 @ 844.5 -> 2026-10-05 STOP_LOSS 805.2, P&L -463.16",-,-463.16,,corrected execution mechanics,"slots, cash"
+NESTLEIND,2026-09-21,"6 @ 1360 -> 2026-10-01 STOP_LOSS 1305.76, P&L -352.62","6 @ 1360 -> 2026-10-01 STOP_GAP_AT_OPEN 1301.9, P&L -375.75",-352.62,-375.75,corrected execution mechanics,cash
+SHINDL,2026-09-21,-,57 @ 162.6 -> open,,,merger,"slots, open positions, cash"
+SUNDRMFAST,2026-09-21,-,"7 @ 1228.2 -> 2026-09-29 STOP_LOSS 1142.04, P&L -631.43",,-631.43,corrected execution mechanics,"slots, cash"
+BLSE,2026-10-05,"16 @ 324.95 -> 2026-10-06 STOP_LOSS 299.81, P&L -419.32",32 @ 162.47 -> open,-419.32,,corrected execution mechanics + BLSE split,"slots, open positions, cash"
+NYKAA,2026-10-05,15 @ 335 -> open,16 @ 335 -> open,,,corrected execution mechanics,"open positions, cash"

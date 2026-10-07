@@ -1,0 +1,1013 @@
+SYMBOL,EX_DATE,KIND,FACTOR,FACTOR_TYPE,SOURCE,STATUS,OBS_RATIO,SUBJECT
+NBCC,20160602,split,0.2,official_ratio,nse,no_price,,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+LUXIND,20160606,split,0.2,official_ratio,nse,no_price,,Face Value Split From Rs 10 To Rs 2
+PINCON,20160623,bonus,0.5,official_ratio,nse,no_price,,Bonus 1:1
+ITC,20160701,bonus,0.6666666666666666,official_ratio,nse,no_price,,Bonus 1:2
+BPCL,20160713,bonus,0.5,official_ratio,nse,no_price,,Bonus 1:1
+HATSUN,20160713,bonus,0.7142857142857143,official_ratio,nse,no_price,,Bonus 2:5
+GANESHHOU,20160714,bonus,0.6666666666666666,official_ratio,nse,no_price,,Bonus 1:2
+GRINDWELL,20160714,bonus,0.5,official_ratio,nse,no_price,,Bonus 1:1
+BERGEPAINT,20160715,bonus,0.7142857142857143,official_ratio,nse,no_price,,Bonus 2:5
+KTIL,20160811,bonus,0.9615384615384616,official_ratio,nse,no_price,,Bonus 1:25/ Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+PNCINFRA,20160812,split,0.2,official_ratio,nse,no_price,,Face Value Split From Rs 10 To Rs 2
+PILITA,20160824,split,0.25,official_ratio,nse,no_price,,Face Value Split (Sub-Division) - From Rs 4/- Per Share To Re 1/- Per Share
+PFC,20160826,bonus,0.5,official_ratio,nse,no_price,,Bonus 1:1
+MENONBE,20160830,bonus,0.8333333333333334,official_ratio,nse,no_price,,Bonus 1:5
+VGUARD,20160830,split,0.1,official_ratio,nse,no_price,,Face Value Split From Rs 10 To Re 1
+NAVA,20160901,bonus,0.5,official_ratio,nse,no_price,,Bonus 1:1
+TECHNO,20160906,bonus,0.5,official_ratio,nse,no_price,,Bonus 1:1
+BAJFINANCE,20160908,bonus,0.5,official_ratio,nse,no_price,,Bonus 1:1/Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+TRENT,20160912,split,0.1,official_ratio,nse,no_price,,Face Value Split From Rs 10 To Re 1
+UNOMINDA,20160912,split,0.2,official_ratio,nse,no_price,,Face Value Split From Rs 10 To Rs 2
+HINDPETRO,20160914,bonus,0.3333333333333333,official_ratio,nse,no_price,,Bonus 2:1
+SYMPHONY,20160914,bonus,0.5,official_ratio,nse,no_price,,Bonus 1:1
+JMTAUTOLTD,20160921,split,0.5,official_ratio,nse,no_price,,Face Value Split From Rs 2 To Re 1
+RECLTD,20160928,bonus,0.5,official_ratio,nse,no_price,,Bonus 1:1
+KAJARIACER,20161004,split,0.5,official_ratio,nse,no_price,,Face Value Split From Rs 2 To Re 1
+GRASIM,20161006,split,0.2,official_ratio,nse,no_price,,Face Value Split From Rs 10 To Re 2
+SECURKLOUD,20161010,bonus,0.75,official_ratio,nse,no_price,,Bonus 1:3/Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+SHAH,20161013,split,0.1,official_ratio,nse,no_price,,Face Value Split From Rs 10 To Re 1
+IOC,20161018,bonus,0.5,official_ratio,nse,no_price,,Bonus 1:1
+ALANKIT,20161019,bonus,0.5,official_ratio,nse,no_price,,Bonus 1:1
+SUNILHITEC,20161201,bonus,0.5,official_ratio,nse,no_price,,Bonus 1:1/Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+INDIANHUME,20161209,bonus,0.5,official_ratio,nse,no_price,,Bonus 1:1
+ONGC,20161215,bonus,0.6666666666666666,official_ratio,nse,no_price,,Bonus 1: 2
+BALMLAWRIE,20161226,bonus,0.25,official_ratio,nse,no_price,,Bonus 3:1
+ENGINERSIN,20161230,bonus,0.5,official_ratio,nse,no_price,,Bonus 1:1
+JSWSTEEL,20170104,inferred,0.1,price_derived_estimate,inferred,snapped,0.1014,one-day ratio 0.099 outside circuit limits
+STERTOOLS,20170109,inferred,0.2,price_derived_estimate,inferred,snapped,0.204,one-day ratio 0.206 outside circuit limits
+GATECH,20170110,bonus,0.8,official_ratio,nse,validated,0.9782,Bonus 1:4
+OIL,20170112,bonus,0.75,official_ratio,nse,validated,0.7137,Bonus 1:3
+LTFOODS,20170207,inferred,0.1,price_derived_estimate,inferred,snapped,0.1006,one-day ratio 0.108 outside circuit limits
+GAYAPROJ,20170210,split,0.2,official_ratio,nse,validated,0.2039,Face Value Split From Rs 10/- Per Share To Rs 2/- Per Share
+ORBTEXP,20170214,bonus,0.5,official_ratio,nse,validated,0.492,Bonus 1:1/Interim Dividend Rs 2/- Per Share (Purpose Revised)
+COMPINFO,20170216,split,0.2,official_ratio,nse,validated,0.2009,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+NBCC,20170217,bonus,0.6666666666666666,official_ratio,nse,validated,0.6697,Bonus 1:2
+GAIL,20170309,bonus,0.75,official_ratio,nse,validated,0.7248,Bonus 1:3
+ABMINTLTD,20170315,bonus,0.16666666666666666,official_ratio,nse,no_price,,Bonus 5:1
+VGUARD,20170315,bonus,0.7142857142857143,official_ratio,nse,validated,0.7355,Bonus 2:5
+BEL,20170316,split,0.1,official_ratio,nse,validated,0.1016,Face Value Split From Rs 10/- Per Share To Re 1/- Per Share
+POLYMED,20170324,bonus,0.5,official_ratio,nse,validated,0.4942,Bonus 1:1
+PTL,20170327,arrangement,0.3353,price_derived_estimate,nse,from_gap,0.3353,Scheme Of Arrangement
+CONCOR,20170405,bonus,0.8,official_ratio,nse,validated,0.7801,Bonus 1:4
+BLS,20170426,split,0.1,official_ratio,nse,validated,0.1023,Face Value Split From Rs 10/- Per Share To Re 1/- Per Share
+BEARDSELL,20170504,bonus,0.8333333333333334,official_ratio,nse,mismatch,0.1337,Bonus 1:5/Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+ADVENZYMES,20170525,split,0.2,official_ratio,nse,validated,0.2036,Face Value Split From Rs 10/- Per Share To Rs 2/- Per Share
+HINDCOMPOS,20170525,bonus,0.6666666666666666,official_ratio,nse,mismatch,0.341,Bonus 1:2/Face Value Split (Sub-Division) From Rs 10 Per Share To Rs 5 Per Share
+HINDCOMPOS,20170525,inferred,0.5,price_derived_estimate,inferred,residual,0.5115,gap left after official factors (snapped)
+SINTEX,20170525,arrangement,0.172,price_derived_estimate,nse,from_gap,0.172,Scheme Of Arrangement
+MUTHOOTCAP,20170612,bonus,0.9090909090909091,official_ratio,nse,validated,0.9957,Bonus 1:10
+OMKARCHEM,20170612,arrangement,0.3893,price_derived_estimate,nse,from_gap,0.3893,Scheme Of Arrangement
+WIPRO,20170613,bonus,0.5,official_ratio,nse,validated,0.494,Bonus 1:1
+BIOCON,20170615,bonus,0.3333333333333333,official_ratio,nse,validated,0.3334,Bonus 2:1
+ICICIBANK,20170620,bonus,0.9090909090909091,official_ratio,nse,validated,0.9069,Annual General Meeting/Dividend - Rs 2.50 Per Share/Bonus 1:10 (Revised)
+ARCOTECH,20170622,split,0.2,official_ratio,nse,validated,0.2007,Face Value Split From Rs 10/- Per Share To Rs 2/- Per Share
+GODREJCP,20170622,bonus,0.5,official_ratio,nse,validated,0.5,Bonus 1:1
+KITEX,20170622,bonus,0.7142857142857143,official_ratio,nse,validated,0.746,Bonus 2:5
+SMSPHARMA,20170622,arrangement,0.9368,price_derived_estimate,nse,from_gap,0.9368,Scheme Of Arrangement
+PETRONET,20170703,bonus,0.5,official_ratio,nse,validated,0.4975,Bonus 1:1
+PLASTIBLEN,20170703,bonus,0.5,official_ratio,nse,validated,0.4978,Bonus 1:1
+SANWARIA,20170703,bonus,0.5,official_ratio,nse,validated,0.5376,Bonus 1:1
+MOTHERSON,20170705,bonus,0.6666666666666666,official_ratio,nse,validated,0.6643,Bonus 1:2
+PCJEWELLER,20170706,bonus,0.5,official_ratio,nse,validated,0.5002,Bonus 1:1
+MAANALU,20170710,bonus,0.5,official_ratio,nse,validated,0.5249,Bonus 1:1
+MHRIL,20170710,bonus,0.6666666666666666,official_ratio,nse,validated,0.7508,Bonus 1:2
+HINDPETRO,20170711,bonus,0.6666666666666666,official_ratio,nse,validated,0.6634,Bonus 1:2/ Dividend - Rs 1.10 Per Share
+MUNJALAU,20170711,bonus,0.5,official_ratio,nse,validated,0.4988,Bonus 1:1
+AURUS,20170712,bonus,0.7142857142857143,official_ratio,nse,validated,0.7714,Bonus 2:5
+BPCL,20170713,bonus,0.6666666666666666,official_ratio,nse,validated,0.6699,Bonus 1:2
+CUB,20170713,bonus,0.9090909090909091,official_ratio,nse,validated,0.9451,Bonus 1:10
+GPTINFRA,20170713,bonus,0.5,official_ratio,nse,validated,0.5299,Bonus 1:1
+LT,20170713,bonus,0.6666666666666666,official_ratio,nse,validated,0.6698,Bonus 1:2
+GRASIM,20170719,arrangement,0.8182,price_derived_estimate,nse,from_gap,0.8182,Scheme Of Arrangement
+NAVINFLUOR,20170719,split,0.2,official_ratio,nse,validated,0.2023,Face Value Split From Rs 10/- Per Share To Rs 2/- Per Share
+SUNTECK,20170725,split,0.5,official_ratio,nse,validated,0.5032,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Rs 1/- Per Share
+NIFTY1,20170727,inferred,0.1111111111111111,price_derived_estimate,inferred,snapped,0.1084,one-day ratio 0.100 outside circuit limits
+JAYAGROGN,20170801,bonus,0.5,official_ratio,nse,validated,0.4988,Bonus 1:1
+CORALFINAC,20170803,split,0.2,official_ratio,nse,validated,0.203,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+VIJIFIN,20170804,bonus,0.9090909090909091,official_ratio,nse,mismatch,0.5878,Bonus 1:10
+DWARKESH,20170810,split,0.1,official_ratio,nse,validated,0.098,Annual General Meeting/Dividend - Rs 10 Per Share/Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share (Purpose Revised)
+CCAVENUE,20170831,split,0.1,official_ratio,nse,validated,0.1006,Annual General Meeting/Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+DOLLAR,20170831,split,0.2,official_ratio,nse,validated,0.2102,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+RELCAPITAL,20170905,arrangement,0.8403,price_derived_estimate,nse,from_gap,0.8403,Scheme Of Arrangement
+RELIANCE,20170907,bonus,0.5,official_ratio,nse,validated,0.5002,Bonus 1:1
+DECCANCE,20170911,split,0.5,official_ratio,nse,validated,0.5018,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+NESCO,20170915,split,0.2,official_ratio,nse,validated,0.2026,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+TATAELXSI,20170918,bonus,0.5,official_ratio,nse,validated,0.5053,Bonus 1:1
+YESBANK,20170921,split,0.2,official_ratio,nse,validated,0.1996,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+SUTLEJTEX,20170926,split,0.1,official_ratio,nse,validated,0.1016,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+MANPASAND,20170927,bonus,0.5,official_ratio,nse,validated,0.4989,Bonus 1:1
+MOIL,20170927,bonus,0.5,official_ratio,nse,validated,0.5083,Bonus 1:1
+BEL,20170928,bonus,0.9090909090909091,official_ratio,nse,validated,0.9386,Bonus 1:10
+BHARATFORG,20170928,bonus,0.5,official_ratio,nse,validated,0.5029,Bonus 1:1
+BHEL,20170928,bonus,0.6666666666666666,official_ratio,nse,validated,0.6643,Bonus 1:2
+TARIL,20170928,split,0.1,official_ratio,nse,validated,0.1002,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+PANAMAPET,20171003,bonus,0.6666666666666666,official_ratio,nse,validated,0.6701,Bonus 1:2
+JAMNAAUTO,20171005,split,0.2,official_ratio,nse,validated,0.2012,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share
+HERITGFOOD,20171010,split,0.5,official_ratio,nse,validated,0.5001,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+CANFINHOME,20171012,split,0.2,official_ratio,nse,validated,0.2021,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+POKARNA,20171018,split,0.2,official_ratio,nse,validated,0.1999,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+SIYSIL,20171025,split,0.2,official_ratio,nse,validated,0.2033,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+ATLASCYCLE,20171030,split,0.5,official_ratio,nse,mismatch,0.1268,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+INFINITE,20171101,bonus,0.9629629629629629,official_ratio,nse,validated,1.0,Bonus 1:26
+IGL,20171109,split,0.2,official_ratio,nse,validated,0.2023,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+FRETAIL,20171129,arrangement,0.945,price_derived_estimate,nse,from_gap,0.945,Scheme Of Arrangement
+NBIFIN,20171207,split,0.5,official_ratio,nse,validated,0.5179,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+BALKRISIND,20171221,bonus,0.5,official_ratio,nse,validated,0.5002,Bonus 1:1
+CASTROLIND,20171221,bonus,0.5,official_ratio,nse,validated,0.4939,Bonus 1:1
+M&M,20171221,bonus,0.5,official_ratio,nse,validated,0.4975,Bonus 1:1
+VAKRANGEE,20171221,bonus,0.5,official_ratio,nse,validated,0.5094,Bonus 1:1
+JINDWORLD,20171226,split,0.5,official_ratio,nse,validated,0.5073,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+BILENERGY,20180111,bonus,0.5,official_ratio,nse,mismatch,1.5,Bonus 1:1
+ORIENTPPR,20180111,arrangement,0.2811,price_derived_estimate,nse,from_gap,0.2811,Scheme Of Arrangement
+LANDSMILL,20180123,bonus,0.3333333333333333,official_ratio,nse,validated,0.261,Bonus 2:1
+SUNDARMFIN,20180201,arrangement,0.902,price_derived_estimate,nse,from_gap,0.902,Scheme Of Arrangement
+IOC,20180315,bonus,0.5,official_ratio,nse,validated,0.4835,Bonus 1:1
+INDNIPPON,20180321,split,0.5,official_ratio,nse,validated,0.5049,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+LAOPALA,20180322,bonus,0.5,official_ratio,nse,validated,0.4788,Bonus 1:1
+GAIL,20180327,bonus,0.75,official_ratio,nse,validated,0.7527,Bonus 1:3
+KELLTONTEC,20180327,bonus,0.5,official_ratio,nse,validated,0.5178,Bonus 1:1
+OIL,20180327,bonus,0.6666666666666666,official_ratio,nse,validated,0.6278,Bonus 1:2
+TALWALKARS,20180327,arrangement,0.4484,price_derived_estimate,nse,from_gap,0.4484,Scheme Of Arrangement
+ADANIENT,20180405,arrangement,0.8782,price_derived_estimate,nse,from_gap,0.8782,Scheme Of Arrangement
+MARATHON,20180405,split,0.5,official_ratio,nse,validated,0.5162,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+AMRUTANJAN,20180413,split,0.5,official_ratio,nse,validated,0.5042,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+PCBL,20180419,split,0.2,official_ratio,nse,validated,0.2028,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+NBCC,20180425,split,0.5,official_ratio,nse,validated,0.5005,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+MMTC,20180503,bonus,0.6666666666666666,official_ratio,nse,validated,0.6352,Bonus 1:2
+GMBREW,20180521,bonus,0.8,official_ratio,nse,validated,0.9248,Bonus 1:4
+TCS,20180531,bonus,0.5,official_ratio,nse,validated,0.4934,Bonus 1:1 /Dividend- Rs 29 Per Share
+GRUH,20180606,bonus,0.5,official_ratio,nse,validated,0.4869,Bonus 1:1
+LUMAXTECH,20180607,split,0.2,official_ratio,nse,validated,0.2053,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+LGBBROSLTD,20180614,bonus,0.5,official_ratio,nse,validated,0.496,Bonus 1:1
+NILAINFRA,20180614,arrangement,0.7027,price_derived_estimate,nse,from_gap,0.7027,Scheme Of Arrangement
+UNITDSPR,20180615,split,0.2,official_ratio,nse,validated,0.2011,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+EPL,20180620,bonus,0.5,official_ratio,nse,validated,0.5024,Bonus 1:1
+EMAMILTD,20180621,bonus,0.5,official_ratio,nse,validated,0.4995,Bonus 1:1/Dividend- Rs 7 Per Share
+JUBLFOOD,20180621,bonus,0.5,official_ratio,nse,validated,0.5024,Bonus 1:1
+HIKAL,20180622,bonus,0.6666666666666666,official_ratio,nse,validated,0.7112,Bonus 1:2
+UNIPLY,20180625,split,0.2,official_ratio,nse,validated,0.1996,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+AVANTIFEED,20180626,bonus,0.6666666666666666,official_ratio,nse,mismatch,0.3441,Bonus 1:2/Face Value Split (Sub-Division) From Rs 2/- Per Share To Re 1/- Per Share
+AVANTIFEED,20180626,inferred,0.5263157894736842,price_derived_estimate,inferred,residual,0.5162,gap left after official factors (snapped)
+CONCOR,20180626,split,0.5,official_ratio,nse,validated,0.4928,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+FILATEX,20180627,split,0.2,official_ratio,nse,validated,0.2042,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+NIACL,20180627,bonus,0.5,official_ratio,nse,validated,0.4975,Bonus 1:1/ Dividend- Rs 5 Per Share
+VISESHINFO,20180627,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+JYOTHYLAB,20180628,bonus,0.5,official_ratio,nse,validated,0.51,Bonus 1:1
+CUB,20180710,bonus,0.9090909090909091,official_ratio,nse,validated,0.9783,Bonus 1:10
+VISESHINFO,20180710,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+UNOMINDA,20180711,bonus,0.3333333333333333,official_ratio,nse,validated,0.3432,Bonus 2:1/Dividend- Rs 1.60 Per Share
+ASHOKA,20180712,bonus,0.6666666666666666,official_ratio,nse,validated,0.706,Bonus 1:2
+GICRE,20180712,bonus,0.5,official_ratio,nse,validated,0.4895,Bonus 1:1/Dividend- Rs 13.5 Per Share
+MMFL,20180718,bonus,0.5,official_ratio,nse,validated,0.5233,Bonus 1:1
+VISESHINFO,20180718,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+VISESHINFO,20180720,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+BORORENEW,20180802,bonus,0.25,official_ratio,nse,validated,0.2481,Bonus 3:1
+SUMEETINDS,20180802,bonus,0.8,official_ratio,nse,mismatch,0.3763,Bonus 1:4
+GALLISPAT,20180807,split,0.1,official_ratio,nse,validated,0.1028,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+WHEELS,20180808,bonus,0.5,official_ratio,nse,validated,0.506,Bonus 1:1
+AURIONPRO,20180814,demerger,0.9363,price_derived_estimate,nse,from_gap,0.9363,Scheme Of Demerger
+KARURVYSYA,20180814,bonus,0.9090909090909091,official_ratio,nse,validated,0.9579,Bonus 1:10
+TIRUMALCHM,20180814,split,0.1,official_ratio,nse,validated,0.1022,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+INFY,20180904,bonus,0.5,official_ratio,nse,validated,0.5034,Bonus 1:1
+VISESHINFO,20180905,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+ADANIENT,20180906,arrangement,0.7111,price_derived_estimate,nse,from_gap,0.7111,Scheme Of Arrangement
+ZENSARTECH,20180907,split,0.2,official_ratio,nse,validated,0.2046,Face Value Split (Sub-Division) - From Rs 10 /- Per Share To Rs 2/- Per Share
+GLAXO,20180911,bonus,0.5,official_ratio,nse,validated,0.5014,Bonus 1:1
+GODREJCP,20180912,bonus,0.6666666666666666,official_ratio,nse,validated,0.6667,Bonus 1:2
+VISESHINFO,20180921,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+VISESHINFO,20180926,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+IGARASHI,20180927,bonus,0.8898678414096917,official_ratio,nse,validated,0.9807,Bonus 25:202
+JMCPROJECT,20181004,split,0.2,official_ratio,nse,validated,0.1982,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+VISESHINFO,20181005,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+CUPID,20181011,bonus,0.8333333333333334,official_ratio,nse,validated,0.9589,Bonus 1:5
+APOLSINHOT,20181012,split,0.5,official_ratio,nse,validated,0.5372,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+IEX,20181019,split,0.1,official_ratio,nse,validated,0.0977,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+VISESHINFO,20181019,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+DAMODARIND,20181025,split,0.5,official_ratio,nse,validated,0.5165,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+CESC,20181030,arrangement,0.7789,price_derived_estimate,nse,from_gap,0.7789,Composite Scheme Of Arrangement
+MOTHERSON,20181030,bonus,0.6666666666666666,official_ratio,nse,validated,0.691,Bonus 1:2
+JINDWORLD,20181031,split,0.2,official_ratio,nse,validated,0.2149,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share
+DFMFOODS,20181101,split,0.2,official_ratio,nse,validated,0.2116,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+VISESHINFO,20181107,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+SAKUMA,20181112,split,0.1,official_ratio,nse,validated,0.1001,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+ICICIGOLD,20181115,inferred,0.09090909090909091,price_derived_estimate,inferred,snapped,0.0939,one-day ratio 0.102 outside circuit limits
+VIKASECO,20181119,demerger,0.9,price_derived_estimate,nse,from_gap,0.9,Scheme Of Arrangement Of Demerger
+VISESHINFO,20181126,inferred,0.5,price_derived_estimate,inferred,snapped,0.5,one-day ratio 0.500 outside circuit limits
+ARVIND,20181128,demerger,0.3519,price_derived_estimate,nse,from_gap,0.3519,Demerger
+BRITANNIA,20181129,split,0.5,official_ratio,nse,validated,0.5059,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+VISESHINFO,20181130,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+VISESHINFO,20181205,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+VISESHINFO,20181214,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+VISESHINFO,20181220,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+VISESHINFO,20181221,inferred,0.5,price_derived_estimate,inferred,snapped,0.5,one-day ratio 0.500 outside circuit limits
+VISESHINFO,20181226,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+VISESHINFO,20181228,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+GUJENERGY,20190115,split,0.2,official_ratio,nse,validated,0.2025,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+VISESHINFO,20190122,inferred,0.5,price_derived_estimate,inferred,snapped,0.5,one-day ratio 0.500 outside circuit limits
+BSOFT,20190124,arrangement,0.6231,price_derived_estimate,nse,from_gap,0.6231,Composite Scheme Of Arrangement
+VISESHINFO,20190125,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+CONCOR,20190204,bonus,0.8,official_ratio,nse,validated,0.8335,Bonus 1:4
+VISESHINFO,20190218,inferred,0.5,price_derived_estimate,inferred,snapped,0.5,one-day ratio 0.500 outside circuit limits
+RADIOCITY,20190220,split,0.2,official_ratio,nse,validated,0.2081,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+WIPRO,20190306,bonus,0.75,official_ratio,nse,validated,0.7547,Bonus 1:3
+NTPC,20190319,bonus,0.8333333333333334,official_ratio,nse,validated,0.8438,Bonus 1:5
+VISESHINFO,20190403,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+HTMEDIA,20190409,demerger,0.823,price_derived_estimate,nse,from_gap,0.823,Demerger
+PRAKASH,20190423,demerger,0.8185,price_derived_estimate,nse,from_gap,0.8185,Demerger
+UVSL,20190426,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+UVSL,20190510,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+JMA,20190514,split,0.2,official_ratio,nse,validated,0.2386,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+UVSL,20190514,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+TTKPRESTIG,20190515,bonus,0.8333333333333334,official_ratio,nse,validated,0.9122,Bonus 1:5
+UVSL,20190521,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+DCM,20190530,demerger,0.4379,price_derived_estimate,nse,from_gap,0.4379,Demerger
+IIFL,20190530,arrangement,0.3833,price_derived_estimate,nse,from_gap,0.3833,Scheme Of Arrangement
+SYNGENE,20190611,bonus,0.5,official_ratio,nse,validated,0.5087,Bonus 1:1
+BIOCON,20190612,bonus,0.5,official_ratio,nse,validated,0.5025,Bonus 1:1
+UVSL,20190613,inferred,0.5,price_derived_estimate,inferred,snapped,0.5,one-day ratio 0.500 outside circuit limits
+CHOLAFIN,20190614,split,0.2,official_ratio,nse,validated,0.2017,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+RELAXO,20190626,bonus,0.5,official_ratio,nse,validated,0.4963,Bonus 1:1
+AVADHSUGAR,20190627,bonus,0.5,official_ratio,nse,validated,0.5352,Bonus 1:1
+MAGADSUGAR,20190627,bonus,0.7142857142857143,official_ratio,nse,validated,0.7467,Bonus 4:10
+VISESHINFO,20190628,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+VISESHINFO,20190701,inferred,0.5,price_derived_estimate,inferred,snapped,0.5,one-day ratio 0.500 outside circuit limits
+UPL,20190702,bonus,0.6666666666666666,official_ratio,nse,validated,0.6722,Bonus 1:2
+VISESHINFO,20190702,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+AARTIIND,20190703,demerger,0.9244,price_derived_estimate,nse,from_gap,0.9244,Scheme Of Demerger
+APCOTEXIND,20190704,split,0.4,official_ratio,nse,validated,0.4026,Face Value Split (Sub-Division) - From Rs 5 Per Share To Rs 2 Per Share
+UVSL,20190704,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+VISESHINFO,20190705,inferred,0.5,price_derived_estimate,inferred,snapped,0.5,one-day ratio 0.500 outside circuit limits
+VISESHINFO,20190708,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+GAIL,20190709,bonus,0.5,official_ratio,nse,validated,0.4998,Bonus 1:1
+VISESHINFO,20190709,inferred,0.5,price_derived_estimate,inferred,snapped,0.5,one-day ratio 0.500 outside circuit limits
+UVSL,20190711,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+GREENPLY,20190712,demerger,0.7833,price_derived_estimate,nse,from_gap,0.7833,Demerger
+UVSL,20190715,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+VISESHINFO,20190715,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+UVSL,20190716,inferred,0.5,price_derived_estimate,inferred,snapped,0.5,one-day ratio 0.500 outside circuit limits
+BHAGERIA,20190717,bonus,0.5,official_ratio,nse,validated,0.5299,Bonus 1:1
+VISESHINFO,20190717,inferred,0.5,price_derived_estimate,inferred,snapped,0.5,one-day ratio 0.500 outside circuit limits
+UVSL,20190718,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+UVSL,20190722,inferred,0.5,price_derived_estimate,inferred,snapped,0.5,one-day ratio 0.500 outside circuit limits
+UVSL,20190723,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+VBL,20190725,bonus,0.6666666666666666,official_ratio,nse,validated,0.667,Bonus 1:2
+UVSL,20190726,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+VISESHINFO,20190729,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+VISESHINFO,20190805,inferred,0.5,price_derived_estimate,inferred,snapped,0.5,one-day ratio 0.500 outside circuit limits
+GFLLIMITED,20190806,demerger,0.062,price_derived_estimate,nse,from_gap,0.062,Demerger
+RITES,20190808,bonus,0.8,official_ratio,nse,validated,0.8432,Bonus 1:4
+AGI,20190819,demerger,0.1959,price_derived_estimate,nse,from_gap,0.1959,Demerger
+SESHAPAPER,20190819,split,0.2,official_ratio,nse,validated,0.2059,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+VISESHINFO,20190820,inferred,0.5,price_derived_estimate,inferred,snapped,0.5,one-day ratio 0.500 outside circuit limits
+SWELECTES,20190822,bonus,0.6666666666666666,official_ratio,nse,validated,0.6999,Bonus 1:2
+ALEMBICLTD,20190826,demerger,0.8143,price_derived_estimate,nse,from_gap,0.8143,Demerger
+BRIGADE,20190828,bonus,0.6666666666666666,official_ratio,nse,validated,0.684,Bonus 1:2
+VISESHINFO,20190828,inferred,0.5,price_derived_estimate,inferred,snapped,0.5,one-day ratio 0.500 outside circuit limits
+ASTRAL,20190916,bonus,0.8,official_ratio,nse,validated,0.8873,Bonus 1:4
+TATACOMM,20190917,demerger,0.8927,price_derived_estimate,nse,from_gap,0.8927,Demerger
+HDFCBANK,20190919,split,0.5,official_ratio,nse,validated,0.5028,Face Value Split (Sub-Division) - From Rs 2 Per Share To Rs 1 Per Share
+UVSL,20190919,inferred,0.5,price_derived_estimate,inferred,snapped,0.5,one-day ratio 0.500 outside circuit limits
+AARTIIND,20190927,bonus,0.5,official_ratio,nse,validated,0.5234,Bonus 1:1
+UVSL,20191009,inferred,0.5,price_derived_estimate,inferred,snapped,0.5,one-day ratio 0.500 outside circuit limits
+UVSL,20191010,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+ABREL,20191011,demerger,0.4421,price_derived_estimate,nse,from_gap,0.4421,Demerger
+UVSL,20191014,inferred,0.5,price_derived_estimate,inferred,snapped,0.5,one-day ratio 0.500 outside circuit limits
+SATIA,20191015,split,0.1,official_ratio,nse,validated,0.1014,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+IMPAL,20191025,bonus,0.6666666666666666,official_ratio,nse,validated,0.6975,Bonus 1:2
+UVSL,20191029,inferred,0.5,price_derived_estimate,inferred,snapped,0.5,one-day ratio 0.500 outside circuit limits
+UVSL,20191106,inferred,0.5,price_derived_estimate,inferred,snapped,0.5,one-day ratio 0.500 outside circuit limits
+HCLTECH,20191205,bonus,0.5,official_ratio,nse,validated,0.5009,Bonus 1:1
+THOMASCOOK,20191205,demerger,0.4622,price_derived_estimate,nse,from_gap,0.4622,Demerger
+TRIDENT,20191213,split,0.1,official_ratio,nse,validated,0.1018,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 1/- Per Share
+BANKBEES,20191219,inferred,0.1,price_derived_estimate,inferred,snapped,0.1009,one-day ratio 0.100 outside circuit limits
+GOLDBEES,20191219,inferred,0.008989165342627479,price_derived_estimate,inferred,raw_gap,0.009,one-day ratio 0.010 outside circuit limits
+HNGSNGBEES,20191219,inferred,0.1,price_derived_estimate,inferred,snapped,0.1,one-day ratio 0.114 outside circuit limits
+NIFTYBEES,20191219,inferred,0.1,price_derived_estimate,inferred,snapped,0.1,one-day ratio 0.101 outside circuit limits
+NV20BEES,20191219,inferred,0.1,price_derived_estimate,inferred,snapped,0.103,one-day ratio 0.103 outside circuit limits
+PSUBNKBEES,20191219,inferred,0.11906485471128353,price_derived_estimate,inferred,raw_gap,0.1191,one-day ratio 0.100 outside circuit limits
+ABB,20191220,demerger,0.8956,price_derived_estimate,nse,from_gap,0.8956,Demerger
+KESORAMIND,20191224,demerger,0.8933,price_derived_estimate,nse,from_gap,0.8933,Demerger
+BALMLAWRIE,20191226,bonus,0.6666666666666666,official_ratio,nse,validated,0.6607,Bonus 1:2
+SIS,20200115,split,0.5,official_ratio,nse,validated,0.5098,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+SUVEN,20200121,demerger,0.0894,price_derived_estimate,nse,from_gap,0.0894,Demerger
+UVSL,20200204,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+VINATIORGA,20200205,split,0.5,official_ratio,nse,validated,0.5061,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Rs 1/- Per Share
+ARCHIDPLY,20200213,demerger,0.6119,price_derived_estimate,nse,from_gap,0.6119,Demerger
+UVSL,20200214,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+UVSL,20200224,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+UVSL,20200227,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+UVSL,20200303,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+TATACHEM,20200304,demerger,0.4348,price_derived_estimate,nse,from_gap,0.4348,Demerger
+BORORENEW,20200306,demerger,0.1973,price_derived_estimate,nse,from_gap,0.1973,Demerger
+KSERASERA,20200309,inferred,0.5,price_derived_estimate,inferred,snapped,0.5,one-day ratio 0.500 outside circuit limits
+RADIOCITY,20200312,bonus,0.8,official_ratio,nse,validated,0.9505,Bonus 1:4
+WEIZMANIND,20200316,inferred,0.6,price_derived_estimate,inferred,snapped,0.5996,one-day ratio 0.600 outside circuit limits
+KSERASERA,20200317,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+KTKBANK,20200317,bonus,0.9090909090909091,official_ratio,nse,validated,0.9597,Bonus 1:10
+KSERASERA,20200324,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+KSERASERA,20200327,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+IRCON,20200403,split,0.2,official_ratio,nse,validated,0.2111,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+KSERASERA,20200413,inferred,2.0,price_derived_estimate,inferred,raw_gap,2.0,one-day ratio 2.000 outside circuit limits
+MOTOGENFIN,20200619,split,0.5,official_ratio,nse,mismatch,0.3889,Face Value Split (Sub-Division) - From Rs 10 Per Share To Rs 5 Per Share
+DHARAN,20200702,split,0.2,official_ratio,nse,mismatch,0.5592,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+KUANTUM,20200714,split,0.1,official_ratio,nse,validated,0.0986,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+GOLDAXIS,20200723,inferred,0.01,price_derived_estimate,inferred,snapped,0.01,one-day ratio 0.012 outside circuit limits
+NIFTYAXIS,20200723,inferred,0.11651166639999264,price_derived_estimate,inferred,raw_gap,0.1165,one-day ratio 0.120 outside circuit limits
+PRIVISCL,20200821,demerger,0.8032,price_derived_estimate,nse,from_gap,0.8032,Demerger
+EICHERMOT,20200824,split,0.1,official_ratio,nse,validated,0.1013,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+PANACEABIO,20200921,demerger,0.9495,price_derived_estimate,nse,from_gap,0.9495,Demerger
+ELGIEQUIP,20200924,bonus,0.5,official_ratio,nse,validated,0.5259,Bonus 1:1
+COHANCE,20200925,bonus,0.5,official_ratio,nse,validated,0.5144,Bonus 1:1
+LAURUSLABS,20200929,split,0.2,official_ratio,nse,validated,0.2047,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+AARTIDRUGS,20200930,bonus,0.25,official_ratio,nse,validated,0.2625,Bonus 3:1
+GAEL,20201001,split,0.5,official_ratio,nse,validated,0.5031,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+SAGARDEEP,20201005,bonus,0.6666666666666666,official_ratio,nse,validated,0.6995,Bonus 1:2
+ANANTRAJ,20201006,demerger,0.5503,price_derived_estimate,nse,from_gap,0.5503,Demerger
+SHRENIK,20201008,bonus,0.3333333333333333,official_ratio,nse,validated,0.183,Bonus 2:1
+SHRENIK,20201008,split,0.5,official_ratio,nse,validated,0.183,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+MAHESHWARI,20201013,bonus,0.5,official_ratio,nse,validated,0.5826,Bonus 1:1
+SDBL,20201015,split,0.5,official_ratio,nse,validated,0.5054,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+DEEPENR,20201110,demerger,0.6657,price_derived_estimate,nse,from_gap,0.6657,Demerger
+HATSUN,20201209,bonus,0.75,official_ratio,nse,validated,0.8507,Bonus 1:3
+APLAPOLLO,20201215,split,0.2,official_ratio,nse,validated,0.2039,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+VISHAL,20201216,bonus,0.6666666666666666,official_ratio,nse,validated,0.6532,Bonus 1:2
+AURUM,20201223,cash_distribution,0.011819611423933422,official_cash_distribution,security_events,validated,0.0124,AURUM-20201223-dividend: cash dividend Rs974/share; factor (985.65 - 974) / 985.65
+VALIANTORG,20201224,bonus,0.5,official_ratio,nse,validated,0.5063,Bonus 1:1
+PILANIINVS,20201231,bonus,0.7142857142857143,official_ratio,nse,validated,0.818,Bonus 2:5
+KNRCON,20210203,bonus,0.5,official_ratio,nse,validated,0.5244,Bonus 1:1
+JUBLPHARMA,20210204,demerger,0.8307,price_derived_estimate,nse,from_gap,0.8307,Demerger
+BASML,20210212,split,0.5,official_ratio,nse,validated,0.5069,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+BANKBETA,20210217,inferred,0.1111111111111111,price_derived_estimate,inferred,snapped,0.1128,one-day ratio 0.106 outside circuit limits
+HDFCGOLD,20210217,inferred,0.010584630251268011,price_derived_estimate,inferred,raw_gap,0.0106,one-day ratio 0.010 outside circuit limits
+HDFCNIFTY,20210217,inferred,0.1,price_derived_estimate,inferred,snapped,0.1013,one-day ratio 0.100 outside circuit limits
+HDFCSENSEX,20210217,inferred,0.09514376161639555,price_derived_estimate,inferred,raw_gap,0.0951,one-day ratio 0.099 outside circuit limits
+SNXT50BETA,20210217,inferred,0.1111111111111111,price_derived_estimate,inferred,snapped,0.1145,one-day ratio 0.120 outside circuit limits
+MARINE,20210218,split,0.2,official_ratio,nse,validated,0.209,Face Value Split (Sub-Division) - From Rs 10 Per Share To Rs 2 Per Share
+ASTRAL,20210318,bonus,0.75,official_ratio,nse,validated,0.7028,Bonus 1:3
+CCAVENUE,20210318,bonus,0.5,official_ratio,nse,validated,0.4842,Bonus 1:1
+DIXON,20210318,split,0.2,official_ratio,nse,validated,0.2045,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+GOLDBETA,20210325,inferred,0.01,price_derived_estimate,inferred,snapped,0.0104,one-day ratio 0.010 outside circuit limits
+NEXT50BETA,20210325,inferred,0.10563184808906714,price_derived_estimate,inferred,raw_gap,0.1056,one-day ratio 0.106 outside circuit limits
+GFLLIMITED,20210326,demerger,0.6322,price_derived_estimate,nse,from_gap,0.6322,Demerger
+LIBAS,20210406,bonus,0.8333333333333334,official_ratio,nse,validated,0.9215,Bonus 1:5
+FINPIPE,20210415,split,0.2,official_ratio,nse,validated,0.2019,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+SHARDAMOTR,20210416,split,0.2,official_ratio,nse,validated,0.2039,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+VAIBHAVGBL,20210507,split,0.2,official_ratio,nse,validated,0.2026,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+ALKYLAMINE,20210511,split,0.4,official_ratio,nse,validated,0.4031,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Rs 2/- Per Share
+IRCON,20210520,bonus,0.5,official_ratio,nse,validated,0.5033,Bonus 1:1
+JAYBARMARU,20210607,bonus,0.5,official_ratio,nse,validated,0.5348,Bonus 1:1
+VBL,20210610,bonus,0.6666666666666666,official_ratio,nse,validated,0.7214,Bonus 1:2
+MON100,20210617,inferred,0.10535436532800221,price_derived_estimate,inferred,raw_gap,0.1054,one-day ratio 0.099 outside circuit limits
+AARTIIND,20210622,bonus,0.5,official_ratio,nse,validated,0.5136,Bonus 1:1
+INVENTURE,20210624,split,0.1,official_ratio,nse,validated,0.1015,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+SALASAR,20210713,bonus,0.5,official_ratio,nse,validated,0.5244,Bonus 1:1
+MOKSH,20210714,split,0.2,official_ratio,nse,validated,0.2031,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+GOLD1,20210722,inferred,0.10492428606079165,price_derived_estimate,inferred,raw_gap,0.1049,one-day ratio 0.100 outside circuit limits
+VEEDOL,20210726,bonus,0.5,official_ratio,nse,mismatch,0.1108,Bonus 1:1
+VEEDOL,20210726,split,0.4,official_ratio,nse,mismatch,0.1108,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 2/- Per Share
+POWERGRID,20210729,bonus,0.75,official_ratio,nse,validated,0.7497,Bonus 1:3
+MAANALU,20210802,bonus,0.5,official_ratio,nse,mismatch,0.3306,Bonus 1: 1
+GLOBE,20210803,split,0.2,official_ratio,nse,mismatch,0.1942,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+GLOBE,20210803,bonus,0.3333333333333333,official_ratio,nse,mismatch,0.1942,Bonus 2:1
+DVL,20210805,bonus,0.6666666666666666,official_ratio,nse,mismatch,1.0085,Bonus 1:2
+DHARAN,20210812,split,0.5,official_ratio,nse,validated,0.095,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+DHARAN,20210812,bonus,0.2,official_ratio,nse,validated,0.095,Bonus 4:1
+SAGCEM,20210817,split,0.2,official_ratio,nse,validated,0.2035,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+BCG,20210818,bonus,0.8,official_ratio,nse,mismatch,2.0588,Bonus 1:4
+REDINGTON,20210818,bonus,0.5,official_ratio,nse,validated,0.5011,Bonus 1:1
+MITTAL,20210831,bonus,0.9090909090909091,official_ratio,nse,validated,1.0,Bonus 1:10
+RAJMET,20210902,bonus,0.6666666666666666,official_ratio,nse,mismatch,0.9831,Bonus 1:2
+PRAXIS,20210907,inferred,0.5263157894736842,price_derived_estimate,inferred,snapped,0.5176,one-day ratio 0.567 outside circuit limits
+MHRIL,20210908,bonus,0.6666666666666666,official_ratio,nse,validated,0.7089,Bonus 1:2
+GANGAFORGE,20210913,split,0.1,official_ratio,nse,validated,0.1019,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+MAHLIFE,20210914,bonus,0.3333333333333333,official_ratio,nse,validated,0.3314,Bonus 2:1
+KANPRPLA,20210915,bonus,0.6666666666666666,official_ratio,nse,validated,0.6699,Bonus 1:2
+APLAPOLLO,20210916,bonus,0.5,official_ratio,nse,validated,0.4974,Bonus 1:1
+TPLPLASTEH,20210916,bonus,0.5,official_ratio,nse,validated,0.5312,Bonus 1:1
+CESC,20210917,split,0.1,official_ratio,nse,validated,0.1014,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+LIBAS,20210921,bonus,0.8333333333333334,official_ratio,nse,validated,0.8741,Bonus 1:5
+ARTEMISMED,20210923,split,0.1,official_ratio,nse,validated,0.1015,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+KPRMILL,20210924,split,0.2,official_ratio,nse,validated,0.2031,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share
+CLEDUCATE,20210930,split,0.5,official_ratio,nse,validated,0.5098,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+AFFLE,20211007,split,0.2,official_ratio,nse,validated,0.2027,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+TIRUPATIFL,20211007,split,0.2,official_ratio,nse,mismatch,0.4647,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+TIRUPATIFL,20211007,bonus,0.5714285714285714,official_ratio,nse,mismatch,0.4647,Bonus 3:4
+SRF,20211013,bonus,0.2,official_ratio,nse,validated,0.2037,Bonus 4:1
+VISHWARAJ,20211021,split,0.2,official_ratio,nse,validated,0.1984,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+GPIL,20211026,split,0.5,official_ratio,nse,validated,0.2582,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+GPIL,20211026,bonus,0.5,official_ratio,nse,validated,0.2582,Bonus 1:1
+BSE500IETF,20211028,inferred,0.1111111111111111,price_derived_estimate,inferred,snapped,0.1094,one-day ratio 0.099 outside circuit limits
+IRCTC,20211028,split,0.2,official_ratio,nse,validated,0.1978,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+NIPPOBATRY,20211028,split,0.5,official_ratio,nse,validated,0.499,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+PATINTLOG,20211028,inferred,0.5454545454545454,price_derived_estimate,inferred,snapped,0.5504,one-day ratio 0.592 outside circuit limits
+BIGBLOC,20211115,split,0.2,official_ratio,nse,validated,0.2116,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+MANINFRA,20211117,bonus,0.6666666666666666,official_ratio,nse,validated,0.7198,Bonus 1:2
+SSWL,20211118,split,0.5,official_ratio,nse,validated,0.4712,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+ABSLBANETF,20211125,inferred,0.1,price_derived_estimate,inferred,snapped,0.1013,one-day ratio 0.100 outside circuit limits
+ABSLNN50ET,20211125,inferred,0.1,price_derived_estimate,inferred,snapped,0.0993,one-day ratio 0.101 outside circuit limits
+BSLGOLDETF,20211125,inferred,0.01,price_derived_estimate,inferred,snapped,0.01,one-day ratio 0.010 outside circuit limits
+BSLNIFTY,20211125,inferred,0.1,price_derived_estimate,inferred,snapped,0.1011,one-day ratio 0.101 outside circuit limits
+BSLSENETFG,20211125,inferred,0.1,price_derived_estimate,inferred,snapped,0.1002,one-day ratio 0.101 outside circuit limits
+APOLLOPIPE,20211202,bonus,0.3333333333333333,official_ratio,nse,validated,0.3487,Bonus 2:1
+IEX,20211203,bonus,0.3333333333333333,official_ratio,nse,validated,0.3393,Bonus 2:1
+TTKPRESTIG,20211214,split,0.1,official_ratio,nse,validated,0.1045,Face Value Split (Sub-Division) - From Rs 10 Per Share To Re 1 Per Share
+KKCL,20211216,bonus,0.2,official_ratio,nse,validated,0.2156,Bonus 4:1
+QGOLDHALF,20211216,inferred,0.01747921166114945,price_derived_estimate,inferred,raw_gap,0.0175,one-day ratio 0.020 outside circuit limits
+PRECWIRE,20211222,split,0.2,official_ratio,nse,validated,0.2038,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share
+PTL,20211223,split,0.5,official_ratio,nse,validated,0.4955,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+ANDHRSUGAR,20211230,split,0.2,official_ratio,nse,validated,0.1937,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+SETFGOLD,20220106,inferred,0.01,price_derived_estimate,inferred,snapped,0.01,one-day ratio 0.010 outside circuit limits
+IMFA,20220107,bonus,0.5,official_ratio,nse,validated,0.5031,Bonus 1:1
+IPCALAB,20220110,split,0.5,official_ratio,nse,validated,0.5109,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+GMRAIRPORT,20220111,demerger,0.903,price_derived_estimate,nse,from_gap,0.903,Demerger
+MOTHERSON,20220114,demerger,0.8303,price_derived_estimate,nse,from_gap,0.8303,Demerger
+ONEPOINT,20220118,split,0.2,official_ratio,nse,validated,0.1396,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+ONEPOINT,20220118,bonus,0.6666666666666666,official_ratio,nse,validated,0.1396,Bonus 1:2
+AURIGROW,20220120,bonus,0.5,official_ratio,nse,validated,0.5248,Bonus 1:1
+AAKASH,20220203,split,0.1,official_ratio,nse,validated,0.1042,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+ESSENTIA,20220203,split,0.3333333333333333,official_ratio,nse,no_price,,Face Value Split (Sub-Division) - From Rs 3/- Per Share To Re 1/- Per Share
+SCHAEFFLER,20220208,split,0.2,official_ratio,nse,validated,0.2004,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+GREENLAM,20220210,split,0.2,official_ratio,nse,validated,0.2004,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share
+JBMA,20220221,split,0.4,official_ratio,nse,validated,0.4055,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Rs 2/- Per Share
+HGS,20220222,bonus,0.5,official_ratio,nse,validated,0.4755,Bonus 1:1
+SBC,20220222,split,0.1,official_ratio,nse,mismatch,0.0362,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+SBC,20220222,bonus,0.5,official_ratio,nse,mismatch,0.0362,Bonus 1:1
+EASEMYTRIP,20220228,bonus,0.5,official_ratio,nse,validated,0.5207,Bonus 1:1
+ARSHIYA,20220303,demerger,0.8464,price_derived_estimate,nse,from_gap,0.8464,Demerger
+SUPREMEENG,20220303,split,0.1,official_ratio,nse,validated,0.1044,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+VISHAL,20220310,bonus,0.3333333333333333,official_ratio,nse,validated,0.3445,Bonus 2:1
+CCAVENUE,20220314,bonus,0.5,official_ratio,nse,validated,0.4804,Bonus 1:1
+RKFORGE,20220314,split,0.2,official_ratio,nse,validated,0.2024,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+BCG,20220315,bonus,0.6,official_ratio,nse,validated,0.6298,Bonus 2:3
+RAJRATAN,20220315,split,0.2,official_ratio,nse,validated,0.2132,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+DRCSYSTEMS,20220316,split,0.1,official_ratio,nse,mismatch,0.0654,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+BSE,20220321,bonus,0.3333333333333333,official_ratio,nse,validated,0.3184,Bonus 2:1
+AURIGROW,20220324,split,0.1,official_ratio,nse,validated,0.1206,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+NDL,20220324,bonus,0.3333333333333333,official_ratio,nse,validated,0.3319,Bonus 2:1
+VTL,20220324,split,0.2,official_ratio,nse,validated,0.2041,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+GOLDIAM,20220328,split,0.2,official_ratio,nse,validated,0.2022,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+SUULD,20220330,bonus,0.5,official_ratio,nse,validated,0.5246,Bonus 1:1
+PCBL,20220411,split,0.5,official_ratio,nse,validated,0.5027,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+ARIHANTCAP,20220412,split,0.2,official_ratio,nse,validated,0.2006,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share
+DUCON,20220418,bonus,0.9090909090909091,official_ratio,nse,validated,0.9797,Bonus 1:10
+JUBLFOOD,20220419,split,0.2,official_ratio,nse,validated,0.2028,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+SAREGAMA,20220426,split,0.1,official_ratio,nse,validated,0.1012,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+BBOX,20220513,split,0.2,official_ratio,nse,validated,0.2082,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+BLS,20220513,bonus,0.5,official_ratio,nse,validated,0.5474,Bonus 1:1
+DHAMPURSUG,20220513,demerger,0.6996,price_derived_estimate,nse,from_gap,0.6996,Demerger
+JETFREIGHT,20220519,split,0.5,official_ratio,nse,validated,0.4978,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+TIPSMUSIC,20220519,demerger,0.8832,price_derived_estimate,nse,from_gap,0.8832,Demerger
+VBL,20220606,bonus,0.6666666666666666,official_ratio,nse,validated,0.6814,Bonus 1:2
+AUBANK,20220609,bonus,0.5,official_ratio,nse,validated,0.5045,Bonus 1:1
+COSMOFIRST,20220616,bonus,0.6666666666666666,official_ratio,nse,validated,0.6981,Bonus 1:2
+NAZARA,20220624,bonus,0.5,official_ratio,nse,validated,0.5529,Bonus 1:1
+SALASAR,20220627,split,0.1,official_ratio,nse,validated,0.1034,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 1/- Per Share
+IOC,20220630,bonus,0.6666666666666666,official_ratio,nse,validated,0.6735,Bonus 1:2
+PAISALO,20220630,split,0.1,official_ratio,nse,validated,0.1016,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+RATNAMANI,20220630,bonus,0.6666666666666666,official_ratio,nse,validated,0.7161,Bonus 1:2
+XPROINDIA,20220701,bonus,0.6666666666666666,official_ratio,nse,validated,0.7459,Bonus 1:2
+UNOMINDA,20220707,bonus,0.5,official_ratio,nse,validated,0.5468,Bonus 1:1
+TORNTPHARM,20220708,bonus,0.5,official_ratio,nse,validated,0.507,Bonus 1:1
+GMMPFAUDLR,20220711,bonus,0.3333333333333333,official_ratio,nse,validated,0.3498,Bonus 2:1
+STEELXIND,20220712,split,0.1,official_ratio,nse,validated,0.0993,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+SONAMLTD,20220714,bonus,0.5,official_ratio,nse,validated,0.4743,Bonus 1:1
+RGL,20220719,split,0.2,official_ratio,nse,validated,0.2002,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+HNDFDS,20220721,split,0.2,official_ratio,nse,validated,0.2034,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+HARDWYN,20220725,bonus,0.6666666666666666,official_ratio,nse,validated,0.6999,Bonus 1:2
+TATASTEEL,20220728,split,0.1,official_ratio,nse,validated,0.1023,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+MOLOWVOL,20220811,inferred,0.2,price_derived_estimate,inferred,snapped,0.2012,one-day ratio 0.200 outside circuit limits
+MOMOMENTUM,20220811,inferred,0.2,price_derived_estimate,inferred,snapped,0.2007,one-day ratio 0.200 outside circuit limits
+MOM30IETF,20220812,inferred,0.1,price_derived_estimate,inferred,snapped,0.1002,one-day ratio 0.101 outside circuit limits
+RECLTD,20220817,bonus,0.75,official_ratio,nse,validated,0.7536,Bonus 1:3
+MGEL,20220818,split,0.2,official_ratio,nse,validated,0.2012,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+RAMASTEEL,20220825,split,0.2,official_ratio,nse,validated,0.2009,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share
+PDSL,20220826,split,0.2,official_ratio,nse,validated,0.2033,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+KRITIKA,20220830,split,0.2,official_ratio,nse,validated,0.21,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+PEL,20220830,demerger,0.5477,price_derived_estimate,nse,from_gap,0.5477,Demerger
+ICICIBANKN,20220901,inferred,0.1,price_derived_estimate,inferred,snapped,0.0986,one-day ratio 0.099 outside circuit limits
+ITIETF,20220901,inferred,0.1,price_derived_estimate,inferred,snapped,0.102,one-day ratio 0.098 outside circuit limits
+SOTL,20220901,split,0.2,official_ratio,nse,validated,0.2014,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+DANGEE,20220906,split,0.1,official_ratio,nse,validated,0.0799,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+DANGEE,20220906,bonus,0.6666666666666666,official_ratio,nse,validated,0.0799,Bonus 1:2
+GAIL,20220906,bonus,0.6666666666666666,official_ratio,nse,validated,0.6764,Bonus 1:2
+BANSWRAS,20220908,split,0.5,official_ratio,nse,validated,0.5067,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+BEML,20220908,demerger,0.8864,price_derived_estimate,nse,from_gap,0.8864,Demerger
+SONATSOFTW,20220908,bonus,0.75,official_ratio,nse,validated,0.8312,Bonus 1:3
+BAJAJFINSV,20220913,split,0.2,official_ratio,nse,validated,0.1024,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share
+BAJAJFINSV,20220913,bonus,0.5,official_ratio,nse,validated,0.1024,Bonus 1:1
+BEL,20220915,bonus,0.3333333333333333,official_ratio,nse,validated,0.3413,Bonus 2:1
+RAJMET,20220915,bonus,0.6666666666666666,official_ratio,nse,validated,0.677,Bonus 1:2
+ECLERX,20220921,bonus,0.6666666666666666,official_ratio,nse,validated,0.7035,Bonus 1:2
+CHOICEIN,20220922,bonus,0.5,official_ratio,nse,validated,0.5301,Bonus 1:1
+BSHSL,20220923,split,0.1,official_ratio,nse,validated,0.105,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+RUBYMILLS,20220923,bonus,0.5,official_ratio,nse,validated,0.5378,Bonus 1:1
+SAKSOFT,20220923,split,0.1,official_ratio,nse,validated,0.0957,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+BHARATGEAR,20220927,bonus,0.6666666666666666,official_ratio,nse,validated,0.6837,Bonus 1:2
+LANDSMILL,20220928,split,0.1,official_ratio,nse,validated,0.0739,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+LANDSMILL,20220928,bonus,0.6666666666666666,official_ratio,nse,validated,0.0739,Bonus 1:2
+RAMRAT,20220928,bonus,0.5,official_ratio,nse,validated,0.5046,Bonus 1:1
+INSECTICID,20220930,bonus,0.6666666666666666,official_ratio,nse,validated,0.7337,Bonus 1:2
+MOTHERSON,20221003,bonus,0.6666666666666666,official_ratio,nse,validated,0.6872,Bonus 1:2
+AHLEAST,20221006,bonus,0.6666666666666666,official_ratio,nse,mismatch,0.3361,Bonus 1:2
+AJOONI,20221007,split,0.2,official_ratio,nse,validated,0.1932,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+RUCHIRA,20221010,bonus,0.9090909090909091,official_ratio,nse,validated,0.9842,Bonus 1:10
+SBCL,20221012,bonus,0.6666666666666666,official_ratio,nse,validated,0.7619,Bonus 1:2
+HLEGLAS,20221018,split,0.2,official_ratio,nse,validated,0.2001,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+MBAPL,20221018,bonus,0.5,official_ratio,nse,mismatch,0.9226,Bonus 1:1
+AARTIIND,20221019,demerger,0.8727,price_derived_estimate,nse,from_gap,0.8727,Demerger
+GLOBAL,20221019,split,0.5,official_ratio,nse,validated,0.525,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+TPLPLASTEH,20221019,split,0.2,official_ratio,nse,validated,0.2015,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+AXITA,20221021,split,0.1,official_ratio,nse,validated,0.1003,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+DIL,20221027,bonus,0.5,official_ratio,nse,validated,0.5246,Bonus 1:1
+KSHITIJPOL,20221027,split,0.2,official_ratio,nse,mismatch,0.5952,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+NMDC,20221027,demerger,0.7055,price_derived_estimate,nse,from_gap,0.7055,Demerger
+SIKKO,20221028,bonus,0.6666666666666666,official_ratio,nse,validated,0.6997,Bonus 1:2
+TDPOWERSYS,20221031,split,0.2,official_ratio,nse,validated,0.2008,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+NYKAA,20221110,bonus,0.16666666666666666,official_ratio,nse,validated,0.1575,Bonus 5:1
+SSWL,20221110,split,0.2,official_ratio,nse,validated,0.2027,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share
+GPTINFRA,20221111,bonus,0.5,official_ratio,nse,validated,0.572,Bonus 1:1
+MSUMI,20221116,bonus,0.7142857142857143,official_ratio,nse,validated,0.7831,Bonus 2:5
+EASEMYTRIP,20221121,split,0.5,official_ratio,nse,validated,0.1388,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+EASEMYTRIP,20221121,bonus,0.25,official_ratio,nse,validated,0.1388,Bonus 3:1
+NDLVENTURE,20221122,demerger,0.2633,price_derived_estimate,nse,from_gap,0.2633,Demerger
+DEVIT,20221125,split,0.5,official_ratio,nse,validated,0.5108,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+MAHSEAMLES,20221125,bonus,0.5,official_ratio,nse,validated,0.5387,Bonus 1:1
+RAJMET,20221130,split,0.1,official_ratio,nse,validated,0.1046,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+LIKHITHA,20221202,split,0.5,official_ratio,nse,validated,0.5139,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+BLS,20221208,bonus,0.5,official_ratio,nse,validated,0.549,Bonus 1:1
+AKG,20221216,inferred,0.4666666666666667,price_derived_estimate,inferred,snapped,0.4648,one-day ratio 0.465 outside circuit limits
+CLEDUCATE,20221216,bonus,0.5,official_ratio,nse,validated,0.5382,Bonus 1:1
+LANCER,20221216,split,0.5,official_ratio,nse,validated,0.5072,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+SFL,20221221,bonus,0.5,official_ratio,nse,validated,0.5291,Bonus 1:1
+PRECWIRE,20221222,bonus,0.6666666666666666,official_ratio,nse,validated,0.7224,Bonus 1:2
+ZIMLAB,20221222,bonus,0.3333333333333333,official_ratio,nse,validated,0.3318,Bonus 2:1
+FILATEX,20221227,split,0.5,official_ratio,nse,validated,0.5183,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+SECURCRED,20230104,bonus,0.25,official_ratio,nse,validated,0.274,Bonus 3:1
+RAMASTEEL,20230106,bonus,0.2,official_ratio,nse,validated,0.2198,Bonus 4:1
+SPLPETRO,20230106,split,0.5,official_ratio,nse,validated,0.5007,Face Value Split (Sub-Division) - From Rs 4/- Per Share To Rs 2/- Per Share
+RADIOCITY,20230113,arrangement,0.8015,price_derived_estimate,nse,from_gap,0.8015,Scheme Of Arrangement - Bonus Ncrps 1:10
+VISHNU,20230113,split,0.2,official_ratio,nse,validated,0.2001,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+KPIGREEN,20230118,bonus,0.5,official_ratio,nse,validated,0.5204,Bonus 1:1
+HERITGFOOD,20230120,inferred,0.5,price_derived_estimate,inferred,snapped,0.4976,one-day ratio 0.532 outside circuit limits
+SHRADHA,20230120,split,0.5,official_ratio,nse,validated,0.515,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+GVPTECH,20230123,split,0.2,official_ratio,nse,mismatch,0.1239,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+SERVOTECH,20230203,split,0.2,official_ratio,nse,validated,0.1898,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+ACCURACY,20230215,split,0.1,official_ratio,nse,validated,0.1059,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+VCL,20230215,split,0.5,official_ratio,nse,validated,0.5798,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+IRB,20230222,split,0.1,official_ratio,nse,validated,0.1022,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+VINNY,20230224,split,0.1,official_ratio,nse,validated,0.0423,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+VINNY,20230224,bonus,0.43478260869565216,official_ratio,nse,validated,0.0423,Bonus 13:10
+360ONE,20230302,bonus,0.5,official_ratio,nse,validated,0.2763,Bonus 1:1
+360ONE,20230302,split,0.5,official_ratio,nse,validated,0.2763,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+OSIAHYPER,20230313,split,0.1,official_ratio,nse,validated,0.0995,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+ASTRAL,20230314,bonus,0.75,official_ratio,nse,validated,0.756,Bonus 1:3
+MEDICO,20230316,split,0.2,official_ratio,nse,validated,0.1985,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+HITECH,20230317,split,0.1,official_ratio,nse,validated,0.1014,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+MIRZAINT,20230329,demerger,0.1416,price_derived_estimate,nse,from_gap,0.1416,Demerger
+SCI,20230331,demerger,0.7795,price_derived_estimate,nse,from_gap,0.7795,Demerger
+GHCL,20230406,demerger,0.9185,price_derived_estimate,nse,from_gap,0.9185,Demerger
+DEEPINDS,20230410,split,0.5,official_ratio,nse,validated,0.5045,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+TIPSMUSIC,20230421,split,0.1,official_ratio,nse,validated,0.1014,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+GOYALALUM,20230425,split,0.1,official_ratio,nse,mismatch,0.0651,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+APOLLO,20230504,split,0.1,official_ratio,nse,validated,0.1015,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+SIRCA,20230511,bonus,0.5,official_ratio,nse,validated,0.5117,Bonus 1:1
+VISAKAIND,20230515,split,0.2,official_ratio,nse,validated,0.2037,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+SRPL,20230519,split,0.1,official_ratio,nse,validated,0.1038,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+RADHIKAJWE,20230526,split,0.2,official_ratio,nse,validated,0.2023,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+VSSL,20230526,bonus,0.5,official_ratio,nse,validated,0.5143,Bonus 1:1
+LODHA,20230531,bonus,0.5,official_ratio,nse,validated,0.5109,Bonus 1:1
+EDELWEISS,20230602,demerger,0.8015,price_derived_estimate,nse,from_gap,0.8015,Demerger
+HARDWYN,20230605,bonus,0.75,official_ratio,nse,validated,0.0825,Bonus 1:3
+HARDWYN,20230605,split,0.1,official_ratio,nse,validated,0.0825,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+NIITLTD,20230608,demerger,0.2294,price_derived_estimate,nse,from_gap,0.2294,Demerger
+IONEXCHANG,20230612,split,0.1,official_ratio,nse,validated,0.1004,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+VAKRANGEE,20230615,demerger,0.9322,price_derived_estimate,nse,from_gap,0.9322,Demerger
+VBL,20230615,split,0.5,official_ratio,nse,validated,0.5076,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+BLUESTARCO,20230620,bonus,0.5,official_ratio,nse,validated,0.5114,Bonus 1:1
+GULPOLY,20230621,bonus,0.8333333333333334,official_ratio,nse,validated,0.876,Bonus 1:5
+INDIAMART,20230621,bonus,0.5,official_ratio,nse,validated,0.5038,Bonus 1:1
+AKI,20230622,split,0.2,official_ratio,nse,validated,0.1882,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+KANSAINER,20230704,bonus,0.6666666666666666,official_ratio,nse,validated,0.6955,Bonus 1:2
+BEPL,20230705,bonus,0.6666666666666666,official_ratio,nse,validated,0.691,Bonus 1:2
+SADHNANIQ,20230705,bonus,0.8181818181818182,official_ratio,nse,validated,0.9473,Bonus 2:9
+ROTO,20230707,bonus,0.5,official_ratio,nse,validated,0.5159,Bonus 1:1
+APTECHT,20230714,bonus,0.7142857142857143,official_ratio,nse,validated,0.7592,Bonus 2:5
+THANGAMAYL,20230717,bonus,0.5,official_ratio,nse,validated,0.5252,Bonus 1:1
+ANMOL,20230718,bonus,0.2,official_ratio,nse,validated,0.2248,Bonus 4:1
+RELIANCE,20230720,demerger,0.9079,price_derived_estimate,nse,from_gap,0.9079,Demerger
+NDRAUTO,20230724,bonus,0.5,official_ratio,nse,mismatch,1.0153,Bonus 1:1
+SHRIPISTON,20230724,bonus,0.5,official_ratio,nse,validated,0.5212,Bonus 1:1
+MAANALU,20230727,bonus,0.5,official_ratio,nse,mismatch,0.3589,Bonus 1:1
+MAANALU,20230727,split,0.5,official_ratio,nse,mismatch,0.3589,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+SAREGAMA,20230727,demerger,0.9318,price_derived_estimate,nse,from_gap,0.9318,Demerger
+SERVOTECH,20230728,split,0.5,official_ratio,nse,validated,0.5141,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+AKSHAR,20230731,split,0.1,official_ratio,nse,validated,0.0906,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+KAMOPAINTS,20230801,bonus,0.5,official_ratio,nse,validated,0.5409,Bonus 1:1
+NINSYS,20230803,bonus,0.5555555555555556,official_ratio,nse,validated,0.6438,Bonus 4:5
+SARDAEN,20230804,split,0.1,official_ratio,nse,validated,0.1005,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+IRISDOREME,20230811,split,0.2,official_ratio,nse,validated,0.2034,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+OSWALSEEDS,20230818,split,0.2,official_ratio,nse,validated,0.2122,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+TVSHLTD,20230824,demerger,0.936,price_derived_estimate,nse,from_gap,0.936,Demerger
+GNA,20230901,bonus,0.5,official_ratio,nse,validated,0.5169,Bonus 1:1
+JTLIND,20230907,bonus,0.5,official_ratio,nse,validated,0.5163,Bonus 1:1
+ADFFOODS,20230911,split,0.2,official_ratio,nse,validated,0.202,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+POWERGRID,20230912,bonus,0.75,official_ratio,nse,validated,0.7675,Bonus 1:3
+SARVESHWAR,20230915,split,0.1,official_ratio,nse,mismatch,0.0439,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+SARVESHWAR,20230915,bonus,0.3333333333333333,official_ratio,nse,mismatch,0.0439,Bonus 2:1
+JBCHEPHARM,20230918,split,0.5,official_ratio,nse,validated,0.4998,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+PFC,20230921,bonus,0.8,official_ratio,nse,validated,0.8003,Bonus 1:4
+BERGEPAINT,20230922,bonus,0.8333333333333334,official_ratio,nse,validated,0.8321,Bonus 1:5
+NIFTYBETA,20230925,inferred,0.1,price_derived_estimate,inferred,snapped,0.1017,one-day ratio 0.100 outside circuit limits
+HAL,20230928,split,0.5,official_ratio,nse,validated,0.5042,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+FOCUS,20231006,split,0.2,official_ratio,nse,validated,0.2086,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+SURYAROSNI,20231006,split,0.5,official_ratio,nse,validated,0.5063,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+SIGACHI,20231009,split,0.1,official_ratio,nse,validated,0.0994,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+THEMISMED,20231010,split,0.1,official_ratio,nse,validated,0.1015,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+GENSOL,20231017,bonus,0.3333333333333333,official_ratio,nse,validated,0.3511,Bonus 2:1
+HDFCLOWVOL,20231020,inferred,0.1111111111111111,price_derived_estimate,inferred,snapped,0.1149,one-day ratio 0.099 outside circuit limits
+HDFCMID150,20231020,inferred,0.1,price_derived_estimate,inferred,snapped,0.1,one-day ratio 0.099 outside circuit limits
+HDFCMOMENT,20231020,inferred,0.1111111111111111,price_derived_estimate,inferred,snapped,0.1096,one-day ratio 0.098 outside circuit limits
+HDFCNEXT50,20231020,inferred,0.1,price_derived_estimate,inferred,snapped,0.0975,one-day ratio 0.099 outside circuit limits
+HDFCNIF100,20231020,inferred,0.1,price_derived_estimate,inferred,snapped,0.0995,one-day ratio 0.100 outside circuit limits
+MBAPL,20231020,bonus,0.5,official_ratio,nse,validated,0.5226,Bonus 1:1
+GEEKAYWIRE,20231023,split,0.2,official_ratio,nse,mismatch,0.4861,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+KRISHANA,20231025,bonus,0.5,official_ratio,nse,validated,0.509,Bonus 1:1
+JAYBARMARU,20231026,split,0.4,official_ratio,nse,validated,0.3988,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Rs 2/- Per Share
+BCLIND,20231027,split,0.1,official_ratio,nse,validated,0.1019,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+TALBROAUTO,20231027,split,0.2,official_ratio,nse,validated,0.2036,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+MITTAL,20231101,split,0.1,official_ratio,nse,validated,0.1005,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+CANTABIL,20231102,split,0.2,official_ratio,nse,validated,0.2031,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+DPWIRES,20231108,bonus,0.875,official_ratio,nse,validated,0.926,Bonus 1:7
+HPAL,20231109,split,0.2,official_ratio,nse,validated,0.2011,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+HINDCON,20231110,split,0.2,official_ratio,nse,validated,0.246,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+MKPL,20231110,split,0.1,official_ratio,nse,validated,0.1007,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+ATALREAL,20231116,split,0.2,official_ratio,nse,validated,0.1738,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+SHAILY,20231123,split,0.2,official_ratio,nse,validated,0.2028,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+BOROLTD,20231205,demerger,0.7851,price_derived_estimate,nse,from_gap,0.7851,Demerger
+SAFARI,20231212,bonus,0.5,official_ratio,nse,validated,0.5073,Bonus 1:1
+SONATSOFTW,20231212,bonus,0.5,official_ratio,nse,validated,0.5034,Bonus 1:1
+TPHQ,20231214,split,0.1,official_ratio,nse,validated,0.1253,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+KRITIKA,20231219,bonus,0.3333333333333333,official_ratio,nse,mismatch,0.9953,Bonus 2:1
+AXITA,20231222,bonus,0.75,official_ratio,nse,validated,0.8339,Bonus 1:3
+HMAAGRO,20231229,split,0.1,official_ratio,nse,validated,0.102,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+ALLCARGO,20240102,bonus,0.25,official_ratio,nse,mismatch,0.0242,Bonus 3:1
+NESTLEIND,20240105,split,0.1,official_ratio,nse,validated,0.1016,Face Value Split (Sub-Division) - From Rs10/- Per Share To Re 1/- Per Share
+PGIL,20240105,split,0.5,official_ratio,nse,validated,0.4344,Face Value Split (Sub-Division) - From Rs10/- Per Share To Rs 5/- Per Share
+COCHINSHIP,20240110,split,0.5,official_ratio,nse,validated,0.506,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+ESSENTIA,20240111,bonus,0.5,official_ratio,nse,mismatch,0.3292,Bonus 1:1
+NEWGEN,20240112,bonus,0.5,official_ratio,nse,mismatch,0.6967,Bonus 1:1
+SBC,20240119,bonus,0.6666666666666666,official_ratio,nse,validated,0.727,Bonus 1:2
+DOLPHIN,20240125,split,0.1,official_ratio,nse,mismatch,1.45,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+KANANIIND,20240130,bonus,0.5,official_ratio,nse,validated,0.5261,Bonus 1:1
+SALASAR,20240201,bonus,0.2,official_ratio,nse,validated,0.2197,Bonus 4:1
+HDFCNIFBAN,20240202,inferred,0.1,price_derived_estimate,inferred,snapped,0.102,one-day ratio 0.100 outside circuit limits
+HDFCNIFIT,20240202,inferred,0.11916834339369552,price_derived_estimate,inferred,raw_gap,0.1192,one-day ratio 0.102 outside circuit limits
+HDFCPVTBAN,20240202,inferred,0.11967973029919932,price_derived_estimate,inferred,raw_gap,0.1197,one-day ratio 0.099 outside circuit limits
+HDFCSENSEX,20240202,inferred,0.1,price_derived_estimate,inferred,snapped,0.1038,one-day ratio 0.100 outside circuit limits
+OSWALSEEDS,20240202,bonus,0.8333333333333334,official_ratio,nse,validated,0.9287,Bonus 1:5
+SANDUMA,20240202,bonus,0.16666666666666666,official_ratio,nse,validated,0.177,Bonus 5:1
+AKSHAR,20240215,bonus,0.8333333333333334,official_ratio,nse,mismatch,0.6045,Bonus 1:5
+KPIGREEN,20240215,bonus,0.6666666666666666,official_ratio,nse,validated,0.7,Bonus 1:2
+CHOICEIN,20240220,bonus,0.5,official_ratio,nse,validated,0.5257,Bonus 1:1
+MASFIN,20240222,bonus,0.3333333333333333,official_ratio,nse,validated,0.3597,Bonus 2:1
+RPPL,20240226,bonus,0.3333333333333333,official_ratio,nse,validated,0.359,Bonus 2:1
+DRCSYSTEMS,20240227,bonus,0.3333333333333333,official_ratio,nse,validated,0.3283,Bonus 2:1
+FIEMIND,20240228,bonus,0.5,official_ratio,nse,validated,0.5194,Bonus 1:1
+AUTOIETF,20240301,inferred,0.1,price_derived_estimate,inferred,snapped,0.1017,one-day ratio 0.103 outside circuit limits
+LOWVOLIETF,20240301,inferred,0.11896842859335822,price_derived_estimate,inferred,raw_gap,0.119,one-day ratio 0.101 outside circuit limits
+NV20IETF,20240301,inferred,0.11987938515849085,price_derived_estimate,inferred,raw_gap,0.1199,one-day ratio 0.102 outside circuit limits
+PVTBANIETF,20240301,inferred,0.1,price_derived_estimate,inferred,snapped,0.1028,one-day ratio 0.102 outside circuit limits
+CGCL,20240305,split,0.5,official_ratio,nse,validated,0.2655,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+CGCL,20240305,bonus,0.5,official_ratio,nse,validated,0.2655,Bonus 1:1
+MANORAMA,20240307,split,0.2,official_ratio,nse,validated,0.2028,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+GAEL,20240315,bonus,0.5,official_ratio,nse,validated,0.504,Bonus 1:1
+MKPL,20240315,bonus,0.3333333333333333,official_ratio,nse,mismatch,0.1691,Bonus 2:1
+RAMASTEEL,20240319,bonus,0.3333333333333333,official_ratio,nse,validated,0.3569,Bonus 2:1
+ADVANIHOTR,20240320,bonus,0.5,official_ratio,nse,validated,0.5369,Bonus 1:1
+NRL,20240320,bonus,0.6666666666666666,official_ratio,nse,validated,0.7536,Bonus 1:2
+PAISALO,20240320,bonus,0.5,official_ratio,nse,validated,0.5224,Bonus 1:1
+REFEX,20240322,split,0.2,official_ratio,nse,validated,0.2012,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+LAL,20240328,bonus,0.6470588235294118,official_ratio,nse,validated,0.0543,Bonus 6:11
+LAL,20240328,split,0.1,official_ratio,nse,validated,0.0543,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+PERSISTENT,20240328,split,0.5,official_ratio,nse,validated,0.5024,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+CUPID,20240404,bonus,0.5,official_ratio,nse,mismatch,0.0751,Bonus 1:1
+CUPID,20240404,split,0.1,official_ratio,nse,mismatch,0.0751,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+BTML,20240405,split,0.1,official_ratio,nse,validated,0.0983,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+SBGLP,20240418,split,0.1,official_ratio,nse,validated,0.1018,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+MHLXMIRU,20240419,demerger,0.6851,price_derived_estimate,nse,from_gap,0.6851,Demerger
+ANUP,20240423,bonus,0.5,official_ratio,nse,validated,0.52,Bonus 1:1
+BBL,20240424,split,0.5,official_ratio,nse,validated,0.5048,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+BHAGCHEM,20240502,split,0.1,official_ratio,nse,validated,0.1013,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 1/- Per Share
+SEMAC,20240503,demerger,0.3668,price_derived_estimate,nse,from_gap,0.3668,Demerger
+ALPL30IETF,20240510,inferred,0.11980980193942117,price_derived_estimate,inferred,raw_gap,0.1198,one-day ratio 0.101 outside circuit limits
+FMCGIETF,20240510,inferred,0.1,price_derived_estimate,inferred,snapped,0.1,one-day ratio 0.101 outside circuit limits
+MIDCAPIETF,20240510,inferred,0.10416220843141451,price_derived_estimate,inferred,raw_gap,0.1042,one-day ratio 0.101 outside circuit limits
+MIDSELIETF,20240510,inferred,0.125,price_derived_estimate,inferred,snapped,0.1216,one-day ratio 0.101 outside circuit limits
+NIF100IETF,20240510,inferred,0.11963936649778593,price_derived_estimate,inferred,raw_gap,0.1196,one-day ratio 0.101 outside circuit limits
+QUAL30IETF,20240510,inferred,0.1,price_derived_estimate,inferred,snapped,0.1028,one-day ratio 0.101 outside circuit limits
+SONAMLTD,20240510,split,0.5,official_ratio,nse,validated,0.5253,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+CANBK,20240515,split,0.2,official_ratio,nse,validated,0.2052,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+VARDMNPOLY,20240517,split,0.1,official_ratio,nse,validated,0.1019,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+BDL,20240524,split,0.5,official_ratio,nse,validated,0.5106,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+GMBREW,20240524,bonus,0.8,official_ratio,nse,validated,0.8624,Bonus 1:4
+INOXWIND,20240524,bonus,0.25,official_ratio,nse,validated,0.2644,Bonus 3:1
+SDBL,20240524,split,0.4,official_ratio,nse,validated,0.4011,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Rs 2/- Per Share
+BALAXI,20240530,split,0.2,official_ratio,nse,validated,0.2044,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+DAVANGERE,20240531,split,0.1,official_ratio,nse,validated,0.1,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+MOTILALOFS,20240610,bonus,0.25,official_ratio,nse,validated,0.2699,Bonus 3:1
+SANOFI,20240613,demerger,0.6622,price_derived_estimate,nse,from_gap,0.6622,Demerger
+KAMOPAINTS,20240614,split,0.2,official_ratio,nse,validated,0.2062,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share
+BPCL,20240621,bonus,0.5,official_ratio,nse,validated,0.5078,Bonus 1:1
+HINDPETRO,20240621,bonus,0.6666666666666666,official_ratio,nse,validated,0.6688,Bonus 1:2
+PREMEXPLN,20240621,split,0.2,official_ratio,nse,validated,0.2041,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+AURIONPRO,20240627,bonus,0.5,official_ratio,nse,validated,0.5192,Bonus 1:1
+SHAREINDIA,20240627,split,0.2,official_ratio,nse,validated,0.2004,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+AVONMORE,20240628,split,0.1,official_ratio,nse,mismatch,0.13,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 1/- Per Share
+OCCL,20240701,demerger,0.3322,price_derived_estimate,nse,from_gap,0.3322,Demerger
+OIL,20240702,bonus,0.6666666666666666,official_ratio,nse,validated,0.6738,Bonus 1:2
+GPTINFRA,20240703,bonus,0.5,official_ratio,nse,mismatch,0.7306,Bonus 1:1
+REMSONSIND,20240705,split,0.2,official_ratio,nse,validated,0.1995,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+VERTOZ,20240705,split,0.1,official_ratio,nse,validated,0.052,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+VERTOZ,20240705,bonus,0.5,official_ratio,nse,validated,0.052,Bonus 1:1
+PGEL,20240710,split,0.1,official_ratio,nse,validated,0.101,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+RAYMOND,20240711,demerger,0.6746,price_derived_estimate,nse,from_gap,0.6746,Demerger
+MMFL,20240716,bonus,0.5,official_ratio,nse,validated,0.5269,Bonus 1:1
+KPIGREEN,20240718,split,0.5,official_ratio,nse,validated,0.5001,Face Value Split (Sub-Division) - From Rs10/- Per Share To Rs 5/- Per Share
+ELECON,20240719,split,0.5,official_ratio,nse,validated,0.5192,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+ALMONDZ,20240723,split,0.16666666666666666,official_ratio,nse,validated,0.1674,Face Value Split (Sub-Division) - From Rs 6/- Per Share To Re 1/- Per Share
+KSB,20240725,split,0.2,official_ratio,nse,validated,0.1973,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+AARTECH,20240809,split,0.5,official_ratio,nse,validated,0.3489,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+AARTECH,20240809,bonus,0.6666666666666666,official_ratio,nse,validated,0.3489,Bonus 1:2
+DJML,20240809,bonus,0.3333333333333333,official_ratio,nse,validated,0.4213,Bonus 2:1
+FILATFASH,20240809,split,0.2,official_ratio,nse,validated,0.2139,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share
+KAPSTON,20240809,split,0.5,official_ratio,nse,validated,0.5201,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+RUSHIL,20240809,split,0.1,official_ratio,nse,validated,0.1005,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+SAKUMA,20240809,bonus,0.2,official_ratio,nse,validated,0.2374,Bonus 4:1
+GRPLTD,20240812,bonus,0.25,official_ratio,nse,validated,0.211,Bonus 3:1
+EIHAHOTELS,20240813,bonus,0.5,official_ratio,nse,validated,0.5077,Bonus 1:1
+CDSL,20240823,bonus,0.5,official_ratio,nse,validated,0.5176,Bonus 1:1
+SAPPHIRE,20240905,split,0.2,official_ratio,nse,validated,0.2085,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+VSTIND,20240906,bonus,0.09090909090909091,official_ratio,nse,validated,0.1065,Bonus 10:1
+ANDHRAPAP,20240911,split,0.2,official_ratio,nse,validated,0.2019,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+BIGBLOC,20240912,bonus,0.5,official_ratio,nse,validated,0.5269,Bonus 1:1
+VBL,20240912,split,0.4,official_ratio,nse,validated,0.405,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Rs 2/- Per Share
+KIMS,20240913,split,0.2,official_ratio,nse,validated,0.2036,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+MONARCH,20240913,bonus,0.5,official_ratio,nse,validated,0.5391,Bonus 1:1
+SPORTKING,20240913,split,0.1,official_ratio,nse,validated,0.1011,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+RPPL,20240917,split,0.5,official_ratio,nse,validated,0.5093,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+NDL,20240919,split,0.1,official_ratio,nse,mismatch,0.0776,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+SAKSOFT,20240919,bonus,0.8,official_ratio,nse,validated,0.8945,Bonus 1:4
+AXITA,20240920,bonus,0.75,official_ratio,nse,validated,0.8661,Bonus 1:3
+MINDTECK,20240920,bonus,0.8,official_ratio,nse,validated,0.6299,Bonus 1:4
+PHOENIXLTD,20240920,bonus,0.5,official_ratio,nse,validated,0.5153,Bonus 1:1
+RITES,20240920,bonus,0.5,official_ratio,nse,validated,0.5209,Bonus 1:1
+ROSSELLIND,20240920,demerger,0.1804,price_derived_estimate,nse,from_gap,0.1804,Demerger
+UEL,20240920,bonus,0.8,official_ratio,nse,no_price,,Bonus 1:4
+NDRAUTO,20240925,bonus,0.5,official_ratio,nse,validated,0.519,Bonus 1:1
+SANGHVIMOV,20240927,split,0.5,official_ratio,nse,validated,0.5029,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+GPIL,20241004,split,0.2,official_ratio,nse,validated,0.1972,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share
+NBCC,20241007,bonus,0.6666666666666666,official_ratio,nse,validated,0.6988,Bonus 1:2
+POWERMECH,20241008,bonus,0.5,official_ratio,nse,validated,0.5034,Bonus 1:1
+JINDALSAW,20241009,split,0.5,official_ratio,nse,validated,0.4976,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+HERCULES,20241011,demerger,0.2955,price_derived_estimate,nse,from_gap,0.2955,Demerger
+VAISHALI,20241015,split,0.2,official_ratio,nse,validated,0.1065,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+VAISHALI,20241015,bonus,0.5,official_ratio,nse,validated,0.1065,Bonus 1:1
+POCL,20241016,split,0.5,official_ratio,nse,validated,0.5007,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+HEGAM,20241018,split,0.2,official_ratio,nse,validated,0.198,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+SUKHJITS,20241025,split,0.5,official_ratio,nse,validated,0.492,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+DRREDDY,20241028,split,0.2,official_ratio,nse,validated,0.2026,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share
+RELIANCE,20241028,bonus,0.5,official_ratio,nse,validated,0.5034,Bonus 1:1
+JASH,20241030,split,0.2,official_ratio,nse,validated,0.2,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+PREMIERPOL,20241105,split,0.2,official_ratio,nse,validated,0.1771,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share
+MOTISONS,20241108,split,0.1,official_ratio,nse,validated,0.0916,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+ROTO,20241108,split,0.5,official_ratio,nse,validated,0.5062,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+WEL,20241112,split,0.1,official_ratio,nse,validated,0.1007,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+JTLIND,20241114,split,0.5,official_ratio,nse,validated,0.5033,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+SHAKTIPUMP,20241125,bonus,0.16666666666666666,official_ratio,nse,validated,0.175,Bonus 5:1
+EASEMYTRIP,20241129,bonus,0.5,official_ratio,nse,validated,0.5219,Bonus 1:1
+RPEL,20241129,bonus,0.5,official_ratio,nse,validated,0.5068,Bonus 1:1
+DIACABS,20241203,split,0.1,official_ratio,nse,validated,0.0999,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+WIPRO,20241203,bonus,0.5,official_ratio,nse,validated,0.5053,Bonus 1:1
+TARACHAND,20241205,split,0.2,official_ratio,nse,validated,0.2061,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+STAR,20241206,demerger,0.4801,price_derived_estimate,nse,from_gap,0.4801,Demerger
+GLOBAL,20241210,split,0.4,official_ratio,nse,validated,0.4401,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Rs 2/- Per Share
+SHRADHA,20241210,split,0.4,official_ratio,nse,validated,0.4185,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Rs 2/- Per Share
+EXXARO,20241213,split,0.1,official_ratio,nse,validated,0.0945,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+PCJEWELLER,20241216,split,0.1,official_ratio,nse,validated,0.1041,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+SKYGOLD,20241216,bonus,0.1,official_ratio,nse,mismatch,0.2919,Bonus 9:1
+LINC,20241220,bonus,0.5,official_ratio,nse,validated,0.2627,Bonus 1:1
+LINC,20241220,split,0.5,official_ratio,nse,validated,0.2627,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+HARDWYN,20241227,bonus,0.7142857142857143,official_ratio,nse,validated,0.7187,Bonus 2:5
+MAZDOCK,20241227,split,0.5,official_ratio,nse,validated,0.5021,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+NMDC,20241227,bonus,0.3333333333333333,official_ratio,nse,validated,0.335,Bonus 2:1
+BANCOINDIA,20241230,bonus,0.5,official_ratio,nse,validated,0.5065,Bonus 1:1
+SURYAROSNI,20250101,bonus,0.5,official_ratio,nse,validated,0.5102,Bonus 1:1
+GARFIBRES,20250103,bonus,0.2,official_ratio,nse,validated,0.2061,Bonus 4:1
+KPIGREEN,20250103,bonus,0.6666666666666666,official_ratio,nse,validated,0.675,Bonus 1:2
+ITC,20250106,demerger,0.946,price_derived_estimate,nse,from_gap,0.946,Demerger
+JAGSNPHARM,20250108,split,0.4,official_ratio,nse,validated,0.3973,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Rs 2/- Per Share
+KAMDHENU,20250108,split,0.1,official_ratio,nse,validated,0.1007,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+SHRIRAMFIN,20250110,split,0.2,official_ratio,nse,validated,0.2014,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+JAIBALAJI,20250117,split,0.2,official_ratio,nse,validated,0.1967,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+KITEX,20250117,bonus,0.3333333333333333,official_ratio,nse,mismatch,0.23,Bonus 2:1
+NAVA,20250120,split,0.5,official_ratio,nse,validated,0.5056,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+MAZDA,20250128,split,0.2,official_ratio,nse,mismatch,0.1433,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+IGL,20250131,bonus,0.5,official_ratio,nse,validated,0.4979,Bonus 1:1
+JBMA,20250131,split,0.5,official_ratio,nse,validated,0.5073,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+SENCO,20250131,split,0.5,official_ratio,nse,validated,0.4982,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+REDTAPE,20250204,bonus,0.25,official_ratio,nse,validated,0.256,Bonus 3:1
+KSOLVES,20250206,split,0.5,official_ratio,nse,validated,0.5037,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+AGIIL,20250207,split,0.5,official_ratio,nse,validated,0.5068,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+RAMAPHO,20250207,split,0.5,official_ratio,nse,validated,0.5151,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+TTL,20250212,split,0.1,official_ratio,nse,mismatch,0.0608,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+TARIL,20250214,bonus,0.5,official_ratio,nse,validated,0.513,Bonus 1:1
+KOTHARIPRO,20250218,bonus,0.5,official_ratio,nse,mismatch,0.3636,Bonus 1:1
+JINDWORLD,20250228,bonus,0.2,official_ratio,nse,validated,0.2121,Bonus 4:1
+COASTCORP,20250304,split,0.2,official_ratio,nse,validated,0.2032,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+MGEL,20250304,split,0.5,official_ratio,nse,validated,0.5116,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+ANANDRATHI,20250305,bonus,0.5,official_ratio,nse,validated,0.4925,Bonus 1:1
+KESORAMIND,20250310,demerger,0.0267,price_derived_estimate,nse,from_gap,0.0267,Demerger
+SBC,20250310,bonus,0.6666666666666666,official_ratio,nse,validated,0.6949,Bonus 1:2
+IOLCP,20250311,split,0.2,official_ratio,nse,validated,0.2004,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+GREENLAM,20250321,bonus,0.5,official_ratio,nse,validated,0.4727,Bonus 1:1
+DHARAN,20250404,bonus,0.5,official_ratio,nse,mismatch,0.3282,Bonus 1:1
+SIEMENS,20250407,demerger,0.4971,price_derived_estimate,nse,from_gap,0.4971,Demerger
+QUESS,20250415,demerger,0.5457,price_derived_estimate,nse,from_gap,0.5457,Demerger
+AFIL,20250417,split,0.1,official_ratio,nse,validated,0.1032,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+NAVKARURB,20250424,bonus,0.4,official_ratio,nse,validated,0.3666,Bonus 3:2
+STLTECH,20250424,demerger,0.6814,price_derived_estimate,nse,from_gap,0.6814,Demerger
+ACUTAAS,20250425,split,0.5,official_ratio,nse,validated,0.5076,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+UNITEDPOLY,20250502,split,0.1,official_ratio,nse,validated,0.1036,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+NAUKRI,20250507,split,0.2,official_ratio,nse,validated,0.1987,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+CHEMBOND,20250509,demerger,0.4963,price_derived_estimate,nse,from_gap,0.4963,Demerger
+CPCAP,20250509,demerger,0.5078,price_derived_estimate,nse,from_gap,0.5078,Demerger
+NAVKARURB,20250509,split,0.5,official_ratio,nse,validated,0.5172,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+RAYMOND,20250514,demerger,0.4111,price_derived_estimate,nse,from_gap,0.4111,Demerger
+ABFRL,20250522,demerger,0.3644,price_derived_estimate,nse,from_gap,0.3644,Demerger
+BSE,20250523,bonus,0.3333333333333333,official_ratio,nse,validated,0.337,Bonus 2:1
+UEL,20250530,bonus,0.5952380952380952,official_ratio,nse,no_price,,Bonus 17:25
+COFORGE,20250604,split,0.2,official_ratio,nse,validated,0.2023,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+KHADIM,20250606,demerger,0.904,price_derived_estimate,nse,from_gap,0.904,Demerger
+VESUVIUS,20250610,split,0.1,official_ratio,nse,validated,0.101,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+VIMTALABS,20250613,bonus,0.5,official_ratio,nse,validated,0.5022,Bonus 1:1
+BAJFINANCE,20250616,bonus,0.2,official_ratio,nse,validated,0.1025,Bonus 4:1
+BAJFINANCE,20250616,split,0.5,official_ratio,nse,validated,0.1025,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+VMART,20250623,bonus,0.25,official_ratio,nse,validated,0.2545,Bonus 3:1
+VERTOZ,20250625,consolidation,10.0,official_ratio,nse,mismatch,7.3845,Consolidation Of Equity Shares From Re 1 Per Share To Rs 10 Per Share
+CONCOR,20250704,bonus,0.8,official_ratio,nse,validated,0.8011,Bonus 1:4
+IRISDOREME,20250704,bonus,0.5,official_ratio,nse,validated,0.5228,Bonus 1:1
+PARAS,20250704,split,0.5,official_ratio,nse,validated,0.5054,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+SHARDAMOTR,20250704,bonus,0.5,official_ratio,nse,validated,0.5114,Bonus 1:1
+DYCL,20250711,bonus,0.5,official_ratio,nse,validated,0.5179,Bonus 1:1
+ROTO,20250711,bonus,0.3333333333333333,official_ratio,nse,validated,0.3477,Bonus 2:1
+ANUHPHR,20250715,bonus,0.5,official_ratio,nse,validated,0.5055,Bonus 1:1
+ASHOKLEY,20250716,bonus,0.5,official_ratio,nse,validated,0.4998,Bonus 1:1
+DBREALTY,20250718,demerger,0.7948,price_derived_estimate,nse,from_gap,0.7948,Demerger
+IFGLEXPOR,20250718,bonus,0.5,official_ratio,nse,validated,0.5075,Bonus 1:1
+INDOTHAI,20250718,split,0.1,official_ratio,nse,mismatch,0.1829,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+MOTHERSON,20250718,bonus,0.6666666666666666,official_ratio,nse,validated,0.6671,Bonus 1:2
+MSUMI,20250718,bonus,0.6666666666666666,official_ratio,nse,validated,0.6778,Bonus 1:2
+KELLTONTEC,20250725,split,0.2,official_ratio,nse,validated,0.2156,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share
+NESTLEIND,20250808,bonus,0.5,official_ratio,nse,validated,0.5021,Bonus 1:1
+INDIAGLYCO,20250812,split,0.5,official_ratio,nse,validated,0.4999,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+VRLLOG,20250814,bonus,0.5,official_ratio,nse,validated,0.5021,Bonus 1:1
+DEVIT,20250821,split,0.4,official_ratio,nse,validated,0.4,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Rs 2/- Per Share
+AARON,20250825,bonus,0.5,official_ratio,nse,validated,0.5349,Bonus 1:1
+HDFCBANK,20250826,bonus,0.5,official_ratio,nse,validated,0.4987,Bonus 1:1
+KARURVYSYA,20250826,bonus,0.8333333333333334,official_ratio,nse,validated,0.8712,Bonus 1:5
+STEELCAS,20250829,split,0.2,official_ratio,nse,validated,0.1973,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share
+PAVNAIND,20250901,split,0.1,official_ratio,nse,validated,0.1013,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+PATANJALI,20250911,bonus,0.3333333333333333,official_ratio,nse,validated,0.3345,Bonus 2:1
+FISCHER,20250912,split,0.1,official_ratio,nse,validated,0.1006,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+GODFRYPHLP,20250916,bonus,0.3333333333333333,official_ratio,nse,validated,0.3423,Bonus 2:1
+ZYDUSWELL,20250918,split,0.2,official_ratio,nse,validated,0.2024,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+TFCILTD,20250919,split,0.2,official_ratio,nse,validated,0.2,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+ADANIPOWER,20250922,split,0.2,official_ratio,nse,validated,0.2089,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+SANDUMA,20250922,bonus,0.3333333333333333,official_ratio,nse,validated,0.3408,Bonus 2:1
+PIDILITIND,20250923,bonus,0.5,official_ratio,nse,validated,0.5049,Bonus 1:1
+TIMETECHNO,20250923,bonus,0.5,official_ratio,nse,validated,0.5149,Bonus 1:1
+SHANKARA,20250924,demerger,0.1444,price_derived_estimate,nse,from_gap,0.1444,Demerger
+NAZARA,20250926,bonus,0.5,official_ratio,nse,validated,0.2608,Bonus 1:1
+NAZARA,20250926,split,0.5,official_ratio,nse,validated,0.2608,Face Value Split (Sub-Division) - From Rs 4/- Per Share To Rs 2/- Per Share
+RMDRIP,20250926,split,0.1,official_ratio,nse,validated,0.0997,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+SHILPAMED,20251003,bonus,0.5,official_ratio,nse,validated,0.5136,Bonus 1:1
+SUMEETINDS,20251003,split,0.2,official_ratio,nse,mismatch,0.3612,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+SIGMA,20251006,split,0.1,official_ratio,nse,validated,0.1004,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+AGIIL,20251010,split,0.2,official_ratio,nse,validated,0.208,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share
+LGHL,20251010,bonus,0.4166666666666667,official_ratio,nse,validated,0.4371,Bonus 7:5
+UEL,20251010,bonus,0.3333333333333333,official_ratio,nse,no_price,,Bonus 2:1
+UNIVASTU,20251013,bonus,0.3333333333333333,official_ratio,nse,validated,0.3432,Bonus 2:1
+GOKULAGRO,20251014,split,0.5,official_ratio,nse,validated,0.5008,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+TATAINVEST,20251014,split,0.1,official_ratio,nse,validated,0.105,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+TMPV,20251014,demerger,0.6054,price_derived_estimate,nse,from_gap,0.6054,Demerger
+SKFINDIA,20251015,demerger,0.4335,price_derived_estimate,nse,from_gap,0.4335,Demerger
+ABINFRA,20251017,split,0.1,official_ratio,nse,validated,0.0995,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+ROLEXRINGS,20251017,split,0.1,official_ratio,nse,validated,0.1003,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+GEEKAYWIRE,20251030,split,0.5,official_ratio,nse,validated,0.5081,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+DALMIASUG,20251031,demerger,0.9353,price_derived_estimate,nse,from_gap,0.9353,Demerger
+FCL,20251031,bonus,0.2,official_ratio,nse,validated,0.1028,Bonus 4:1
+FCL,20251031,split,0.5,official_ratio,nse,validated,0.1028,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+BEML,20251103,split,0.5,official_ratio,nse,validated,0.4973,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+SMCGLOBAL,20251114,bonus,0.5,official_ratio,nse,validated,0.5177,Bonus 1:1
+WEBELSOLAR,20251114,split,0.1,official_ratio,nse,validated,0.0998,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+HDFCAMC,20251126,bonus,0.5,official_ratio,nse,validated,0.5026,Bonus 1:1
+SIKKO,20251127,split,0.1,official_ratio,nse,validated,0.0439,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+THYROCARE,20251128,bonus,0.3333333333333333,official_ratio,nse,validated,0.3457,Bonus 2:1
+CAMS,20251205,split,0.2,official_ratio,nse,validated,0.2,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+SIKKO,20251208,bonus,0.5,official_ratio,nse,validated,0.0439,Bonus 1:1
+BECTORFOOD,20251212,split,0.2,official_ratio,nse,validated,0.2006,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+BHARATRAS,20251212,bonus,0.5,official_ratio,nse,validated,0.2575,Bonus 1:1
+BHARATRAS,20251212,split,0.5,official_ratio,nse,validated,0.2575,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+MONEYBOXX,20251215,bonus,0.5,official_ratio,nse,validated,0.5131,Bonus 1:1
+LALPATHLAB,20251219,bonus,0.5,official_ratio,nse,validated,0.4946,Bonus 1:1
+KMEW,20251222,split,0.5,official_ratio,nse,validated,0.493,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+GRMOVER,20251224,bonus,0.3333333333333333,official_ratio,nse,validated,0.3534,Bonus 2:1
+DCMSRIND,20251226,demerger,0.3108,price_derived_estimate,nse,from_gap,0.3108,Demerger
+NUVAMA,20251226,split,0.2,official_ratio,nse,validated,0.1996,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+RAMRAT,20251226,bonus,0.5,official_ratio,nse,validated,0.5021,Bonus 1:1
+MCX,20260102,split,0.2,official_ratio,nse,validated,0.2029,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+ORIENTTECH,20260105,bonus,0.9090909090909091,official_ratio,nse,validated,1.0366,Bonus 1:10
+SKMEGGPROD,20260112,split,0.5,official_ratio,nse,validated,0.4959,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+AIIL,20260113,bonus,0.2,official_ratio,nse,validated,0.2098,Bonus 4:1
+AJMERA,20260114,split,0.2,official_ratio,nse,validated,0.201,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+KOTAKBANK,20260114,split,0.2,official_ratio,nse,validated,0.1998,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share
+BESTAGRO,20260116,bonus,0.6666666666666666,official_ratio,nse,validated,0.073,Bonus 1:2
+BESTAGRO,20260116,split,0.1,official_ratio,nse,validated,0.073,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+GROWWGOLD,20260206,inferred,0.1,price_derived_estimate,inferred,snapped,0.0968,one-day ratio 0.099 outside circuit limits
+GROWWSLVR,20260206,inferred,0.1,price_derived_estimate,inferred,snapped,0.0989,one-day ratio 0.095 outside circuit limits
+AXITA,20260213,bonus,0.9090909090909091,official_ratio,nse,validated,0.809,Bonus 1:10
+DELPHIFX,20260213,split,0.2,official_ratio,nse,validated,0.0697,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+DELPHIFX,20260213,bonus,0.3333333333333333,official_ratio,nse,validated,0.0697,Bonus 2:1
+SADHNANIQ,20260218,inferred,0.3,price_derived_estimate,inferred,snapped,0.2959,one-day ratio 0.296 outside circuit limits
+ANGELONE,20260226,split,0.1,official_ratio,nse,validated,0.1008,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+CONS,20260227,inferred,0.1,price_derived_estimate,inferred,snapped,0.101,one-day ratio 0.099 outside circuit limits
+INFOBEAN,20260227,bonus,0.25,official_ratio,nse,validated,0.2521,Bonus 3:1
+MIDCAP,20260227,inferred,0.1,price_derived_estimate,inferred,snapped,0.103,one-day ratio 0.099 outside circuit limits
+NV20,20260227,inferred,0.10592083742230947,price_derived_estimate,inferred,raw_gap,0.1059,one-day ratio 0.099 outside circuit limits
+SILVER1,20260227,inferred,0.1111111111111111,price_derived_estimate,inferred,snapped,0.1078,one-day ratio 0.103 outside circuit limits
+VGL,20260302,split,0.5,official_ratio,nse,validated,0.5362,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+AQYLON,20260305,split,0.1,official_ratio,nse,validated,0.1005,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+KAPSTON,20260306,bonus,0.6666666666666666,official_ratio,nse,validated,0.835,Bonus 1:2
+LICMFGOLD,20260306,inferred,0.01,price_derived_estimate,inferred,snapped,0.0103,one-day ratio 0.010 outside circuit limits
+SILVERTUC,20260306,bonus,0.5,official_ratio,nse,validated,0.1025,Bonus 1:1
+SILVERTUC,20260306,split,0.2,official_ratio,nse,validated,0.1025,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+CUPID,20260309,bonus,0.2,official_ratio,nse,validated,0.2039,Bonus 4:1
+ECLERX,20260313,bonus,0.5,official_ratio,nse,validated,0.4985,Bonus 1:1
+MAHAPEXLTD,20260320,inferred,0.47368421052631576,price_derived_estimate,inferred,snapped,0.4775,one-day ratio 0.445 outside circuit limits
+METROPOLIS,20260320,bonus,0.25,official_ratio,nse,validated,0.2577,Bonus 3:1
+KILITCH,20260324,bonus,0.5,official_ratio,nse,validated,0.4847,Bonus 1:1
+V2RETAIL,20260325,split,0.1,official_ratio,nse,validated,0.1012,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+HIRECT,20260327,bonus,0.5,official_ratio,nse,validated,0.4975,Bonus 1:1
+IRB,20260330,bonus,0.5,official_ratio,nse,validated,0.5023,Bonus 1:1
+RNBDENIMS,20260402,split,0.5,official_ratio,nse,mismatch,0.0591,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+RNBDENIMS,20260402,bonus,0.6666666666666666,official_ratio,nse,mismatch,0.0591,Bonus 1:2
+RMDRIP,20260410,bonus,0.5833333333333334,official_ratio,nse,validated,0.6049,Bonus 5:7
+PASHUPATI,20260417,split,0.1,official_ratio,nse,validated,0.0996,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+AHCL,20260424,split,0.2,official_ratio,nse,validated,0.1113,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+AHCL,20260424,bonus,0.5,official_ratio,nse,validated,0.1113,Bonus 1:1
+IVZINGOLD,20260430,inferred,0.01,price_derived_estimate,inferred,snapped,0.0101,one-day ratio 0.010 outside circuit limits
+VEDL,20260430,demerger,0.3742,price_derived_estimate,nse,from_gap,0.3742,Demerger
+AVROIND,20260505,split,0.1,official_ratio,nse,validated,0.0995,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+LEMERITE,20260529,split,0.2,official_ratio,nse,validated,0.19,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+LICI,20260529,bonus,0.5,official_ratio,nse,validated,0.5031,Bonus 1:1
+ANANDRATHI,20260603,bonus,0.5,official_ratio,nse,validated,0.5029,Bonus 1:1
+TRENT,20260604,bonus,0.6666666666666666,official_ratio,nse,validated,0.6647,Bonus 1:2
+E2E,20260605,split,0.1,official_ratio,nse,validated,0.105,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+CUB,20260612,bonus,0.75,official_ratio,nse,validated,0.7687,Bonus 1:3
+BRIGADE,20260617,bonus,0.75,official_ratio,nse,validated,0.7771,Bonus 1:3
+DBEIL,20260619,split,0.1,official_ratio,nse,validated,0.08,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+KOTYARK,20260624,bonus,0.09090909090909091,official_ratio,nse,mismatch,0.0698,Bonus 10:1
+ZFCVINDIA,20260624,bonus,0.16666666666666666,official_ratio,nse,validated,0.1749,Bonus 5:1
+GUJENERGY,20260702,demerger,0.8594,price_derived_estimate,nse,from_gap,0.8594,Demerger
+HEALTHADD,20260703,inferred,0.1,price_derived_estimate,inferred,snapped,0.1016,one-day ratio 0.103 outside circuit limits
+KRISHANA,20260703,split,0.2,official_ratio,nse,validated,0.2032,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+MBAPL,20260703,split,0.2,official_ratio,nse,validated,0.1994,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+MIDQ50ADD,20260703,inferred,0.1,price_derived_estimate,inferred,snapped,0.1005,one-day ratio 0.100 outside circuit limits
+GOLDIAM,20260710,bonus,0.75,official_ratio,nse,validated,0.7646,Bonus 1:3
+MWL,20260710,split,0.1,official_ratio,nse,validated,0.0976,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+PSUBANK,20260710,inferred,0.1,price_derived_estimate,inferred,snapped,0.1021,one-day ratio 0.104 outside circuit limits
+POCL,20260721,split,0.4,official_ratio,nse,validated,0.4066,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Rs 2/- Per Share
+TRIVENI,20260722,demerger,0.5408,price_derived_estimate,nse,from_gap,0.5408,Demerger
+JLHL,20260724,split,0.2,official_ratio,nse,validated,0.1994,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+HARDWYN,20260728,bonus,0.7142857142857143,official_ratio,nse,validated,0.762,Bonus 2:5
+IVZINNIFTY,20260731,inferred,0.1,price_derived_estimate,inferred,snapped,0.0992,one-day ratio 0.101 outside circuit limits
+NARMADA,20260731,split,0.5,official_ratio,nse,validated,0.5524,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+TEMBO,20260805,split,0.1,official_ratio,nse,validated,0.104,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+KIRLPNU,20260818,split,0.5,official_ratio,nse,validated,0.5011,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+GOODLUCK,20260821,bonus,0.3333333333333333,official_ratio,nse,validated,0.3426,Bonus 2:1
+TDPOWERSYS,20260824,split,0.5,official_ratio,nse,validated,0.505,Face Value Split (Sub-Division) - From Rs 2/- Per Share To Re 1/- Per Share
+CORDELIA,20260825,split,0.1,official_ratio,nse,validated,0.0977,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Re 1/- Per Share
+GOLDADD,20260828,inferred,0.1,price_derived_estimate,inferred,snapped,0.1012,one-day ratio 0.100 outside circuit limits
+SILVERADD,20260828,inferred,0.1049428658990412,price_derived_estimate,inferred,raw_gap,0.1049,one-day ratio 0.102 outside circuit limits
+INDIAGLYCO,20260902,demerger,0.2297,price_derived_estimate,nse,from_gap,0.2297,Demerger
+TCC,20260904,split,0.2,official_ratio,nse,validated,0.203,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+HEGAM,20260907,demerger,0.3392,price_derived_estimate,nse,from_gap,0.3392,Demerger
+PGIL,20260911,bonus,0.5,official_ratio,nse,validated,0.5049,Bonus 1:1
+TAALTECH,20260922,split,0.2,official_ratio,nse,validated,0.2035,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+AASTHA,20260928,bonus,0.5,official_ratio,nse,validated,0.5092,Bonus 1:1
+BLSE,20261006,split,0.5,official_ratio,nse,validated,0.5129,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share
+BUILDPRO,20261008,split,0.2,official_ratio,nse,no_price,,Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 2/- Per Share
+MOLDTECH,20261009,bonus,0.5,official_ratio,nse,no_price,,Bonus 1:1
+MOLDTKPAC,20261009,bonus,0.5,official_ratio,nse,no_price,,Bonus 1:1
+BANSALWIRE,20261016,split,0.2,official_ratio,nse,no_price,,Face Value Split (Sub-Division) - From Rs 5/- Per Share To Re 1/- Per Share
