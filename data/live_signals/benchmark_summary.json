@@ -1,11 +1,11 @@
 {
-  "as_of": "2026-10-14",
+  "as_of": "2026-10-15",
   "start_date": "2026-06-15",
-  "n_days": 80,
-  "portfolio_return_pct": -0.62,
-  "benchmark_return_pct": -3.73,
-  "excess_return_pct": 3.11,
-  "information_ratio": 1.14,
+  "n_days": 81,
+  "portfolio_return_pct": -0.77,
+  "benchmark_return_pct": -3.1,
+  "excess_return_pct": 2.33,
+  "information_ratio": 0.82,
   "beating_market": true,
   "status": "ok"
 }
