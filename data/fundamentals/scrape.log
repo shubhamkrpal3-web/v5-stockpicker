@@ -2365,3 +2365,25 @@
 [2026-10-27 20:36:21] [450/500] ok=399 fail=51  elapsed=1.7m  ETA=0.2m
 [2026-10-27 20:36:27] [475/500] ok=421 fail=54  elapsed=1.8m  ETA=0.1m
 [2026-10-27 20:36:38] [500/500] ok=441 fail=59  elapsed=2.0m  ETA=0.0m
+[2026-10-28 20:56:44] [25/500] ok=23 fail=2  elapsed=0.9m  ETA=16.5m
+[2026-10-28 20:57:38] [50/500] ok=47 fail=3  elapsed=1.8m  ETA=15.9m
+[2026-10-28 20:58:32] [75/500] ok=67 fail=8  elapsed=2.7m  ETA=15.1m
+[2026-10-28 20:59:26] [100/500] ok=89 fail=11  elapsed=3.6m  ETA=14.2m
+[2026-10-28 21:00:20] [125/500] ok=114 fail=11  elapsed=4.5m  ETA=13.4m
+[2026-10-28 21:01:13] [150/500] ok=136 fail=14  elapsed=5.4m  ETA=12.5m
+[2026-10-28 21:02:07] [175/500] ok=159 fail=16  elapsed=6.3m  ETA=11.6m
+[2026-10-28 21:03:01] [200/500] ok=183 fail=17  elapsed=7.2m  ETA=10.7m
+[2026-10-28 21:03:55] [225/500] ok=205 fail=20  elapsed=8.1m  ETA=9.8m
+[2026-10-28 21:04:48] [250/500] ok=222 fail=28  elapsed=8.9m  ETA=8.9m
+[2026-10-28 21:05:25] GET https://www.screener.in/company/HEG/consolidated/ -> 404 (giving up)
+[2026-10-28 21:05:42] [275/500] ok=245 fail=30  elapsed=9.8m  ETA=8.0m
+[2026-10-28 21:06:35] [300/500] ok=267 fail=33  elapsed=10.7m  ETA=7.1m
+[2026-10-28 21:07:29] [325/500] ok=291 fail=34  elapsed=11.6m  ETA=6.3m
+[2026-10-28 21:08:24] [350/500] ok=313 fail=37  elapsed=12.5m  ETA=5.4m
+[2026-10-28 21:09:18] [375/500] ok=336 fail=39  elapsed=13.4m  ETA=4.5m
+[2026-10-28 21:09:33] GET https://www.screener.in/company/ICICIPRULI/consolidated/ -> 404 (giving up)
+[2026-10-28 21:10:12] [400/500] ok=357 fail=43  elapsed=14.3m  ETA=3.6m
+[2026-10-28 21:11:06] [425/500] ok=378 fail=47  elapsed=15.2m  ETA=2.7m
+[2026-10-28 21:11:59] [450/500] ok=399 fail=51  elapsed=16.1m  ETA=1.8m
+[2026-10-28 21:12:54] [475/500] ok=421 fail=54  elapsed=17.0m  ETA=0.9m
+[2026-10-28 21:13:46] [500/500] ok=441 fail=59  elapsed=17.9m  ETA=0.0m
