@@ -328,10 +328,3 @@ if __name__ == "__main__":
         print("Implement the fetch_* functions to enable real evaluation.\n")
         df = gate.batch_evaluate(test_symbols)
         print(df.to_string(index=False))
- tempfile.TemporaryDirectory() as tmp:
-        gate = QualityGate(cache_dir=tmp)
-        test_symbols = ["BIOCON", "MANKIND", "SOLARINDS", "ADANIPORTS"]
-        print("Note: this demo runs with EMPTY data — all stocks will FAIL closed.")
-        print("Implement the fetch_* functions to enable real evaluation.\n")
-        df = gate.batch_evaluate(test_symbols)
-        print(df.to_string(index=False))
