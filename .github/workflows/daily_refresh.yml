@@ -14,6 +14,11 @@ on:
 permissions:
   contents: write   # needed to commit updated data back to repo
 
+# Shared with the research workflows so data commits never race each other
+concurrency:
+  group: data-commit
+  cancel-in-progress: false
+
 jobs:
   refresh:
     runs-on: ubuntu-latest
@@ -52,6 +57,17 @@ jobs:
           python v5_modules/bhavcopy_downloader.py \
             --master data/market_database/master_history.csv \
             --max-back-days $MAX_BACK
+
+      # Split/bonus events: back-adjusts prices for the signal and rescales held
+      # paper positions on their ex-date. Non-fatal: if NSE's feed is unreachable
+      # the script falls back to inference and keeps the stored official events.
+      - name: Update corporate actions (splits / bonuses)
+        continue-on-error: true
+        run: |
+          python v5_modules/corporate_actions.py --update \
+            --master data/market_database/master_history.csv \
+            --events data/market_database/corporate_actions.csv \
+            --days 30 --ahead 45
 
       - name: Refresh stale fundamentals (top 500 only — to fit in 30-min budget)
         run: |
@@ -95,7 +111,11 @@ jobs:
             --min-close 20 \
             --min-traded-value 10000000
 
+      # Advisory only: a Telegram outage must never block the Excel/email steps or the data commit
+      # (2026-11-13: a read timeout here skipped the commit and lost the session's ledger update).
+      # Unsent exit reports stay pending in the exit marker and are included in the next report.
       - name: Broadcast daily status to Telegram (always — heartbeat + exits if any)
+        continue-on-error: true
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}

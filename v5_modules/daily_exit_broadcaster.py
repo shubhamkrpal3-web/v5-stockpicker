@@ -1,71 +1,41 @@
 """
 daily_exit_broadcaster.py
 =========================
-Sends a Telegram alert ONLY if positions were closed today via stop-loss
-or time-stop. Reads from realized_trades.csv and filters to today's exits.
+Preview only: prints the exit report the next nightly status would send (exit_report.py, the one
+exit-reporting function). It never sends anything and never writes the report marker, so the
+nightly status (daily_status_broadcaster.py, V5 Daily Data Refresh) stays the only sender of exit
+details and the same exits are never sent twice.
 
-Used as a step inside daily_refresh.yml right after paper_trade_manager
-has updated the ledger.
+Not scheduled by any workflow. (An earlier version described itself as a step inside
+daily_refresh.yml, but no workflow ever ran it; it filtered exits by the wall-clock date.)
+--dry-run is accepted for compatibility; it changes nothing.
 """
 from __future__ import annotations
 
 import argparse
-from pathlib import Path
 
-import pandas as pd
-
-from telegram_broadcaster import send
+import exit_report
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--realized", default="./data/live_signals/realized_trades.csv")
     ap.add_argument("--positions", default="./data/live_signals/positions.csv")
-    ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--equity-log", default="./data/live_signals/equity_log.csv")
+    ap.add_argument("--exit-marker", default=None, help="last_exit_report.txt (default: next to --positions)")
+    ap.add_argument("--dry-run", action="store_true", help="accepted for compatibility; this tool never sends")
     args = ap.parse_args()
 
-    if not Path(args.realized).exists():
-        print("No realized_trades.csv yet — skipping exit broadcast.")
-        return
-    real = pd.read_csv(args.realized)
-    if real.empty:
-        print("No realized trades yet — skipping.")
-        return
-
-    today = pd.Timestamp.now().strftime("%Y-%m-%d")
-    real["exit_date"] = real["exit_date"].astype(str)
-    todays_exits = real[real["exit_date"] == today]
-    if todays_exits.empty:
-        print(f"No exits on {today} — skipping broadcast.")
-        return
-
-    lines = [f"*⚠️ EXIT SIGNAL — {pd.Timestamp.now().strftime('%a %d %b %Y')}*", ""]
-    total_pnl = 0.0
-    for r in todays_exits.itertuples():
-        sym = r.symbol
-        reason = r.exit_reason
-        exit_px = r.exit_price
-        pnl = r.pnl_inr
-        pnl_pct = r.pnl_pct * 100
-        days = r.days_held
-        emoji = "✅" if pnl > 0 else "❌" if pnl < 0 else "➖"
-        lines.append(
-            f"{emoji} `{sym}` — {reason} at ₹{exit_px:.2f}  "
-            f"({pnl_pct:+.2f}% / ₹{pnl:+,.0f} / held {days}d)"
-        )
-        total_pnl += pnl
-    lines.append("")
-    lines.append(f"*Today's realized:* ₹{total_pnl:+,.0f}  ({len(todays_exits)} positions)")
-    msg = "\n".join(lines)
-
-    if args.dry_run:
-        print(msg)
-        return
-    resp = send(msg)
-    if resp.get("ok"):
-        print("Sent OK.")
+    marker = args.exit_marker or exit_report.marker_path(args.positions)
+    rep = exit_report.collect_paths(args.realized, args.positions, args.equity_log, marker)
+    if rep is None:
+        print("No ledger runs yet — nothing to report.")
+    elif rep["window"]["already_reported"]:
+        print(f"Ledger run {rep['window']['end']} already reported by the nightly status.")
     else:
-        print("FAILED:", resp)
+        print(exit_report.build_message(rep) or
+              "No exits, cash settlements or newly stale/locked holdings in the unreported runs.")
+    print("(preview only - nothing sent, nothing recorded)")
 
 
 if __name__ == "__main__":

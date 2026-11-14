@@ -27,6 +27,7 @@ from typing import Optional
 import pandas as pd
 
 from telegram_broadcaster import send
+import ledger_view
 
 
 def fmt_inr(v: float) -> str:
@@ -82,11 +83,14 @@ def main():
         latest_equity = float(eq["EQUITY"].iloc[-1])
 
         # Position counts
+        other_lines = []                   # stale, locked, pending, cash owed: active but not open
         if Path(args.positions).exists():
             pos = pd.read_csv(args.positions)
-            open_pos = pos[pos["status"] == "open"]
+            rows = ledger_view.classify(pos)
+            open_pos = rows[rows.state == ledger_view.OPEN]
             n_open = len(open_pos)
             top_symbols = ", ".join(open_pos["symbol"].head(8).tolist()) if n_open else "—"
+            other_lines = ledger_view.holdings_line(rows[rows.state != ledger_view.OPEN])
         else:
             n_open = 0
             top_symbols = "—"
@@ -152,6 +156,9 @@ def main():
         lines.append(f"*Open positions:* {n_open}")
         if top_symbols != "—":
             lines.append(f"_{top_symbols}_")
+        if other_lines:
+            lines.append("*Also active (not open):*")
+            lines += [f"• {line}" for line in other_lines]
         lines.append("")
         lines.append(f"*Closed this week:* {n_trades_week} ({wins}W / {losses}L)   P&L {fmt_inr(recent_pnl)}")
         if Path(args.realized).exists() and len(pd.read_csv(args.realized)):

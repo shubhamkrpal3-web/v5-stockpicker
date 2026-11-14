@@ -57,17 +57,35 @@ def _load_creds(creds_path: Optional[str] = None) -> tuple[str, str]:
     return token, chat
 
 
-def send(text: str, creds_path: Optional[str] = None, parse_mode: str = "Markdown") -> dict:
-    """Send a message to Telegram. Returns the API response."""
+def send(text: str, creds_path: Optional[str] = None, parse_mode: str = "Markdown",
+         retries: int = 3, timeout: float = 20) -> dict:
+    """Send a message to Telegram. Returns the API response.
+
+    A transport failure (timeout, connection error) or a gateway/rate-limit status (5xx, 429) is retried with a
+    short back-off. After the last attempt the failure is RETURNED as {"ok": False, ...} rather than raised, so an
+    api.telegram.org outage never fails the run that produced the message: callers log the response, and the
+    exit-report marker keeps the unsent report pending for the next run (2026-11-13: a Telegram read timeout
+    failed the daily refresh before its data commit). Missing credentials still raise: that is a setup error."""
     token, chat = _load_creds(creds_path)
     url = f"https://api.telegram.org/bot{token}/sendMessage"
-    r = requests.post(url, json={
-        "chat_id": chat,
-        "text": text,
-        "parse_mode": parse_mode,
-        "disable_web_page_preview": True,
-    }, timeout=20)
-    return r.json()
+    payload = {"chat_id": chat, "text": text, "parse_mode": parse_mode, "disable_web_page_preview": True}
+    last: dict = {"ok": False, "error": "not attempted"}
+    for attempt in range(1, retries + 1):
+        try:
+            r = requests.post(url, json=payload, timeout=timeout)
+            try:
+                resp = r.json()
+            except ValueError:
+                resp = {"ok": False, "error_code": r.status_code, "description": r.text[:200]}
+            if resp.get("ok") or not (r.status_code == 429 or 500 <= r.status_code < 600):
+                return resp                      # delivered, or a definite client-side error (no point retrying)
+            last = resp
+        except requests.RequestException as e:
+            last = {"ok": False, "error": f"{type(e).__name__}: {e}"}
+        if attempt < retries:
+            time.sleep(5 * attempt)
+    print(f"[WARN] Telegram send failed after {retries} attempts: {last}", file=sys.stderr)
+    return last
 
 
 def _fmt_inr(v: float) -> str:
@@ -142,32 +160,34 @@ def build_weekly_signal(
     if positions_path and Path(positions_path).exists():
         pos = pd.read_csv(positions_path)
         if len(pos):
-            held = pos[pos["status"] == "open"]
+            import ledger_view                      # every active ledger state, labelled
+            held = ledger_view.classify(pos)
             if len(held):
-                lines.append(f"*HOLD ({len(held)}):* " + ", ".join(held["symbol"].head(8).tolist()))
+                lines.append(f"*HOLD ({len(held)} active):*")
+                lines += [f"• {line}" for line in ledger_view.holdings_line(held)]
                 lines.append("")
 
     lines.append("_Disclaimer: Educational signal. Not investment advice. Execute at your discretion._")
     return "\n".join(lines)
 
 
-def build_daily_exit(positions_path: str) -> Optional[str]:
-    """Build daily exit broadcast — returns None if no exits fired today."""
-    if not Path(positions_path).exists():
+def build_daily_exit(positions_path: str, realized_path: Optional[str] = None,
+                     equity_log_path: Optional[str] = None, marker_file: Optional[str] = None) -> Optional[str]:
+    """What the V5 Daily Exit Check sends: a 'report not sent' notice (counts only) when the latest
+    ledger run has no exit report recorded, else None. Exit details are sent only by the nightly status
+    (daily_status_broadcaster.py), whose workflow commits the marker; this job runs on a separate runner
+    that cannot persist one, so it never sends exit details and the same exits are never sent twice.
+    (The original version looked for statuses the ledger never writes, so it never fired.)"""
+    import exit_report
+    base = Path(positions_path).parent
+    marker_file = marker_file or exit_report.marker_path(positions_path)
+    if not Path(marker_file).exists():
+        # the nightly status creates the marker on its first run (sent or not); until then there is
+        # no record to check against, so stay quiet rather than raise a false alarm
         return None
-    pos = pd.read_csv(positions_path)
-    if pos.empty or "status" not in pos.columns:
-        return None
-    exits = pos[pos["status"].isin(["stop_hit", "exit_pending", "time_stop"])]
-    if exits.empty:
-        return None
-    today = pd.Timestamp.now().strftime("%a %d %b %Y")
-    lines = [f"*EXIT SIGNAL — {today}*", ""]
-    for r in exits.itertuples():
-        reason = getattr(r, "exit_reason", "STOP")
-        stop = getattr(r, "current_stop", 0)
-        lines.append(f"`{r.symbol}` | {reason} at ₹{stop:.2f}\nExit at next open.")
-    return "\n".join(lines)
+    rep = exit_report.collect_paths(realized_path or base / "realized_trades.csv", positions_path,
+                                    equity_log_path or base / "equity_log.csv", marker_file)
+    return exit_report.missing_report_notice(rep)
 
 
 def build_weekly_summary(
@@ -211,6 +231,10 @@ def main():
     ap.add_argument("--portfolio", default="./data/live_signals/daily_live_portfolio.csv")
     ap.add_argument("--positions", default="./data/live_signals/positions.csv")
     ap.add_argument("--equity-log", default="./data/live_signals/equity_log.csv")
+    ap.add_argument("--realized", default=None,
+                    help="realized_trades.csv (default: next to --positions)")
+    ap.add_argument("--exit-marker", default=None,
+                    help="last_exit_report.txt (default: next to --positions)")
     ap.add_argument(
         "--regime-json",
         default="./data/live_signals/daily_regime.json",
@@ -243,9 +267,11 @@ def main():
             dd_from_peak_pct=args.dd,
         )
     elif args.type == "daily_exit":
-        msg = build_daily_exit(positions_path=args.positions)
+        # V5 Daily Exit Check: never sends exit details and never writes the marker (see build_daily_exit)
+        msg = build_daily_exit(args.positions, args.realized, args.equity_log, args.exit_marker)
         if not msg:
-            print("No exits to broadcast — skipping.")
+            print("Nothing to send: the latest ledger run is already reported, or the nightly status has not "
+                  "created its report marker yet, or there is no ledger.")
             return
     elif args.type == "weekly_summary":
         msg = build_weekly_summary(

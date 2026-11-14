@@ -235,6 +235,14 @@ def build_body(
                     else:
                         lines.append(f"  {sym:<12} entry ₹{entry:.1f}  stop ₹{stop:.1f}")
                 lines.append("")
+            import ledger_view                      # active but not open: stale, locked, pending, cash owed
+            other = ledger_view.classify(pos)
+            other = other[other.state != ledger_view.OPEN]
+            if not other.empty:
+                lines.append(f"OTHER ACTIVE HOLDINGS ({len(other)}) - not tradable today, or cash owed")
+                for r in other.itertuples():
+                    lines.append(f"  {r.symbol:<12} {ledger_view.describe(r)}")
+                lines.append("")
 
     lines.append("Full detail (MTM, equity curve, closed trades) is in the attached Excel.")
     lines.append("— V5 automation")

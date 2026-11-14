@@ -7,6 +7,7 @@ Drop these on your Oracle Cloud VM under `/home/ubuntu/v5/v5_modules/`. See `Ora
 | File | Purpose | Called by |
 |---|---|---|
 | `bhavcopy_downloader.py` | Downloads NSE EOD bhavcopy, appends new rows to master_history.csv. Idempotent. | `daily_data_refresh.py` |
+| `corporate_actions.py` | Split/bonus events from NSE's corporate-actions feed (validated against the price gap; inferred only for gaps no circuit band allows) -> `data/market_database/corporate_actions.csv`. Prices are back-adjusted in memory at load time; raw data is never rewritten. Held paper positions are rescaled on the ex-date. | `daily_refresh.yml` |
 | `screener_scraper.py` | Fetches fundamentals from Screener.in. SQLite-cached, rate-limited 1 req / 2 sec. | `daily_data_refresh.py` (and one-time bootstrap) |
 | `v5_signal_generator.py` | The heart. Reads master + fundamentals + master, applies V5 multifactor + quality gate + regime overlay + ATR sizing, writes `daily_live_portfolio.csv`. | `daily_data_refresh.py` |
 | `daily_data_refresh.py` | Nightly orchestrator. Calls the three above in sequence, logs everything, alerts via Telegram on failure. | cron at 21:30 IST |
@@ -17,7 +18,7 @@ Drop these on your Oracle Cloud VM under `/home/ubuntu/v5/v5_modules/`. See `Ora
 | File | What it provides | Tested |
 |---|---|---|
 | `pit_corrections.py` | Point-in-time factor shifts and OPEN-to-OPEN forward returns. Removes look-ahead bias. | ✓ (smoke test in `__main__`) |
-| `multifactor_score.py` | V5 sleeve composition: 50% momentum (skip-month) + 30% low-vol + 20% breadth, with hooks for quality + value when fundamentals are wired. | ✓ |
+| `multifactor_score.py` | V5 sleeve composition: 62.5% momentum (skip-month) + 37.5% low-vol (breadth removed 2026-10-04: it predicted the opposite of its intent), with hooks for quality + value when fundamentals are wired. | ✓ |
 | `risk_overlay_fixed.py` | Properly enforcing per-stock + per-sector caps. Reproduces V4's cap-violation bug and demonstrates the fix. | ✓ |
 | `realistic_cost_model.py` | Per-stock cost: brokerage + STT + stamp duty + exchange + GST + slippage scaled to participation. | ✓ |
 | `quality_gate.py` | Mandatory fundamental & event filters. Uses cached Screener data. | ✓ scaffolding, ✓ fetchers via screener_scraper |
@@ -71,7 +72,9 @@ _Portfolio YTD:_ +0.00%   _DD from peak:_ +0.00%
 
 ## Honest caveats
 
-The variant search confirmed that V5 momentum/low-vol/breadth scoring **does not beat benchmark** on its own. The single remaining lever is the fundamental quality gate, which only takes effect after `screener_scraper.py` has bootstrapped a meaningful cache. **Do not trade real money until you've run the system end-to-end for 8 weeks of paper trading with the quality gate active.** See the audit blueprint (one directory up) for the full reasoning.
+**Update 2026-10-04.** Two data/model errors were fixed: prices were not adjusted for splits/bonuses, and the 20% breadth sleeve was predicting the opposite of its intent. The backtest benchmark also had look-ahead (same-day turnover membership). Re-run 2018-2026 on corrected data with the live exit rules: +134% (10.3%/yr, vol 12%, max drawdown -21.7%) vs the equal-weighted benchmark +129% (10.0%/yr, vol 21%, max drawdown -52%). The edge is weaker in the second half of the sample. The new multi-engine research system and central risk engine are described in `docs/ARCHITECTURE.md`.
+
+The earlier variant search (on uncorrected data) concluded that V5 momentum/low-vol/breadth scoring **does not beat benchmark** on its own. The single remaining lever is the fundamental quality gate, which only takes effect after `screener_scraper.py` has bootstrapped a meaningful cache. **Do not trade real money until you've run the system end-to-end for 8 weeks of paper trading with the quality gate active.** See the audit blueprint (one directory up) for the full reasoning.
 
 ---
 

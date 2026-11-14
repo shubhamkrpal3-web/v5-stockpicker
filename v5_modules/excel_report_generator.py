@@ -34,6 +34,8 @@ from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 from openpyxl.formatting.rule import CellIsRule
 
+import ledger_view
+
 NAVY = "1F3A5F"
 LIGHT_BLUE = "DCE6F1"
 GREEN = "C6EFCE"
@@ -133,6 +135,12 @@ def _build_dashboard(ws, positions, equity, regime_state, today_date):
         ("Open Positions", f"{n_open}"),
         ("Regime", regime_state),
     ]
+    other = ledger_view.classify(positions)
+    other = other[other.state != ledger_view.OPEN] if len(other) else other
+    if len(other):
+        counts = other.state.value_counts()
+        metrics.insert(9, ("Other Active Holdings", ", ".join(f"{n} {ledger_view.LABEL[s]}" for s, n in counts.items())
+                           + (f"; cash owed ₹{other.owed.sum():,.0f}" if other.owed.sum() else "")))
     for i, (k, v) in enumerate(metrics, start=4):
         kc = ws.cell(row=i, column=1, value=k)
         vc = ws.cell(row=i, column=2, value=v)
@@ -158,6 +166,8 @@ def _build_open_positions(ws, positions, today_bar):
     opens = positions[positions["status"] == "open"].copy()
     if opens.empty:
         ws.cell(row=2, column=1, value="No open positions today.").font = Font(italic=True, color="555555")
+        _build_other_active(ws, positions, 4)
+        _autosize(ws, max_width=40)
         return
     r = 2
     for _, p in opens.iterrows():
@@ -207,7 +217,37 @@ def _build_open_positions(ws, positions, today_bar):
         CellIsRule(operator="greaterThan", formula=["0"], fill=PatternFill("solid", fgColor=GREEN)))
     ws.conditional_formatting.add(f"H2:H{r-1}",
         CellIsRule(operator="lessThan", formula=["0"], fill=PatternFill("solid", fgColor=RED)))
+    _build_other_active(ws, positions, r + 1)
     _autosize(ws, max_width=20)
+
+
+def _build_other_active(ws, positions, row: int) -> int:
+    """Active holdings that are not open - stale, exit-offer locked, pending entitlements, cash owed,
+    fractions - listed with their state, so nothing active is silently left out (ledger_view.py)."""
+    rows = ledger_view.classify(positions)
+    rows = rows[rows.state != ledger_view.OPEN]
+    if rows.empty:
+        return row
+    ws.cell(row=row, column=1, value="Other active holdings (not tradable today, or cash owed)").font = \
+        Font(name="Arial", size=11, bold=True, color=NAVY)
+    _styled_header(ws, ["Symbol", "State", "Qty", "Value basis", "Mark / cash due", "Mark date / pay date",
+                        "Value (Rs)", "Note"], row=row + 1)
+    r = row + 2
+    for x in rows.itertuples():
+        if x.owed:
+            vals = [x.symbol, x.label, x.qty, "cash due", x.owed, x.cash_date, x.owed, x.detail]
+        else:
+            has = x.mark == x.mark
+            vals = [x.symbol, x.label, x.qty, x.mark_basis or "no valid mark", x.mark if has else None,
+                    x.mark_date, x.exposure if has else None, x.detail]
+        for col, v in enumerate(vals, 1):
+            c = ws.cell(row=r, column=col, value=v)
+            c.font = default_font
+            c.border = border
+        for col in (5, 7):
+            ws.cell(row=r, column=col).number_format = "₹#,##0.00"
+        r += 1
+    return r
 
 
 def _build_closed_trades(ws, realized):
