@@ -1,0 +1,20 @@
+{
+  "fixed": {
+    "total_return_pct": 134.08,
+    "cagr_pct": 10.25,
+    "max_drawdown_pct": -21.7,
+    "sharpe": 0.89,
+    "benchmark_total_return_pct": 128.81,
+    "excess_vs_benchmark_pct": 5.26,
+    "information_ratio": -0.07,
+    "years": 8.71,
+    "regime_days": {
+      "RISK_OFF": 721,
+      "RISK_NEU": 718,
+      "RISK_ON": 716
+    },
+    "avg_exposure_pct": 64.3,
+    "n_trades": 776,
+    "win_rate_pct": 32.6
+  }
+}

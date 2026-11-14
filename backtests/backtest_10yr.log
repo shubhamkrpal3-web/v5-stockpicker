@@ -1,0 +1,42 @@
+[INFO] loaded 2378 sessions x 3448 symbols
+
+[INFO] === regime variant: old ===
+{
+  "total_return_pct": 23.89,
+  "cagr_pct": 2.52,
+  "max_drawdown_pct": -25.46,
+  "sharpe": 0.34,
+  "benchmark_total_return_pct": 208.83,
+  "excess_vs_benchmark_pct": -184.94,
+  "information_ratio": -0.65,
+  "years": 8.61,
+  "regime_days": {
+    "RISK_OFF": 1395,
+    "RISK_NEU": 735
+  },
+  "avg_exposure_pct": 47.7,
+  "n_trades": 1737,
+  "win_rate_pct": 31.5
+}
+
+[INFO] === regime variant: fixed ===
+{
+  "total_return_pct": 22.21,
+  "cagr_pct": 2.36,
+  "max_drawdown_pct": -27.35,
+  "sharpe": 0.27,
+  "benchmark_total_return_pct": 208.83,
+  "excess_vs_benchmark_pct": -186.62,
+  "information_ratio": -0.66,
+  "years": 8.61,
+  "regime_days": {
+    "RISK_OFF": 862,
+    "RISK_NEU": 636,
+    "RISK_ON": 632
+  },
+  "avg_exposure_pct": 59.2,
+  "n_trades": 1704,
+  "win_rate_pct": 31.3
+}
+
+[DONE] outputs written to /tmp/bt10out

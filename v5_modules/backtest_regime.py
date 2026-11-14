@@ -19,16 +19,44 @@ benchmark files. All output goes to a separate --output-dir (default ./backtests
 
 Method
 ------
-* Point-in-time correct: factors are computed from data up to the PREVIOUS close;
-  entries are executed at the NEXT session's OPEN.
-* Weekly rebalance on Mondays (matching live behaviour), max 15 concurrent names.
-* ATR-based sizing: 1% equity risk per trade, stop at entry - 2*ATR(14),
-  per-name weight cap, and total scaled to the regime's gross-exposure target.
-* Exits: stop-loss (intraday low pierces stop), chandelier trail (highest close
-  - 3*ATR), 22-day low trail, and a 25-trading-day time stop.
-* Costs: configurable round-trip cost in basis points applied on entry and exit.
-* Benchmark: an equal-weighted index of the liquid universe, rebuilt from the
-  same price data (the official Nifty 500 series only exists from mid-2026).
+* Point-in-time: factors use data up to the PREVIOUS close; entries fill at the
+  next session's OPEN. Share quantities are fixed from the previous close
+  (an order is sized before the open), sized from equity at the previous close.
+* Weekly entries on Mondays (matching live behaviour), max 15 concurrent holdings.
+  Stale and pending holdings occupy capacity.
+* New positions (--entry-allocation, see allocate_entries): by default ('rank_order')
+  each pick is sized with the formula of v5_signal_generator.size_positions
+  (risk-parity, 10% cap, the top-N list renormalised so a full book fits
+  equity x regime gross) and the picks are funded in rank order; the last one
+  takes what is left of the regime budget and lower-ranked picks wait for a later
+  week. 'pro_rata_leftover' reproduces the original rule, which scaled every pick
+  down to share the leftover budget (tiny positions, one per free slot).
+  Neither setting matches the paper ledger or the research risk engine yet: the
+  capital base, candidate set, ordering and caps still differ.
+  'shared' sizes the same ranked list with the shared allocator (allocator.py),
+  the rules the research risk engine uses: loss budget over stop (2 ATR) + gap
+  allowance + round-trip costs, position / liquidity / capital / cash caps, the
+  regime-scaled gross cap, net and sector caps, slots and duplicates. It needs a
+  configured policy (--risk-config), sectors (--sectors) and a gap allowance
+  ([engines.swing] gap_allowance_atr); without them it opens nothing. Capital
+  follows equity at the previous close and the per-trade loss budget keeps its
+  ratio to capital.
+* Initial stop at entry - 2*ATR(14) (ATR at the previous close), live from the
+  entry fill; chandelier trail (highest close - 4*ATR). A stop applies from the
+  session after it was set. A gap through the stop fills at the OPEN.
+* Costs: cost_bps per side on traded notional.
+* Signals use split/bonus back-adjusted prices (corporate_actions.py) after the
+  derived-data layer (data_integrity.py quarantine, security_master.py rename
+  stitching). Execution and valuation use REAL prices and share counts
+  (portfolio_accounting.py): official split/bonus ratios change share counts;
+  verified mergers/demergers create pending entitlements that are tradable only
+  from their documented first tradable session; unexplained or unverified
+  endings stay stale (untradeable, capital and slot occupied) and are reported
+  with recovery scenarios instead of being sold.
+* The Rs 20 price floor uses the raw (as-traded) previous close.
+* Benchmark: an equal-weighted index of the liquid universe (index-style:
+  adjusted returns), membership from the PREVIOUS session's 20-day turnover.
+* Score: 62.5% momentum + 37.5% low-vol (breadth sleeve removed 2026-10-04).
 
 Two variants are run over identical data:
     OLD   - vol trigger = mean of individual-stock 20d vol   (the bug)
@@ -47,34 +75,87 @@ import argparse
 import json
 from pathlib import Path
 
+import glob
+import sys
+
 import numpy as np
 import pandas as pd
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from corporate_actions import load_events, adjust_long, integrity_layer, share_count_events  # noqa: E402
+import security_master  # noqa: E402
+from portfolio_accounting import Book  # noqa: E402
+import allocator  # noqa: E402
 
 
 # ---------------------------------------------------------------
 # Load & shape
 # ---------------------------------------------------------------
-def load_wide(master_path: Path, start: str) -> dict:
-    """Load master OHLCV and pivot to wide (dates x symbols) matrices."""
+def load_wide(master_path: Path, start: str, history_dir: Path | None = None,
+              events_path: Path | None = None) -> dict:
+    """Load OHLCV (yearly parquet archive + master), apply the derived-data layer,
+    and return adjusted matrices (signals) plus raw matrices (execution) under "RAW"."""
     use = ["DATE", "SYMBOL", "SERIES", "OPEN", "HIGH", "LOW", "CLOSE", "TRADED_VALUE"]
     df = pd.read_csv(master_path, low_memory=False)
     df.columns = [c.strip().upper().replace(" ", "_") for c in df.columns]
     keep = [c for c in use if c in df.columns]
     df = df[keep]
-    df["DATE_DT"] = pd.to_datetime(df["DATE"].astype(str), format="%Y%m%d", errors="coerce")
-    df = df[df["DATE_DT"].notna()]
+    if history_dir is not None:
+        hist = [pd.read_parquet(f, columns=[c for c in use if c != "SERIES"])
+                for f in sorted(glob.glob(str(Path(history_dir) / "nse_*.parquet")))]
+        if hist:
+            for h in hist:
+                h["DATE"] = h["DATE"].astype(str)
+                h["SYMBOL"] = h["SYMBOL"].astype(str)
+                h["SERIES"] = "EQ"          # the archive stores EQ rows only
+            df["DATE"] = df["DATE"].astype(str)
+            df = pd.concat(hist + [df], ignore_index=True)
+    df["DATE"] = df["DATE"].astype(str)
     if "SERIES" in df.columns:
         df = df[df["SERIES"].astype(str).str.upper() == "EQ"]
     df["SYMBOL"] = df["SYMBOL"].astype(str).str.strip().str.upper()
     for c in ["OPEN", "HIGH", "LOW", "CLOSE", "TRADED_VALUE"]:
         if c in df.columns:
             df[c] = pd.to_numeric(df[c], errors="coerce")
-    df = df[df["DATE_DT"] >= pd.Timestamp(start) - pd.Timedelta(days=400)]
-    df = df.drop_duplicates(subset=["DATE_DT", "SYMBOL"], keep="last")
+    df = df.drop_duplicates(subset=["DATE", "SYMBOL"], keep="last")
+    df = integrity_layer(df)                     # quarantine corrections + rename stitching
+    df["DATE_DT"] = pd.to_datetime(df["DATE"], format="%Y%m%d", errors="coerce")
+    df = df[df["DATE_DT"].notna() & (df["DATE_DT"] >= pd.Timestamp(start) - pd.Timedelta(days=400))]
 
-    out = {}
-    for c in ["OPEN", "HIGH", "LOW", "CLOSE", "TRADED_VALUE"]:
-        out[c] = df.pivot(index="DATE_DT", columns="SYMBOL", values=c).sort_index()
+    raw = {c: df.pivot(index="DATE_DT", columns="SYMBOL", values=c).sort_index()
+           for c in ["OPEN", "HIGH", "LOW", "CLOSE", "TRADED_VALUE"]}
+    # Non-EQ prints (e.g. a spin-off's first BE-series sessions, or a held stock moved to
+    # BE) are tradable: execution and the stop's ATR only, never signals
+    sup = security_master.load_supplement()
+    sup_rows = pd.DataFrame()
+    if len(sup):
+        sup = sup[sup["DATE"].astype(str) >= (pd.Timestamp(start) - pd.Timedelta(days=400)).strftime("%Y%m%d")].copy()
+        sup["DATE"] = sup["DATE"].astype(str)
+        sup["DATE_DT"] = pd.to_datetime(sup["DATE"], format="%Y%m%d")
+        sup = sup.drop_duplicates(["DATE_DT", "SYMBOL"], keep="first")
+        for c in ["OPEN", "HIGH", "LOW", "CLOSE"]:
+            extra = sup.pivot(index="DATE_DT", columns="SYMBOL", values=c)
+            raw[c] = raw[c].combine_first(extra)       # EQ rows win; supplement fills gaps
+        idx, cols = raw["CLOSE"].index, raw["CLOSE"].columns
+        for c in raw:
+            raw[c] = raw[c].reindex(index=idx, columns=cols)
+        have = set(zip(df["SYMBOL"], df["DATE"]))
+        sup_rows = sup[[(s, d) not in have for s, d in zip(sup["SYMBOL"], sup["DATE"])]]
+        sup_rows = sup_rows[sup_rows["DATE_DT"].isin(idx)][["DATE", "SYMBOL", "OPEN", "HIGH", "LOW", "CLOSE", "DATE_DT"]]
+    # Adjust EQ and supplement rows in one pass so both share the same factors
+    both = pd.concat([df.assign(_SUP=False), sup_rows.assign(_SUP=True)], ignore_index=True)
+    if events_path is not None and Path(events_path).exists():
+        both = adjust_long(both, load_events(events_path))
+        print(f"[INFO] signals use split/bonus back-adjusted prices ({events_path})")
+    else:
+        print("[WARN] no corporate-actions file: signal prices are RAW")
+    df = both[~both["_SUP"]]
+    out = {c: df.pivot(index="DATE_DT", columns="SYMBOL", values=c).sort_index()
+           for c in ["OPEN", "HIGH", "LOW", "CLOSE", "TRADED_VALUE"]}
+    # EXEC: adjusted bars a holding actually traded on (EQ, else supplement), for the stop's ATR
+    out["EXEC"] = {c: both.pivot(index="DATE_DT", columns="SYMBOL", values=c).sort_index()
+                   .reindex(index=raw["CLOSE"].index, columns=raw["CLOSE"].columns) for c in ["HIGH", "LOW", "CLOSE"]}
+    out["RAW"] = raw
     print(f"[INFO] loaded {out['CLOSE'].shape[0]} sessions x {out['CLOSE'].shape[1]} symbols")
     return out
 
@@ -82,6 +163,13 @@ def load_wide(master_path: Path, start: str) -> dict:
 # ---------------------------------------------------------------
 # Factors & regime inputs (all vectorised on wide matrices)
 # ---------------------------------------------------------------
+def atr14(H: pd.DataFrame, L: pd.DataFrame, C: pd.DataFrame) -> pd.DataFrame:
+    """ATR(14) on wide matrices: mean true range over 14 sessions, at least 10 observed."""
+    prev_c = C.shift(1)
+    tr = pd.concat([(H - L).stack(), (H - prev_c).abs().stack(), (L - prev_c).abs().stack()], axis=1).max(axis=1)
+    return tr.unstack().reindex(index=C.index, columns=C.columns).rolling(14, min_periods=10).mean()
+
+
 def build_factors(W: dict) -> dict:
     C, H, L, TV = W["CLOSE"], W["HIGH"], W["LOW"], W["TRADED_VALUE"]
     F = {}
@@ -91,12 +179,7 @@ def build_factors(W: dict) -> dict:
     F["RET1"] = ret1
     F["VOL90"] = ret1.rolling(90, min_periods=60).std() * np.sqrt(252)
     F["VOL20"] = ret1.rolling(20, min_periods=10).std()
-    tv20 = TV.rolling(20, min_periods=10).mean()
-    F["BREADTH_RAW"] = TV / (tv20 + 1e-9)
-    # ATR(14)
-    prev_c = C.shift(1)
-    tr = pd.concat([(H - L).stack(), (H - prev_c).abs().stack(), (L - prev_c).abs().stack()], axis=1).max(axis=1)
-    F["ATR14"] = tr.unstack().rolling(14, min_periods=10).mean()
+    F["ATR14"] = atr14(H, L, C)
     F["SMA50"] = C.rolling(50, min_periods=30).mean()
     F["SMA200"] = C.rolling(200, min_periods=120).mean()
     F["LOW22"] = L.rolling(22, min_periods=10).min()
@@ -168,7 +251,30 @@ def regime_series(W: dict, F: dict, variant: str, debounce: int = 2,
     return r
 
 
-GROSS = {"RISK_ON": 1.00, "RISK_NEU": 0.70, "RISK_OFF": 0.40}
+GROSS = allocator.REGIME_GROSS                       # RISK_ON 1.00 / RISK_NEU 0.70 / RISK_OFF 0.40
+ENTRY_ALLOCATIONS = allocator.LEGACY_METHODS + ("shared",)
+allocate_entries = allocator.legacy_allocate           # rank_order / pro_rata_leftover, unchanged (see allocator.py)
+
+
+def accounting_book_state(book: Book, sectors: dict) -> allocator.BookState:
+    """The backtest Book as the shared allocator sees it (the same states the paper ledger view uses):
+    shares (open, stale, priced pending) are exposure at their last mark; cash owed is committed and holds its
+    slot unless it is a dividend; fractions hold no slot; pending shares with no price yet leave the book
+    incomplete, so nothing is approved until they are priced. Cash is the book's cash now."""
+    ex, cl, problems = [], [], []
+    for h in book.active():
+        if h.kind == "shares" and (h.state != "pending" or h.last_mark_date):
+            val = h.qty * h.last_mark if h.last_mark and h.last_mark > 0 else None
+            ex.append(allocator.Exposure(h.symbol, "swing", val, sectors.get(h.symbol), "cash", h.symbol))
+        elif h.kind == "shares":
+            problems.append(f"{h.symbol}: pending entitlement with no price yet ({h.origin})")
+            cl.append(allocator.Claim(h.symbol, "swing", 0.0, True, True))
+        elif h.kind == "cash":
+            div = Book.is_dividend_receivable(h)
+            cl.append(allocator.Claim(h.symbol, "swing", float(h.cash_due), slot=not div, held=not div))
+        else:
+            cl.append(allocator.Claim(h.symbol, "swing", float(h.cash_due), slot=False, held=True))
+    return allocator.BookState(tuple(ex), tuple(cl), float(book.cash), tuple(problems))
 
 
 # ---------------------------------------------------------------
@@ -179,110 +285,145 @@ def simulate(W: dict, F: dict, reg: pd.DataFrame, start: str,
              max_w: float = 0.10, cost_bps: float = 35.0,
              min_close: float = 20.0, min_tv: float = 1e7,
              time_stop: int | None = None, chandelier: float = 4.0,
-             use_low22: bool = False, capital: float = 200000.0) -> dict:
-    C, O, H, L, TV = W["CLOSE"], W["OPEN"], W["HIGH"], W["LOW"], W["TRADED_VALUE"]
-    dates = [d for d in C.index if d >= pd.Timestamp(start)]
+             capital: float = 200000.0, events_path: Path | None = None,
+             entry_allocation: str = "rank_order", policy: "allocator.Policy | None" = None,
+             sectors: dict | None = None, gap_allowance_atr: float | None = None) -> dict:
+    """Weekly entries with share-based accounting (see portfolio_accounting.py).
+    entry_allocation: how new positions share the regime budget - see allocate_entries, or "shared" for the
+    shared allocator with `policy` (unset by default: nothing is opened), `sectors` {symbol: sector} and
+    `gap_allowance_atr`; max_pos and the risk_pct / max_w sizing parameters are then not used."""
+    if entry_allocation not in ENTRY_ALLOCATIONS:
+        raise ValueError(f"entry_allocation must be one of {ENTRY_ALLOCATIONS}, not {entry_allocation!r}")
+    shared = entry_allocation == "shared"
+    policy = policy if policy is not None else allocator.Policy()
+    sectors = sectors or {}
+    R = W["RAW"]
+    RO, RH, RL, RC = R["OPEN"], R["HIGH"], R["LOW"], R["CLOSE"]
+    C, TV = W["CLOSE"], W["TRADED_VALUE"]
+    # Stops: the trailing high comes from the bars a holding actually trades on (EQ, or the
+    # BE supplement when EQ is missing), so its ATR is computed on those same bars.
+    # Identical to the signal ATR for every symbol without supplement rows.
+    X = W.get("EXEC")
+    if X is not None:
+        atr_adj, factor = atr14(X["HIGH"], X["LOW"], X["CLOSE"]), X["CLOSE"] / RC.reindex_like(X["CLOSE"])
+    else:
+        atr_adj, factor = F["ATR14"], C / RC.reindex_like(C)   # adjusted = raw x factor
+    atr_raw = atr_adj / factor                          # ATR in each day's as-traded price terms
     cost = cost_bps / 10000.0
+    sess = [t for t in RC.index if t >= pd.Timestamp(start)]
+    key = {t: t.strftime("%Y%m%d") for t in RC.index}
+    rev = {v: k for k, v in key.items()}
 
-    cash = capital
-    pos = {}           # sym -> dict
-    eq_curve, exposure_log, trades = [], [], []
+    def bar(sym, d):
+        t = rev.get(d)
+        if t is None or sym not in RC.columns:
+            return None
+        o, c = RO.at[t, sym], RC.at[t, sym]
+        if not (o == o and c == c and o > 0):
+            return None
+        return {"open": float(o), "high": float(RH.at[t, sym]), "low": float(RL.at[t, sym]), "close": float(c)}
 
-    score = (0.50 * F["MOM_3_1"].rank(axis=1, pct=True).add(F["MOM_6_1"].rank(axis=1, pct=True)).div(2)
-             + 0.30 * (1 - F["VOL90"].rank(axis=1, pct=True))
-             + 0.20 * F["BREADTH_RAW"].rank(axis=1, pct=True))
+    def atr(sym, d):
+        t = rev.get(d)
+        if t is None or sym not in atr_raw.columns:
+            return None
+        a = atr_raw.at[t, sym]
+        return float(a) if a == a and a > 0 else None
 
-    for d in dates:
-        # ---------- mark & manage existing ----------
-        for sym in list(pos.keys()):
-            if sym not in C.columns:
-                continue
-            c = C.at[d, sym] if d in C.index else np.nan
-            lo = L.at[d, sym] if d in L.index else np.nan
-            if not (c == c):
-                continue
-            p = pos[sym]
-            p["days"] += 1
-            p["hi"] = max(p["hi"], c)
-            atr = F["ATR14"].at[d, sym] if d in F["ATR14"].index else np.nan
-            cands = [p["stop"]]
-            if atr == atr:
-                cands.append(p["hi"] - chandelier * atr)
-            if use_low22:
-                l22 = F["LOW22"].at[d, sym] if d in F["LOW22"].index else np.nan
-                if l22 == l22:
-                    cands.append(l22)
-            p["stop"] = max([x for x in cands if x == x])
+    ev = load_events(events_path) if events_path and Path(events_path).exists() else pd.DataFrame()
+    share_ev = share_count_events(ev) if len(ev) else ev
+    other_ev = ev[ev["FACTOR_TYPE"] != "official_ratio"] if len(ev) else ev
+    book = Book(capital, bar, atr, lambda n, side, sym, d: n * cost, share_ev, other_ev,
+                security_master.load_events(), chandelier=chandelier, time_stop=time_stop)
 
-            exit_px, reason = None, None
-            if lo == lo and lo <= p["stop"]:
-                exit_px, reason = p["stop"], "STOP_LOSS"
-            elif time_stop is not None and p["days"] >= time_stop:
-                exit_px, reason = c, "TIME_STOP"
-            if exit_px is not None:
-                proceeds = exit_px * p["qty"] * (1 - cost)
-                cash += proceeds
-                pnl = proceeds - p["cost_basis"]
-                trades.append(dict(symbol=sym, entry=p["entry"], exit=float(exit_px),
-                                   qty=p["qty"], reason=reason, days=p["days"], pnl=pnl))
-                del pos[sym]
+    score = (0.625 * F["MOM_3_1"].rank(axis=1, pct=True).add(F["MOM_6_1"].rank(axis=1, pct=True)).div(2)
+             + 0.375 * (1 - F["VOL90"].rank(axis=1, pct=True)))
+    tv20 = TV.rolling(20, min_periods=10).mean() if shared else None
+    comps, last_comp, alloc_log = [], None, []
 
-        # ---------- weekly entries (Mondays) ----------
-        if d.weekday() == 0 and len(pos) < max_pos:
-            prev = C.index[C.index.get_loc(d) - 1] if C.index.get_loc(d) > 0 else None
-            if prev is not None:
-                state = reg["state"].get(prev, "RISK_NEU") or "RISK_NEU"
-                gross = GROSS.get(state, 0.7)
-                s = score.loc[prev].dropna()
-                elig = s.index
-                elig = elig[(C.loc[prev, elig] >= min_close) & (TV.loc[prev, elig] >= min_tv)]
-                elig = [x for x in elig if x not in pos]
-                ranked = s[elig].nlargest(top_n)
-                # equity for sizing
-                mtm = sum(pos[k]["qty"] * (C.at[d, k] if k in C.columns and C.at[d, k] == C.at[d, k] else pos[k]["entry"]) for k in pos)
-                equity = cash + mtm
-                slots = max_pos - len(pos)
-                picks = list(ranked.index)[:slots]
-                if picks:
-                    sizes = {}
-                    for sym in picks:
-                        atr = F["ATR14"].at[prev, sym]
-                        op = O.at[d, sym] if d in O.index else np.nan
-                        if not (atr == atr and atr > 0 and op == op and op > 0):
-                            continue
-                        size = (equity * risk_pct / (2.0 * atr)) * op
-                        sizes[sym] = min(size, equity * max_w)
-                    tot = sum(sizes.values())
-                    target = equity * gross - sum(pos[k]["qty"] * C.at[d, k] for k in pos if k in C.columns and C.at[d, k] == C.at[d, k])
-                    target = max(target, 0)
-                    if tot > target and tot > 0:
-                        sizes = {k: v * target / tot for k, v in sizes.items()}
-                    for sym, size in sizes.items():
-                        op = O.at[d, sym]
-                        qty = int(size / op)
-                        if qty < 1:
-                            continue
-                        outlay = qty * op * (1 + cost)
-                        if outlay > cash:
-                            continue
-                        cash -= outlay
-                        atr = F["ATR14"].at[prev, sym]
-                        pos[sym] = dict(entry=float(op), qty=qty, stop=float(op - 2 * atr),
-                                        hi=float(op), days=0, cost_basis=outlay)
+    def enter_shared(d, prev, cands, equity, state):
+        """The ranked list sized by the shared allocator, against the book as it stands before the open."""
+        raw_state = reg["state"].get(prev)
+        regime = raw_state if isinstance(raw_state, str) and raw_state else None    # unknown: nothing approved
+        reqs = []
+        for i, sym in enumerate(cands):
+            a, cp = atr(sym, key[prev]), RC.at[prev, sym]
+            ok = bool(a) and cp == cp and cp > 0
+            reqs.append(allocator.Request(
+                key=sym, symbol=sym, engine="swing", priority=float(len(cands) - i),   # the score ranking
+                price=float(cp) if ok else None, stop_loss=2.0 * a if ok else None,
+                gap_allowance=gap_allowance_atr * a if ok and gap_allowance_atr is not None else None,
+                costs=2.0 * cost * float(cp) if ok else None,                         # cost_bps on both legs
+                sector=sectors.get(sym), adv_inr=tv20.at[prev, sym] if sym in tv20.columns else None))
+        decisions = allocator.allocate(reqs, accounting_book_state(book, sectors), policy.at_capital(equity), regime)
+        for rank, dec in enumerate(decisions, 1):
+            opened = None
+            if dec.status == "approved" and (b := bar(dec.symbol, d)) is not None:
+                opened = book.open_position(dec.symbol, d, dec.quantity, b["open"], atr(dec.symbol, key[prev]),
+                                            regime=state)
+            fail = dec.failed
+            alloc_log.append({"date": d, "mode": "shared", "rank": rank, "symbol": dec.symbol, "regime": regime,
+                              "status": dec.status, "qty": dec.quantity, "notional_ref": dec.notional_inr,
+                              "opened_qty": opened.qty if opened else 0, "check": fail[0] if fail else "",
+                              "detail": fail[2] if fail else "; ".join(dec.notes)})
 
-        # ---------- record ----------
-        mtm = 0.0
-        for k, p in pos.items():
-            c = C.at[d, k] if k in C.columns else np.nan
-            mtm += p["qty"] * (c if c == c else p["entry"])
-        eq = cash + mtm
-        eq_curve.append((d, eq))
-        exposure_log.append((d, mtm / eq if eq > 0 else 0.0, len(pos),
-                             reg["state"].get(d, None)))
+    for t in sess:
+        d = key[t]
+        book.apply_events(d)
+        book.settle_pending(d)
+        book.check_exits(d)
 
-    eqs = pd.Series(dict(eq_curve)).sort_index()
-    exp = pd.DataFrame(exposure_log, columns=["DATE", "exposure", "n_pos", "state"]).set_index("DATE")
-    return dict(equity=eqs, exposure=exp, trades=pd.DataFrame(trades))
+        # ---------- weekly entries (Mondays), decided at the previous close ----------
+        k = RC.index.get_loc(t)
+        if t.weekday() == 0 and k > 0 and last_comp is not None and (shared or book.slots_used() < max_pos):
+            prev = RC.index[k - 1]
+            state = reg["state"].get(prev, "RISK_NEU") or "RISK_NEU"
+            gross = GROSS.get(state, 0.7)
+            equity = last_comp["equity"]                         # valued at the previous close
+            occupied = last_comp["open_mtm"] + last_comp["pending_ref"] + last_comp["stale_mark"]
+            sc = score.loc[prev].dropna() if prev in score.index else pd.Series(dtype=float)
+            sc = sc[sc.index.isin(RC.columns)]
+            px_prev = RC.loc[prev, sc.index]
+            elig = sc.index[(px_prev >= min_close).to_numpy() & (TV.loc[prev, sc.index] >= min_tv).to_numpy()]
+            elig = [x for x in elig if not book.holds(x)]
+            cands = list(sc[elig].nlargest(top_n).index)
+            if shared:
+                enter_shared(d, prev, cands, equity, state)
+            else:
+                picks = cands[:max_pos - book.slots_used()]
+                intended = {}
+                for sym in cands:
+                    a, cp = atr(sym, key[prev]), RC.at[prev, sym]
+                    if not (a and cp == cp and cp > 0):
+                        continue
+                    notional = (equity * risk_pct / (2.0 * a)) * cp
+                    intended[sym] = min(notional, equity * max_w)
+                sizes = allocate_entries(intended, picks, equity, gross, max(equity * gross - occupied, 0),
+                                         entry_allocation)
+                for rank, sym in enumerate(cands, 1):
+                    opened = None
+                    if sym in sizes and (b := bar(sym, d)) is not None:
+                        qty = int(sizes[sym] / RC.at[prev, sym])  # quantity fixed before the open
+                        opened = book.open_position(sym, d, qty, b["open"], atr(sym, key[prev]), regime=state)
+                    alloc_log.append({"date": d, "mode": entry_allocation, "rank": rank, "symbol": sym,
+                                      "regime": state, "status": "approved" if sym in sizes else "not funded",
+                                      "qty": int(sizes[sym] / RC.at[prev, sym]) if sym in sizes else 0,
+                                      "notional_ref": round(sizes.get(sym, 0.0), 2),
+                                      "opened_qty": opened.qty if opened else 0, "check": "", "detail": ""})
+
+        book.end_of_day(d)
+        last_comp = book.value(d)
+        last_comp["state"] = reg["state"].get(t, None)
+        comps.append(last_comp)
+
+    comp = pd.DataFrame(comps)
+    comp.index = pd.to_datetime(comp["date"], format="%Y%m%d")
+    holdings_end = pd.DataFrame([h.to_dict() for h in book.active()])
+    occupied = comp["open_mtm"] + comp["pending_ref"] + comp["stale_mark"]
+    return dict(equity=comp["equity"], components=comp, trades=pd.DataFrame(book.trades),
+                holdings_end=holdings_end, log=pd.DataFrame(book.log),
+                exposure=pd.DataFrame({"exposure": occupied / comp["equity"], "state": comp["state"]}),
+                allocations=pd.DataFrame(alloc_log))
 
 
 def benchmark_series(W: dict, start: str) -> pd.Series:
@@ -292,10 +433,10 @@ def benchmark_series(W: dict, start: str) -> pd.Series:
     ret = C.pct_change(fill_method=None)
     vals, idx = [], []
     lvl = 100.0
-    for d in C.index:
-        if d < pd.Timestamp(start):
+    for i, d in enumerate(C.index):
+        if d < pd.Timestamp(start) or i == 0:
             continue
-        row = tv20.loc[d].dropna()
+        row = tv20.iloc[i - 1].dropna()     # membership known at the previous close
         if len(row) < 100:
             continue
         liquid = row.nlargest(100).index
@@ -326,10 +467,43 @@ def stats(eq: pd.Series, bench: pd.Series) -> dict:
                 information_ratio=round(float(ir), 2), years=round(yrs, 2))
 
 
+def unresolved_impact(sim: dict) -> dict:
+    """What a headline result depends on: holdings that are not open at the end,
+    stale exposure during the run, and recovery scenarios."""
+    comp = sim["components"]
+    end = comp.iloc[-1]
+    he = sim["holdings_end"]
+    rows = []
+    for h in (he.itertuples(index=False) if len(he) else []):
+        val = h.cash_due if h.kind == "cash" else h.qty * h.last_mark
+        rows.append({"symbol": h.symbol, "state": h.state, "kind": h.kind, "last_mark_date": h.last_mark_date,
+                     "reason": h.stale_reason or h.origin, "value_at_last_mark": round(float(val), 2),
+                     "pct_of_equity": round(float(val) / float(end["equity"]) * 100, 2)})
+    stale_val = sum(r["value_at_last_mark"] for r in rows if r["state"] == "stale")
+    return {
+        "end_components": {k: (round(float(v), 2) if isinstance(v, (int, float, np.floating)) else v)
+                           for k, v in end.items()},
+        "holdings_not_open_at_end": [r for r in rows if r["state"] != "open"],
+        "recovery_scenarios_final_equity": {
+            "stale_at_last_mark": round(float(end["equity"]), 2),
+            "stale_at_50pct": round(float(end["equity"] - 0.5 * stale_val), 2),
+            "stale_at_zero": round(float(end["equity_stale_at_zero"]), 2),
+        },
+        "max_stale_value_pct_of_equity": round(float((comp["stale_mark"] / comp["equity"]).max() * 100), 2),
+        "sessions_with_any_stale_holding": int((comp["n_stale"] > 0).sum()),
+        "unconfirmed_fraction_value_end": round(float(end["fraction_ref_unconfirmed"]), 2),
+        "unpriced_pending_indicative_end": round(float(end["pending_unpriced_indicative"]), 2),
+    }
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--master", default="./data/market_database/master_history.csv")
     ap.add_argument("--output-dir", default="./backtests")
+    ap.add_argument("--history-dir", default=None,
+                    help="Yearly parquet archive (data/market_database/history) for runs before 2023.")
+    ap.add_argument("--corporate-actions", default="./data/market_database/corporate_actions.csv")
+    ap.add_argument("--variants", default="old,fixed", help="Regime variants to run.")
     ap.add_argument("--start", default="2023-06-01")
     ap.add_argument("--top-n", type=int, default=15)
     ap.add_argument("--max-pos", type=int, default=15)
@@ -337,35 +511,62 @@ def main():
     ap.add_argument("--time-stop", type=int, default=0,
                     help="0 = disabled (new default). Old behaviour was 25.")
     ap.add_argument("--chandelier", type=float, default=4.0)
-    ap.add_argument("--use-low22", action="store_true",
-                    help="Re-enable the 22-day-low stop ratchet (old behaviour).")
     ap.add_argument("--capital", type=float, default=200000.0)
+    ap.add_argument("--entry-allocation", choices=ENTRY_ALLOCATIONS, default="rank_order",
+                    help="rank_order (default: size_positions formula, funded in rank order), "
+                         "pro_rata_leftover (original backtest rule) or shared (shared allocator).")
+    ap.add_argument("--risk-config", default=None,
+                    help="shared only: risk config TOML (default: config/risk_config.toml, else the unconfigured "
+                         "example, which opens nothing).")
+    ap.add_argument("--sectors", default=None,
+                    help="shared only: CSV with Symbol and Industry columns (e.g. nifty500.csv). A pick with no "
+                         "sector is rejected.")
     args = ap.parse_args()
+    policy, sectors, gap_atr = None, None, None
+    if args.entry_allocation == "shared":
+        sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+        from research_system import config as cfgmod
+        cfg = cfgmod.load(args.risk_config)
+        policy = allocator.policy_from_risk_config(cfg)
+        gap_atr = cfg.get("engines", {}).get("swing", {}).get("gap_allowance_atr")
+        if args.sectors:
+            s = pd.read_csv(args.sectors)
+            sectors = dict(zip(s["Symbol"].astype(str).str.strip().str.upper(), s["Industry"].astype(str)))
+        if policy.problems():
+            print(f"[WARN] shared allocation: policy unset ({'; '.join(policy.problems())}); no position will open")
 
     outdir = Path(args.output_dir); outdir.mkdir(parents=True, exist_ok=True)
-    W = load_wide(Path(args.master), args.start)
+    ev_path = Path(args.corporate_actions) if args.corporate_actions else None
+    W = load_wide(Path(args.master), args.start,
+                  history_dir=Path(args.history_dir) if args.history_dir else None, events_path=ev_path)
     F = build_factors(W)
     bench = benchmark_series(W, args.start)
 
     results = {}
-    for variant in ["old", "fixed"]:
+    for variant in args.variants.split(","):
         print(f"\n[INFO] === regime variant: {variant} ===")
         reg = regime_series(W, F, variant)
         sim = simulate(W, F, reg, args.start, top_n=args.top_n, max_pos=args.max_pos,
                        cost_bps=args.cost_bps, capital=args.capital,
-                       time_stop=(args.time_stop or None),
-                       chandelier=args.chandelier, use_low22=args.use_low22)
+                       time_stop=(args.time_stop or None), chandelier=args.chandelier, events_path=ev_path,
+                       entry_allocation=args.entry_allocation, policy=policy, sectors=sectors,
+                       gap_allowance_atr=gap_atr)
         st = stats(sim["equity"], bench)
-        dist = sim["exposure"]["state"].value_counts().to_dict()
-        st["regime_days"] = dist
+        st["stats_with_stale_at_zero"] = stats(sim["components"]["equity_stale_at_zero"], bench)
+        st["regime_days"] = sim["exposure"]["state"].value_counts().to_dict()
         st["avg_exposure_pct"] = round(float(sim["exposure"]["exposure"].mean() * 100), 1)
         st["n_trades"] = int(len(sim["trades"]))
         if len(sim["trades"]):
-            w = sim["trades"]["pnl"] > 0
-            st["win_rate_pct"] = round(float(w.mean() * 100), 1)
+            st["win_rate_pct"] = round(float((sim["trades"]["pnl"] > 0).mean() * 100), 1)
+            st["exit_reasons"] = sim["trades"]["reason"].value_counts().to_dict()
+        st["unresolved_impact"] = unresolved_impact(sim)
         results[variant] = st
         sim["equity"].to_csv(outdir / f"equity_{variant}.csv", header=["EQUITY"])
+        sim["components"].to_csv(outdir / f"components_{variant}.csv")
         sim["trades"].to_csv(outdir / f"trades_{variant}.csv", index=False)
+        sim["holdings_end"].to_csv(outdir / f"holdings_end_{variant}.csv", index=False)
+        sim["log"].to_csv(outdir / f"events_log_{variant}.csv", index=False)
+        sim["allocations"].to_csv(outdir / f"allocations_{variant}.csv", index=False)
         reg.to_csv(outdir / f"regime_{variant}.csv")
         print(json.dumps(st, indent=2, default=str))
 

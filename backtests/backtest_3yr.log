@@ -1,0 +1,42 @@
+[INFO] loaded 883 sessions x 2975 symbols
+
+[INFO] === regime variant: old ===
+{
+  "total_return_pct": -6.39,
+  "cagr_pct": -2.07,
+  "max_drawdown_pct": -20.55,
+  "sharpe": -0.24,
+  "benchmark_total_return_pct": 105.67,
+  "excess_vs_benchmark_pct": -112.06,
+  "information_ratio": -1.7,
+  "years": 3.16,
+  "regime_days": {
+    "RISK_OFF": 431,
+    "RISK_NEU": 351
+  },
+  "avg_exposure_pct": 43.0,
+  "n_trades": 677,
+  "win_rate_pct": 32.5
+}
+
+[INFO] === regime variant: fixed ===
+{
+  "total_return_pct": -5.7,
+  "cagr_pct": -1.84,
+  "max_drawdown_pct": -27.26,
+  "sharpe": -0.13,
+  "benchmark_total_return_pct": 105.67,
+  "excess_vs_benchmark_pct": -111.37,
+  "information_ratio": -1.7,
+  "years": 3.16,
+  "regime_days": {
+    "RISK_ON": 301,
+    "RISK_NEU": 248,
+    "RISK_OFF": 233
+  },
+  "avg_exposure_pct": 57.5,
+  "n_trades": 678,
+  "win_rate_pct": 33.0
+}
+
+[DONE] outputs written to /tmp/backtests

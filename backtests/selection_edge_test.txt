@@ -1,0 +1,6 @@
+[INFO] loaded 883 sessions x 2975 symbols
+SELECTION TEST — mean forward 25-session return, 145 weekly cohorts
+  Top-15 picks      : +1.529% per 25 sessions
+  Eligible universe : +1.319% per 25 sessions
+  EDGE (picks-universe): +0.210 pp   | t-stat 0.47
+  win vs universe   : 49% of cohorts

@@ -5,7 +5,8 @@ Heart of the V5 system. Run daily after the market close.
 
 Sequence:
   1. Load master_history.csv (long-format daily OHLCV)
-  2. Compute multifactor V5 score with PIT lag
+  2. Back-adjust prices for splits/bonuses (corporate_actions.py), then
+     compute the V5 score: 62.5% momentum + 37.5% low volatility
   3. Apply universe filters (price, liquidity, EQ series)
   4. Apply quality gate (Screener.in cached data)
   5. Apply regime detector (Nifty 500 vs 200-DMA, breadth, VIX proxy)
@@ -44,6 +45,7 @@ import pandas as pd
 # So that modules in this folder import cleanly when v5_signal_generator
 # is invoked from cron with an absolute path.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from corporate_actions import load_events, adjust_long, integrity_layer  # noqa: E402
 
 
 # =========================================================
@@ -54,12 +56,24 @@ QG_MAX_DE = 1.0
 QG_MAX_PROMOTER_DROP_PP = 2.0
 QG_MIN_MARKET_CAP_INR = 5_000_000_000   # ₹500 Cr
 
+# Sleeve weights. The 20% "breadth" sleeve (today's volume vs its 20-day
+# average) was removed on 2026-10-04: tested 2017-2026 it predicted the
+# opposite of its intent (5-day rank IC -0.027, t -9.2). Momentum and low-vol
+# keep their original 5:3 ratio.
+W_MOMENTUM = 0.625
+W_LOWVOL = 0.375
+
 
 # =========================================================
 # 1. Master DB loading
 # =========================================================
-def load_master(master_path: Path, lookback_days: int = 400) -> pd.DataFrame:
-    """Load the daily OHLCV master. Keeps only the last N days to be fast."""
+def load_master(master_path: Path, lookback_days: int = 400,
+                events_path: Optional[Path] = None) -> pd.DataFrame:
+    """Load the daily OHLCV master, back-adjusted for splits/bonuses.
+
+    Keeps only the last N days to be fast. Latest prices are unchanged by the
+    adjustment; only history before each ex-date is rescaled.
+    """
     print(f"[INFO] loading {master_path}")
     df = pd.read_csv(master_path, low_memory=False)
     df.columns = [c.strip().upper().replace(" ", "_") for c in df.columns]
@@ -76,12 +90,24 @@ def load_master(master_path: Path, lookback_days: int = 400) -> pd.DataFrame:
     for c in ["OPEN", "HIGH", "LOW", "CLOSE", "VOLUME", "TRADED_VALUE"]:
         if c in df.columns:
             df[c] = pd.to_numeric(df[c], errors="coerce")
+    # Derived-data layer: documented session corrections (data_integrity.py) and
+    # renamed symbols stitched to their current symbol (security_master.py).
+    # Raw files are not modified.
+    df = integrity_layer(df)
     if "CORPORATE_ACTION_FLAG" not in df.columns:
         df["CORPORATE_ACTION_FLAG"] = 0
     df["CORPORATE_ACTION_FLAG"] = pd.to_numeric(df["CORPORATE_ACTION_FLAG"], errors="coerce").fillna(0).astype(int)
     # Trim to last lookback_days
     cutoff = df["DATE_DT"].max() - pd.Timedelta(days=lookback_days * 1.5)
     df = df[df["DATE_DT"] >= cutoff].sort_values(["SYMBOL", "DATE_DT"]).reset_index(drop=True)
+    if events_path is not None and Path(events_path).exists():
+        events = load_events(events_path)
+        df = adjust_long(df, events)
+        n_adj = int((df["ADJ_FACTOR"] != 1.0).groupby(df["SYMBOL"]).any().sum())
+        print(f"[INFO] split/bonus adjustment: {len(events)} events, {n_adj} symbols adjusted in window")
+    else:
+        print(f"[WARN] no corporate-actions file at {events_path}; prices are RAW "
+              f"(splits/bonuses will distort momentum, volatility and ATR)")
     print(f"[INFO] master rows kept: {len(df):,}  symbols: {df['SYMBOL'].nunique():,}  dates: {df['DATE_DT'].nunique()}")
     return df
 
@@ -95,11 +121,6 @@ def compute_factors(df: pd.DataFrame) -> pd.DataFrame:
     df["MOM_6_1"] = g["CLOSE"].shift(21) / g["CLOSE"].shift(126) - 1
     df["RET_1D"] = g["CLOSE"].pct_change(1)
     df["VOL_90D"] = g["RET_1D"].rolling(90, min_periods=60).std().reset_index(level=0, drop=True) * np.sqrt(252)
-    df["VOL_20D"] = g["VOLUME"].transform(lambda x: x.rolling(20, min_periods=10).mean())
-    df["TV_20D"] = g["TRADED_VALUE"].transform(lambda x: x.rolling(20, min_periods=10).mean())
-    df["VOL_RATIO_20D"] = df["VOLUME"] / (df["VOL_20D"] + 1e-9)
-    df["TV_RATIO_20D"] = df["TRADED_VALUE"] / (df["TV_20D"] + 1e-9)
-    df["BREADTH_RAW"] = 0.5 * df["VOL_RATIO_20D"] + 0.5 * df["TV_RATIO_20D"]
     # ATR(14) for position sizing
     high_low = df["HIGH"] - df["LOW"]
     high_pc = (df["HIGH"] - g["CLOSE"].shift(1)).abs()
@@ -114,12 +135,11 @@ def rank_and_score(snap: pd.DataFrame) -> pd.DataFrame:
     def rank(s):
         return s.rank(pct=True, method="average")
     snap = snap.copy()
-    for c in ["MOM_3_1", "MOM_6_1", "VOL_90D", "BREADTH_RAW"]:
+    for c in ["MOM_3_1", "MOM_6_1", "VOL_90D"]:
         snap[c + "_R"] = rank(snap[c])
     snap["MOM_R"] = snap[["MOM_3_1_R", "MOM_6_1_R"]].mean(axis=1)
     snap["LOWVOL_R"] = 1.0 - snap["VOL_90D_R"]
-    snap["BREADTH_R"] = snap["BREADTH_RAW_R"]
-    snap["V5_SCORE"] = 0.50 * snap["MOM_R"] + 0.30 * snap["LOWVOL_R"] + 0.20 * snap["BREADTH_R"]
+    snap["V5_SCORE"] = W_MOMENTUM * snap["MOM_R"] + W_LOWVOL * snap["LOWVOL_R"]
     return snap
 
 
@@ -362,6 +382,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--master", required=True)
     ap.add_argument("--fundamentals", default="./data/fundamentals/screener.sqlite")
+    ap.add_argument("--corporate-actions", default="./data/market_database/corporate_actions.csv",
+                    help="Split/bonus events used to back-adjust prices (corporate_actions.py).")
     ap.add_argument("--output-dir", default="./data/live_signals")
     ap.add_argument("--top-n", type=int, default=15)
     ap.add_argument("--portfolio-inr", type=float, default=200000.0)
@@ -378,7 +400,7 @@ def main():
     diag = {"timestamp": datetime.utcnow().isoformat()}
 
     # Load
-    master = load_master(Path(args.master))
+    master = load_master(Path(args.master), events_path=Path(args.corporate_actions))
     snap_date = master["DATE_DT"].max()
     diag["snapshot_date"] = snap_date.strftime("%Y-%m-%d")
     print(f"[INFO] snapshot date: {snap_date.date()}")
@@ -447,7 +469,7 @@ def main():
 
     print("\n[DONE] V5 signal generation complete.")
     print(f"  regime: {state}")
-    print(f"  universe: {diag['universe_raw']} → {diag['universe_after_liquidity']} → {diag['universe_after_quality_gate']}")
+    print(f"  universe: {diag['universe_raw']} -> {diag['universe_after_liquidity']} -> {diag['universe_after_quality_gate']}")
     if "picks" in diag:
         print(f"  picks: {diag['picks']}")
     print(f"  outputs in: {outdir}")

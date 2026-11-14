@@ -43,9 +43,12 @@ import pandas as pd
 # -----------------------------------------------------
 @dataclass
 class SleeveWeights:
-    momentum: float = 0.50
-    low_vol:  float = 0.30
-    breadth:  float = 0.20
+    # Breadth set to 0 on 2026-10-04: tested 2017-2026 a volume spike predicted
+    # short-term UNDERperformance (5-day rank IC -0.027, t -9.2). Momentum and
+    # low-vol keep their original 5:3 ratio. Matches v5_signal_generator.
+    momentum: float = 0.625
+    low_vol:  float = 0.375
+    breadth:  float = 0.0
     quality:  float = 0.0     # set > 0 once quality_gate scores are wired
     value:    float = 0.0     # set > 0 once fundamentals fetch is implemented
 

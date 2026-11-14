@@ -47,22 +47,38 @@ import argparse
 import warnings
 from pathlib import Path
 
+import sys
+
 import numpy as np
 import pandas as pd
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from corporate_actions import load_events, adjust_long, integrity_layer  # noqa: E402
 
 warnings.filterwarnings("ignore")
 
 
 # ---------------------------------------------------------------
-def load(path: Path, start: str, min_adv: float, min_price: float) -> dict:
+def load(path: Path, start: str, min_adv: float, min_price: float,
+         events_path: Path | None = None) -> dict:
     df = pd.read_parquet(path)
     df.columns = [c.strip().upper() for c in df.columns]
     df["DATE_DT"] = pd.to_datetime(df["DATE"].astype(str), format="%Y%m%d", errors="coerce")
     df = df[df["DATE_DT"].notna()]
+    df["SYMBOL"] = df["SYMBOL"].astype(str)
+    df["DATE"] = df["DATE"].astype(str)
+    df = integrity_layer(df)                             # session corrections + rename stitching
+    df["DATE_DT"] = pd.to_datetime(df["DATE"], format="%Y%m%d", errors="coerce")
+    raw_close = df.pivot(index="DATE_DT", columns="SYMBOL", values="CLOSE").sort_index()
+    if events_path is not None and Path(events_path).exists():
+        df = adjust_long(df, load_events(events_path))   # splits/bonuses (signals only)
+    else:
+        print("[WARN] no corporate-actions file: prices are RAW")
     df = df[df["DATE_DT"] >= pd.Timestamp(start) - pd.Timedelta(days=400)]
     W = {}
     for c in ["OPEN", "HIGH", "LOW", "CLOSE", "VOLUME", "TRADED_VALUE"]:
         W[c] = df.pivot(index="DATE_DT", columns="SYMBOL", values=c).sort_index().astype("float32")
+    W["RAW_CLOSE"] = raw_close.reindex_like(W["CLOSE"]).astype("float32")
     # keep only symbols that are ever plausibly tradable — keeps memory sane
     adv = W["TRADED_VALUE"].rolling(20, min_periods=10).mean()
     keep = adv.columns[(adv >= min_adv).any()]
@@ -71,7 +87,8 @@ def load(path: Path, start: str, min_adv: float, min_price: float) -> dict:
     print(f"[INFO] {W['CLOSE'].shape[0]} sessions x {W['CLOSE'].shape[1]} symbols "
           f"(filtered from {df.SYMBOL.nunique()} by liquidity)")
     W["ADV20"] = W["TRADED_VALUE"].rolling(20, min_periods=10).mean()
-    W["TRADABLE"] = (W["ADV20"] >= min_adv) & (W["CLOSE"] >= min_price)
+    # price floor on the as-traded close: a later split must not change past eligibility
+    W["TRADABLE"] = (W["ADV20"] >= min_adv) & (W["RAW_CLOSE"] >= min_price)
     return W
 
 
@@ -164,6 +181,7 @@ def evaluate(sig: pd.DataFrame, fwd: pd.DataFrame, tradable: pd.DataFrame,
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--data", default="/tmp/all.parquet")
+    ap.add_argument("--corporate-actions", default="./data/market_database/corporate_actions.csv")
     ap.add_argument("--start", default="2017-01-01")
     ap.add_argument("--end-train", default="2023-12-31")
     ap.add_argument("--min-adv", type=float, default=5e7, help="20d avg traded value floor (default Rs 5 cr)")
@@ -174,7 +192,8 @@ def main():
     args = ap.parse_args()
 
     horizons = [int(x) for x in args.horizons.split(",")]
-    W = load(Path(args.data), args.start, args.min_adv, args.min_price)
+    W = load(Path(args.data), args.start, args.min_adv, args.min_price,
+             events_path=Path(args.corporate_actions) if args.corporate_actions else None)
     I = indicators(W)
     S = build_signals(W, I)
     fwd = forward_returns(W, horizons)

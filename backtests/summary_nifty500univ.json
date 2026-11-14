@@ -1,0 +1,37 @@
+{
+  "old": {
+    "total_return_pct": -10.85,
+    "cagr_pct": -3.56,
+    "max_drawdown_pct": -21.46,
+    "sharpe": -0.47,
+    "benchmark_total_return_pct": 94.74,
+    "excess_vs_benchmark_pct": -105.59,
+    "information_ratio": -1.94,
+    "years": 3.16,
+    "avg_exposure_pct": 38.9,
+    "n_trades": 733,
+    "win_rate_pct": 27.3,
+    "regime_days": {
+      "RISK_OFF": 437,
+      "RISK_NEU": 345
+    }
+  },
+  "fixed": {
+    "total_return_pct": -17.58,
+    "cagr_pct": -5.93,
+    "max_drawdown_pct": -30.24,
+    "sharpe": -0.56,
+    "benchmark_total_return_pct": 94.74,
+    "excess_vs_benchmark_pct": -112.32,
+    "information_ratio": -2.18,
+    "years": 3.16,
+    "avg_exposure_pct": 54.5,
+    "n_trades": 746,
+    "win_rate_pct": 27.3,
+    "regime_days": {
+      "RISK_ON": 289,
+      "RISK_NEU": 267,
+      "RISK_OFF": 226
+    }
+  }
+}
