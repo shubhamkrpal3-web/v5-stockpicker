@@ -1,0 +1,46 @@
+name: Research system - pre market
+
+# 02:45 UTC = 08:15 IST, before the 09:00 pre-open. Overnight global markets,
+# new public filings, data quality, and a re-check of the latest approved ideas.
+on:
+  schedule:
+    - cron: '45 2 * * 1-5'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: data-commit
+  cancel-in-progress: false
+
+jobs:
+  pre_market:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run pre-market brief (skips NSE holidays)
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python -m research_system.run --phase pre_market --telegram
+
+      - name: Commit brief and refreshed data
+        run: |
+          git config user.name "v5-automation"
+          git config user.email "v5-automation@users.noreply.github.com"
+          git add data/research || true
+          git diff --cached --quiet || git commit -m "Research pre-market $(date -u +%Y-%m-%d)"
+          git pull --rebase --autostash && git push

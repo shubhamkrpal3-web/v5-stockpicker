@@ -1,0 +1,60 @@
+name: Research system - post close
+
+# 17:30 UTC = 23:00 IST, after "V5 Daily Data Refresh" (16:00 UTC) has committed
+# the day's prices. Market state -> four engines -> central risk engine ->
+# report + audit log. Decision support only: nothing here places orders.
+on:
+  schedule:
+    - cron: '30 17 * * 1-5'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: data-commit
+  cancel-in-progress: false
+
+jobs:
+  post_close:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Decompress price master
+        run: gunzip -k -f data/market_database/master_history.csv.gz
+
+      - name: Run post-close research (refresh data, engines, risk engine, report)
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python -m research_system.run --phase post_close --telegram
+
+      - name: Commit research data, report and audit log
+        run: |
+          rm -f data/market_database/master_history.csv
+          git config user.name "v5-automation"
+          git config user.email "v5-automation@users.noreply.github.com"
+          git add data/research data/market_database/corporate_actions.csv research_system/setup_registry.json || true
+          git diff --cached --quiet || git commit -m "Research post-close $(date -u +%Y-%m-%d)"
+          git pull --rebase --autostash && git push
+
+      - name: Failure alert
+        if: failure()
+        env:
+          BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
+            -d "chat_id=${CHAT_ID}" -d "text=Research post-close run FAILED $(date -u). Default state is NO TRADE."

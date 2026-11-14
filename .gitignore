@@ -39,3 +39,7 @@ data/factors_v2/*.parquet
 
 # OS
 Thumbs.db
+
+# Research system: full daily F&O contract files are re-downloaded each run;
+# only data/research/fno/summary.parquet (IV/OI history) is committed
+data/research/fno/fo_*.parquet

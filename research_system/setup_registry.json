@@ -1,0 +1,86 @@
+{
+  "momentum_lowvol_rank": {
+    "status": "backtest_only",
+    "description": "62.5% skip-month momentum (3-1, 6-1) + 37.5% low 90d volatility; top 15 liquid NSE names; weekly entry at next open; stop 2 ATR; chandelier 4 ATR; regime-scaled gross (V5)",
+    "source": "backtests/registry/trades_fixed.csv",
+    "built_at": "2026-10-04T05:09:00+00:00",
+    "stats": {
+      "n": 776,
+      "period": "2018-01-01..2026-09-16",
+      "win_rate": 0.326,
+      "mean_ret": 0.02343,
+      "median_ret": -0.0395,
+      "t_stat_ret": 2.86,
+      "mean_r": 0.442,
+      "median_days": 20.0,
+      "p90_days": 73.0
+    },
+    "by_regime": {
+      "RISK_NEU": {
+        "n": 285,
+        "period": "2018-02-05..2026-09-16",
+        "win_rate": 0.2947,
+        "mean_ret": 0.02433,
+        "median_ret": -0.03875,
+        "t_stat_ret": 1.46,
+        "mean_r": 0.404,
+        "median_days": 19.0,
+        "p90_days": 66.6
+      },
+      "RISK_OFF": {
+        "n": 294,
+        "period": "2018-10-08..2026-07-21",
+        "win_rate": 0.3776,
+        "mean_ret": 0.0138,
+        "median_ret": -0.03821,
+        "t_stat_ret": 1.61,
+        "mean_r": 0.365,
+        "median_days": 22.5,
+        "p90_days": 85.09999999999997
+      },
+      "RISK_ON": {
+        "n": 197,
+        "period": "2018-01-01..2026-08-10",
+        "win_rate": 0.2944,
+        "mean_ret": 0.03651,
+        "median_ret": -0.04282,
+        "t_stat_ret": 2.11,
+        "mean_r": 0.611,
+        "median_days": 21.0,
+        "p90_days": 67.80000000000001
+      }
+    },
+    "first_half": {
+      "n": 386,
+      "period": "2018-01-01..2022-09-28",
+      "win_rate": 0.3316,
+      "mean_ret": 0.03403,
+      "median_ret": -0.04209,
+      "t_stat_ret": 2.77,
+      "mean_r": 0.53,
+      "median_days": 20.0,
+      "p90_days": 76.5
+    },
+    "second_half": {
+      "n": 390,
+      "period": "2021-11-29..2026-09-16",
+      "win_rate": 0.3205,
+      "mean_ret": 0.01294,
+      "median_ret": -0.03733,
+      "t_stat_ret": 1.2,
+      "mean_r": 0.354,
+      "median_days": 20.0,
+      "p90_days": 69.0
+    },
+    "oos": {
+      "n": 0,
+      "note": "live outcomes from the audit log"
+    },
+    "caveats": [
+      "Backtest on split-adjusted NSE EOD data, 35 bps per side charges; not out-of-sample.",
+      "The breadth sleeve was removed after testing on overlapping 2017-2026 data.",
+      "No quality gate in the backtest; the gate is reported as evidence, not applied.",
+      "Stops filled at the stop price; gaps through the stop are understated."
+    ]
+  }
+}

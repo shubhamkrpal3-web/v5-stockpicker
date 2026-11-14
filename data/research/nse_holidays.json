@@ -1,0 +1,86 @@
+{
+  "fetched_at": "2026-10-04T04:56:17",
+  "holidays": [
+    {
+      "date": "2026-01-15",
+      "description": "Municipal Corporation Election - Maharashtra"
+    },
+    {
+      "date": "2026-01-26",
+      "description": "Republic Day"
+    },
+    {
+      "date": "2026-02-15",
+      "description": "Mahashivratri"
+    },
+    {
+      "date": "2026-03-03",
+      "description": "Holi"
+    },
+    {
+      "date": "2026-03-21",
+      "description": "Id-Ul-Fitr (Ramadan Eid)"
+    },
+    {
+      "date": "2026-03-26",
+      "description": "Shri Ram Navami"
+    },
+    {
+      "date": "2026-03-31",
+      "description": "Shri Mahavir Jayanti"
+    },
+    {
+      "date": "2026-04-03",
+      "description": "Good Friday"
+    },
+    {
+      "date": "2026-04-14",
+      "description": "Dr. Baba Saheb Ambedkar Jayanti"
+    },
+    {
+      "date": "2026-05-01",
+      "description": "Maharashtra Day"
+    },
+    {
+      "date": "2026-05-28",
+      "description": "Bakri Id"
+    },
+    {
+      "date": "2026-06-26",
+      "description": "Muharram"
+    },
+    {
+      "date": "2026-08-15",
+      "description": "Independence Day"
+    },
+    {
+      "date": "2026-09-14",
+      "description": "Ganesh Chaturthi"
+    },
+    {
+      "date": "2026-10-02",
+      "description": "Mahatma Gandhi Jayanti"
+    },
+    {
+      "date": "2026-10-20",
+      "description": "Dussehra"
+    },
+    {
+      "date": "2026-11-08",
+      "description": "Diwali Laxmi Pujan*"
+    },
+    {
+      "date": "2026-11-10",
+      "description": "Diwali-Balipratipada"
+    },
+    {
+      "date": "2026-11-24",
+      "description": "Prakash Gurpurb Sri Guru Nanak Dev"
+    },
+    {
+      "date": "2026-12-25",
+      "description": "Christmas"
+    }
+  ],
+  "special": []
+}

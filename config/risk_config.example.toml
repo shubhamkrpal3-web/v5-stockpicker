@@ -1,0 +1,103 @@
+# =====================================================================
+# Central risk engine configuration
+# =====================================================================
+# Copy this file to config/risk_config.toml and fill in YOUR values.
+#
+# Until [account].configured = true AND every budget value marked REQUIRED
+# is positive, the risk engine rejects every candidate: the output is NO TRADE.
+#
+# Nothing in this file is a recommendation of a suitable amount. The budget
+# numbers are personal and must be chosen by you. Parameters that are not
+# budget (liquidity, data freshness, correlation, session times) carry
+# working defaults you should still review.
+# =====================================================================
+
+[account]
+configured = false
+capital_inr = 0                   # REQUIRED  capital this system may allocate in the cash segment
+fno_margin_inr = 0                # margin you allow for derivatives; 0 disables derivative approvals
+
+[limits]
+per_trade_max_loss_inr = 0        # REQUIRED  planned loss at the stop, incl. charges and gap allowance
+daily_loss_limit_inr = 0          # REQUIRED  today's realised + unrealised loss that halts new entries
+max_drawdown_pct = 0.0            # REQUIRED  peak-to-trough drawdown that halts new entries (0.10 = 10%)
+max_gross_exposure_pct = 0.0      # REQUIRED  sum of |position notional| / capital (1.0 = 100%)
+max_net_exposure_pct = 0.0        # REQUIRED  (long - short notional) / capital
+max_position_pct = 0.0            # REQUIRED  one position's notional / capital
+max_sector_pct = 0.0              # REQUIRED  one sector's notional / capital
+max_open_positions = 0            # REQUIRED  across all engines
+
+# --- strategy-specific limits ----------------------------------------
+[engines.investment]
+enabled = true
+min_grade = "C"                   # lowest confidence grade the engine may submit (A best .. E worst)
+max_positions = 10
+review_drawdown_pct = 0.25        # fall from entry that forces a thesis review; sizes the planned loss
+
+[engines.swing]
+enabled = true
+min_grade = "C"
+max_positions = 15
+gap_allowance_atr = 1.0           # extra adverse gap (in ATRs) added to the planned loss at the stop
+
+[engines.fno]
+enabled = true
+min_grade = "C"
+max_positions = 4
+allow_naked_short_options = false # defined-risk structures only when false
+max_loss_per_trade_inr = 0        # 0 = use limits.per_trade_max_loss_inr
+min_days_to_expiry = 7
+min_oi_contracts = 200            # per option leg / future
+futures_margin_pct = 0.20         # ESTIMATE of exchange+broker margin; confirm with your broker
+risk_free_rate = 0.065            # for Black-76 pricing / implied vol
+stress_sigma = 2.0                # underlying move (in implied sigmas over the holding window) for stress loss
+
+[engines.intraday_short]
+enabled = false                   # needs a live intraday data feed (see docs/ARCHITECTURE.md)
+min_grade = "C"
+max_positions = 3
+no_new_entries_after = "14:30"
+square_off_by = "15:10"           # flat before your broker's MIS auto square-off
+require_fno_listed = true         # restrict to F&O names (deep liquidity, no fixed circuit)
+
+# --- shared controls ---------------------------------------------------
+[liquidity]
+max_participation_adv = 0.02      # order notional / 20-day average traded value
+min_adv_inr = 50000000            # 20-day average traded value floor (Rs 5 Cr)
+min_price_inr = 20
+
+[correlation]
+lookback_days = 126
+max_pairwise = 0.80               # with any one open position
+max_avg_with_book = 0.60          # average across open positions
+
+[factors]
+max_beta_weighted_gross = 0.0     # sum |w x beta to Nifty 500|; 0 = report only
+max_macro_exposure = 0.0          # |sum w x sector beta to a macro factor|; 0 = report only
+
+[event_risk]
+results_window_days = 3           # results / ex-date this close to entry ...
+results_action = "reject"         # ... -> reject | halve | allow
+in_hold_action = "halve"          # results / ex-date later inside the expected hold -> reject | halve | allow
+
+[macro_overlay]
+enabled = true
+# When the risk-appetite composite (z-score) is below risk_off_z, new position
+# sizes are multiplied by `scale`. It can only reduce size. It is a risk control,
+# not a forecast that markets will fall.
+risk_off_z = -1.5
+scale = 0.5
+
+[data]
+# Maximum lag (in trading sessions) before a dataset counts as stale for an engine.
+equity_eod = 0
+indices = 1
+macro = 3
+fno_summary = 0
+fundamentals = 30
+
+[session]
+pre_open_start = "09:00"
+pre_open_end = "09:15"
+regular_start = "09:15"
+regular_end = "15:30"
