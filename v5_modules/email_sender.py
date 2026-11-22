@@ -66,8 +66,17 @@ def send_email(subject: str, body: str, attachment_path: str | None = None,
         )
 
     context = ssl.create_default_context()
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
-        server.login(from_addr, password)
+    # timeout: a stalled connection fails in a minute instead of holding the runner
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context, timeout=60) as server:
+        try:
+            server.login(from_addr, password)
+        except (smtplib.SMTPAuthenticationError, smtplib.SMTPServerDisconnected) as e:
+            # 2026-11-16 onwards: Gmail closed the connection at AUTH on every run
+            raise SystemExit(
+                f"[ERROR] Gmail refused the login for {from_addr} ({type(e).__name__}: {e}). The app password in "
+                "the GMAIL_APP_PASSWORD secret was probably revoked (it is revoked when the Google account "
+                "password changes) or Google blocked the sign-in: check the account's security alerts, create a "
+                "new app password and update the secret.") from e
         server.send_message(msg)
     print(f"[INFO] Email sent to {to_addr} (subject: {subject})")
 

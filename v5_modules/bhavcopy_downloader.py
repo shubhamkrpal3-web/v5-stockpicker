@@ -158,20 +158,49 @@ def append_to_master(new_rows: pd.DataFrame, master_path: Path) -> int:
     return len(truly_new)
 
 
+def master_last_date(master_path: Path) -> date | None:
+    """Latest DATE (YYYYMMDD) in the master, or None when there is no master or no valid date."""
+    if not master_path.exists():
+        return None
+    dates = pd.read_csv(master_path, usecols=["DATE"], dtype=str)["DATE"]
+    d = pd.to_datetime(dates.str.strip().str[:8], format="%Y%m%d", errors="coerce").max()
+    return None if pd.isna(d) else d.date()
+
+
+def dates_to_fetch(today: date, max_back_days: int, last: date | None, max_catch_up_days: int) -> list[date]:
+    """Weekdays to try, oldest first: the last max_back_days calendar days, plus every day after the master's
+    last date so that a run following failed or skipped runs catches up (2026-11: six failed nightly runs left
+    the master at 12 Nov while a 7-day window would have skipped 13 and 16 Nov for good). The catch-up never
+    reaches back more than max_catch_up_days; an older gap needs historical_backfill.py."""
+    days = {today - timedelta(days=o) for o in range(max_back_days)}
+    if last is not None:
+        d = max(last + timedelta(days=1), today - timedelta(days=max_catch_up_days - 1))
+        while d <= today:
+            days.add(d)
+            d += timedelta(days=1)
+    return sorted(d for d in days if d.weekday() < 5)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--master", required=True)
     ap.add_argument("--max-back-days", type=int, default=7,
                     help="Try up to this many days back if today's file isn't available yet.")
+    ap.add_argument("--max-catch-up-days", type=int, default=30,
+                    help="Also fetch every day after the master's last date, up to this many days back.")
     args = ap.parse_args()
 
     master_path = Path(args.master)
+    today = date.today()
+    last = master_last_date(master_path)
+    if last is not None and (today - last).days >= args.max_catch_up_days:
+        print(f"[WARN] master ends {last}; catching up only the last {args.max_catch_up_days} days - "
+              "run historical_backfill.py for the rest")
+    plan = dates_to_fetch(today, args.max_back_days, last, args.max_catch_up_days)
+    print(f"[INFO] master ends {last}; trying {len(plan)} dates {plan[0] if plan else ''}..{plan[-1] if plan else ''}")
     added_total = 0
     tried_dates = []
-    for offset in range(args.max_back_days):
-        d = date.today() - timedelta(days=offset)
-        if d.weekday() >= 5:  # Sat/Sun
-            continue
+    for d in plan:
         tried_dates.append(d.strftime("%Y-%m-%d"))
         df = fetch_one(d)
         if df is None:

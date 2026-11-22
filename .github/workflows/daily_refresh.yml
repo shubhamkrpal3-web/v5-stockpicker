@@ -22,7 +22,7 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
 
     steps:
       - name: Checkout repo
@@ -50,6 +50,8 @@ jobs:
             gunzip -k -f data/market_database/master_history.csv.gz
           fi
 
+      # Also fetches every day after the master's last date (up to 30 days), so a run that
+      # follows failed or skipped runs catches up instead of leaving permanent gaps.
       - name: Download latest bhavcopy
         run: |
           MAX_BACK="${{ github.event.inputs.max_back_days }}"
@@ -69,7 +71,12 @@ jobs:
             --events data/market_database/corporate_actions.csv \
             --days 30 --ahead 45
 
+      # Capped and non-fatal: the scrape re-does every symbol that went stale since the last
+      # committed run (18 min on 2026-11-20 after six uncommitted runs, 2 min normally). Stale
+      # fundamentals only make the quality gate use older data; the ledger must still run.
       - name: Refresh stale fundamentals (top 500 only — to fit in 30-min budget)
+        continue-on-error: true
+        timeout-minutes: 25
         run: |
           # Only refresh if symbols.txt exists; first run bootstraps via separate workflow
           if [ -f symbols.txt ]; then
@@ -115,6 +122,7 @@ jobs:
       # (2026-11-13: a read timeout here skipped the commit and lost the session's ledger update).
       # Unsent exit reports stay pending in the exit marker and are included in the next report.
       - name: Broadcast daily status to Telegram (always — heartbeat + exits if any)
+        id: status
         continue-on-error: true
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -126,7 +134,13 @@ jobs:
             --equity-log data/live_signals/equity_log.csv \
             --regime-json data/live_signals/daily_regime.json
 
+      # Reports (Excel, email) are non-fatal for the same reason as the Telegram status: the
+      # ledger and data must be committed even when a report fails (2026-11-16..20: Gmail
+      # refused the SMTP login every night and each failure skipped the commit). A failed
+      # report step is announced on Telegram after the commit (last step).
       - name: Generate live Excel tracker
+        id: excel
+        continue-on-error: true
         run: |
           python v5_modules/excel_report_generator.py \
             --positions data/live_signals/positions.csv \
@@ -163,6 +177,9 @@ jobs:
           cat /tmp/email_body.txt || true
 
       - name: Email live tracker
+        id: email
+        continue-on-error: true
+        timeout-minutes: 5
         env:
           EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
@@ -199,3 +216,24 @@ jobs:
           curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
             -d "chat_id=${CHAT_ID}" \
             -d "text=⚠️ V5 daily refresh FAILED on $(date -u). Check GitHub Actions logs."
+
+      # The run succeeded and the data is committed, but a non-fatal report step failed.
+      - name: Alert that a report step failed (data was committed)
+        if: success() && (steps.status.outcome == 'failure' || steps.excel.outcome == 'failure' || steps.email.outcome == 'failure')
+        continue-on-error: true
+        env:
+          BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          STATUS_OUTCOME: ${{ steps.status.outcome }}
+          EXCEL_OUTCOME: ${{ steps.excel.outcome }}
+          EMAIL_OUTCOME: ${{ steps.email.outcome }}
+        run: |
+          FAILED=""
+          if [ "$STATUS_OUTCOME" = "failure" ]; then FAILED="$FAILED Telegram-status"; fi
+          if [ "$EXCEL_OUTCOME" = "failure" ]; then FAILED="$FAILED Excel-tracker"; fi
+          if [ "$EMAIL_OUTCOME" = "failure" ]; then FAILED="$FAILED email"; fi
+          HINT=""
+          if [ "$EMAIL_OUTCOME" = "failure" ]; then HINT=" Email failing at login usually means the Gmail app password (secret GMAIL_APP_PASSWORD) was revoked: create a new one and update the secret."; fi
+          curl -s -m 60 -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
+            -d "chat_id=${CHAT_ID}" \
+            --data-urlencode "text=⚠️ V5 daily refresh $(date -u +%Y-%m-%d): ledger and data committed, but these report steps failed:${FAILED}.${HINT} See the Actions log." || true

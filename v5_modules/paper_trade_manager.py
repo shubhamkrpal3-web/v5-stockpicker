@@ -23,7 +23,10 @@ portfolio_accounting.py, shared with the backtest:
     is never lowered when the rule changes. --counterfactual-today-rules applies
     today's rules to every date instead: a labelled preview that never writes.
   * New Monday positions: quantity = SIZE_INR / the signal's close (fixed before
-    the open), filled at the actual OPEN, with the signal's stop.
+    the open), filled at the actual OPEN, with the signal's stop. No entries are made from a signal
+    file that carries no single DATE, is dated on or after the entry session, or is more than
+    --max-signal-age-sessions (3) sessions old (a file left behind by failed nightly refreshes:
+    its quantities and stops were set from old closes).
   * A holding touched by a verified life-cycle event that has not yet been
     applied is REPLAYED from its original entry and quantity through the event
     timeline, so stops never fire while shares were not tradable.
@@ -116,6 +119,9 @@ FEE_CHARGED = "charged by the paper ledger at entry (realistic_cost_model)"
 # (from_date, chandelier multiple, rolling-low sessions, calendar-day time stop) - see portfolio_accounting.Book
 PAPER_RULES = (("00000000", 3.0, 22, 25), ("20260903", 4.0, None, None))
 COST_MODEL_FROM = "20260903"
+# A signal is computed at a close before the entry session, normally the previous one (Friday's close for a
+# Monday entry; 1 session). Up to 3 sessions covers a failed Friday refresh or a holiday; older files are refused.
+MAX_SIGNAL_AGE_SESSIONS = 3
 TODAY_RULES = (("00000000", 4.0, None, None),)        # counterfactual only: today's rules on every date
 COUNTERFACTUAL_LABEL = ("COUNTERFACTUAL: today's exit rules and fees applied to earlier dates - not what the paper "
                         "ledger did; never written to a ledger")
@@ -580,7 +586,7 @@ def run(args, market=None) -> dict:
         book.settle_pending(d)
         book.check_exits(d)
         if d == today:
-            _enter(book, args, d, bar)
+            _enter(book, args, d, bar, sessions)
         book.end_of_day(d)
     comp = book.value(today)
 
@@ -674,7 +680,25 @@ def _cash_note(pos: pd.DataFrame) -> str:
     return "; ".join(notes)
 
 
-def _enter(book: Book, args, d: str, bar) -> None:
+def _signal_refusal(sig: pd.DataFrame, d: str, sessions, max_age: int) -> str:
+    """Why the signal file must not be entered at session d's open ('' when it may be).
+
+    sessions: the session dates (YYYYMMDD) of the price data. The age is the number of sessions after the
+    signal's date up to and including d."""
+    dates = sorted({_ymd(x) for x in sig["DATE"]} - {""}) if "DATE" in sig.columns else []
+    if len(dates) != 1:
+        return f"the signal file has no single DATE ({', '.join(dates) or 'none'})"
+    sd = dates[0]
+    if sd >= d:
+        return f"the signal is dated {_iso(sd)}, not before the entry session {_iso(d)}"
+    age = sum(1 for s in sessions if sd < s <= d)
+    if age > max_age:
+        return (f"the signal from the {_iso(sd)} close is {age} sessions old at {_iso(d)} (at most {max_age}); "
+                "no newer signal was produced (failed nightly refreshes?)")
+    return ""
+
+
+def _enter(book: Book, args, d: str, bar, sessions=()) -> None:
     dow = {"mon": 0, "tue": 1, "wed": 2, "thu": 3, "fri": 4, "any": -1}.get(args.entry_day, 0)
     if not (dow == -1 or pd.Timestamp(d).weekday() == dow):
         print(f"[INFO] not entry day ({pd.Timestamp(d):%A}); skipping new entries")
@@ -684,6 +708,10 @@ def _enter(book: Book, args, d: str, bar) -> None:
     sig = pd.read_csv(args.signal)
     sig.columns = [c.strip().upper() for c in sig.columns]
     if sig.empty:
+        return
+    why = _signal_refusal(sig, d, sessions, int(getattr(args, "max_signal_age_sessions", MAX_SIGNAL_AGE_SESSIONS)))
+    if why:
+        print(f"[WARN] no new entries on {_iso(d)}: {why}")
         return
     if "CONFIDENCE" in sig.columns:
         sig = sig.sort_values("CONFIDENCE", ascending=False)
@@ -723,6 +751,8 @@ def main():
                     help="Time stop in sessions held. 0 = disabled (recommended).")
     ap.add_argument("--max-open-positions", type=int, default=15,
                     help="Capacity across open, pending and stale holdings.")
+    ap.add_argument("--max-signal-age-sessions", type=int, default=MAX_SIGNAL_AGE_SESSIONS,
+                    help="No entries from a signal file older than this many sessions at the entry session.")
     ap.add_argument("--fee-evidence", default=str(FEE_EVIDENCE),
                     help="Verified historical entry-fee records (data/ledger_evidence/historical_entry_fees.csv).")
     ap.add_argument("--dry-run", action="store_true", help="Compute and print; write nothing.")

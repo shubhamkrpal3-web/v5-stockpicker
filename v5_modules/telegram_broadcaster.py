@@ -106,20 +106,59 @@ def _conviction_band(score: float) -> str:
     return "skip"
 
 
+STALE_SIGNAL_DAYS = 4      # Friday close -> Monday is 3 days; a Friday holiday makes it 4
+
+
+def _ytd_and_dd(equity_log_path: Optional[str], year: int) -> tuple[Optional[float], Optional[float]]:
+    """(return since the year's first equity-log row, drawdown from the peak) or None where not computable."""
+    if not equity_log_path or not Path(equity_log_path).exists():
+        return None, None
+    eq = pd.read_csv(equity_log_path)
+    if eq.empty or "EQUITY" not in eq.columns or "DATE" not in eq.columns:
+        return None, None
+    eq = eq.assign(DATE=pd.to_datetime(eq["DATE"], errors="coerce"),
+                   EQUITY=pd.to_numeric(eq["EQUITY"], errors="coerce")).dropna(subset=["DATE", "EQUITY"])
+    eq = eq.sort_values("DATE")
+    if eq.empty:
+        return None, None
+    yr = eq[eq["DATE"].dt.year == year]
+    ytd = float(yr["EQUITY"].iloc[-1] / yr["EQUITY"].iloc[0] - 1) if len(yr) >= 2 else None
+    dd = float(eq["EQUITY"].iloc[-1] / eq["EQUITY"].cummax().iloc[-1] - 1)
+    return ytd, dd
+
+
 def build_weekly_signal(
     portfolio_path: str,
     positions_path: Optional[str] = None,
     regime_state: str = "RISK_NEU",
     regime_triggers: dict = None,
     regime_json_path: Optional[str] = None,
-    ytd_pct: float = 0.0,
-    dd_from_peak_pct: float = 0.0,
+    ytd_pct: Optional[float] = None,
+    dd_from_peak_pct: Optional[float] = None,
     portfolio_target: float = 1.0,
+    equity_log_path: Optional[str] = None,
+    now: Optional[pd.Timestamp] = None,
 ) -> str:
-    """Build the Monday-morning new-entries/holds/exits broadcast."""
+    """Build the Monday-morning new-entries/holds/exits broadcast. YTD and drawdown come from the equity log
+    unless given; the signal's own close date is shown, with a warning when it is stale."""
     df = pd.read_csv(portfolio_path)
     df.columns = [c.upper() for c in df.columns]
-    today = pd.Timestamp.now().strftime("%a %d %b %Y")
+    now = now if now is not None else pd.Timestamp.now()
+    today = now.strftime("%a %d %b %Y")
+    if ytd_pct is None or dd_from_peak_pct is None:
+        ytd, dd = _ytd_and_dd(equity_log_path, now.year)
+        ytd_pct = ytd if ytd_pct is None else ytd_pct
+        dd_from_peak_pct = dd if dd_from_peak_pct is None else dd_from_peak_pct
+    sig_line = ""
+    if "DATE" in df.columns and len(df):
+        sd = pd.to_datetime(df["DATE"].astype(str).str.strip().str[:8], format="%Y%m%d", errors="coerce").dropna()
+        if len(sd):
+            sd = sd.max()
+            age = (now.normalize() - sd.normalize()).days
+            sig_line = f"_Signal from the {sd:%d %b %Y} close_"
+            if age > STALE_SIGNAL_DAYS:
+                sig_line += (f"  ⚠️ *{age} days old*: no newer signal was produced (nightly refresh failed?). "
+                             "The paper ledger does not enter a signal more than 3 sessions old.")
 
     if regime_json_path and Path(regime_json_path).exists():
         with open(regime_json_path) as f:
@@ -133,11 +172,14 @@ def build_weekly_signal(
     rt = regime_triggers or {"Trend": "?", "Breadth": "?", "VIX": "?"}
     trig = "  ".join(f"{k}{v}" for k, v in rt.items())
 
+    pct = lambda v: "n/a" if v is None else f"{v * 100:+.2f}%"
     lines = []
     lines.append(f"*V5 SIGNAL — {today}*")
+    if sig_line:
+        lines.append(sig_line)
     lines.append(f"_Regime:_ `{regime_state}`  ({trig})")
-    lines.append(f"_Gross target:_ {portfolio_target * 100:.0f}%   _Kill switch:_ clear")
-    lines.append(f"_Portfolio YTD:_ {ytd_pct * 100:+.2f}%   _DD from peak:_ {dd_from_peak_pct * 100:+.2f}%")
+    lines.append(f"_Gross target:_ {portfolio_target * 100:.0f}%")
+    lines.append(f"_Portfolio YTD:_ {pct(ytd_pct)}   _DD from peak:_ {pct(dd_from_peak_pct)}")
     lines.append("")
 
     new_entries = df[df.get("ACTION", "ENTER") == "ENTER"] if "ACTION" in df.columns else df
@@ -241,8 +283,8 @@ def main():
         help="Path to daily_regime.json (preferred). If provided and exists, overrides --regime.",
     )
     ap.add_argument("--regime", default="RISK_NEU")
-    ap.add_argument("--ytd", type=float, default=0.0)
-    ap.add_argument("--dd", type=float, default=0.0)
+    ap.add_argument("--ytd", type=float, default=None, help="default: from --equity-log")
+    ap.add_argument("--dd", type=float, default=None, help="default: from --equity-log")
     ap.add_argument(
         "--creds",
         default=None,
@@ -265,6 +307,7 @@ def main():
             regime_json_path=args.regime_json,
             ytd_pct=args.ytd,
             dd_from_peak_pct=args.dd,
+            equity_log_path=args.equity_log,
         )
     elif args.type == "daily_exit":
         # V5 Daily Exit Check: never sends exit details and never writes the marker (see build_daily_exit)
