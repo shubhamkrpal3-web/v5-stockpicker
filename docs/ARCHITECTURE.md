@@ -220,6 +220,16 @@ data on every run, so it carries across separate daily runs. The ledger stops
 before writing anything if the supplementary price file is missing (a header-only
 file states that there are none).
 
+New positions are opened only from a signal computed at one of the three sessions
+before the entry session (normally the previous close). A signal file left behind
+by failed nightly refreshes is not entered, because its quantities and stops come
+from old closes, and the Monday broadcast shows the signal's close date with a
+warning when it is stale. The nightly workflow downloads every session missed
+since the price master's last date, commits the ledger even when a report step
+(Telegram, Excel, email) fails, and then announces the failed step on Telegram.
+Sessions missed by failed runs are processed in order on the next run (exits and
+marks); entries are never back-filled for an entry day that has passed.
+
 Stops are planned controls, not guaranteed execution prices. Gaps, halts, thin
 order books, and rejected or partial orders can make the realised loss exceed
 the planned amount.
