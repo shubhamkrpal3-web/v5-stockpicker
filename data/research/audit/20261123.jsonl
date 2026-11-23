@@ -1,0 +1,1 @@
+{"run_at": "2026-11-23T11:19:50+00:00", "phase": "pre_market", "type": "run", "steps": [{"step": "macro", "ok": true}, {"step": "fii_dii_cash", "ok": true}, {"step": "events_calendar", "ok": true}, {"step": "announcements", "ok": true}, {"step": "holiday_calendar", "ok": true}]}
