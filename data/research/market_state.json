@@ -1,208 +1,206 @@
 {
-  "as_of": "2026-10-01",
-  "built_at": "2026-10-04T05:26:05+00:00",
+  "as_of": "2026-11-23",
+  "built_at": "2026-11-25T01:32:53+00:00",
   "broad": {
     "index_source": "NSE Nifty 500",
-    "regime": "RISK_OFF",
+    "regime": "RISK_NEU",
     "trend": {
-      "close": 21857.75,
-      "sma200": 22959.67825,
-      "above_200dma": false,
-      "sma50_slope_20d": -0.008732997336606929
+      "close": 23748.15,
+      "sma200": 22966.987250000002,
+      "above_200dma": true,
+      "sma50_slope_20d": -0.005310598829723845
     },
     "volatility": {
-      "realized_20d": 0.11646328916122801,
-      "india_vix": 14.46,
-      "vix_1y_percentile": 0.7222222222222222,
-      "state": "low_vol"
+      "realized_20d": 0.14036199348812534,
+      "india_vix": 17.7,
+      "vix_1y_percentile": null,
+      "state": "high_vol"
     },
-    "breadth_above_50dma": 0.26851851851851855,
-    "liquidity_turnover_vs_120d": 0.9064551614683799,
-    "risk_appetite_z": -0.609,
+    "breadth_above_50dma": 0.4010416666666667,
+    "liquidity_turnover_vs_120d": 1.0525391374504538,
+    "risk_appetite_z": 0.361,
     "risk_appetite_components": {
-      "smallcap_vs_largecap_20d": 0.488,
-      "vix_change_20d (inverted)": -0.729,
-      "inr_strength_20d": -1.065,
-      "fii_index_futures_long_share": null,
-      "breadth": -1.132
+      "inr_strength_20d": 2.103,
+      "fii_index_futures_long_share": -0.792,
+      "breadth": -0.229
     },
     "flows_latest": {
-      "date": "2026-10-01",
-      "fii_net_cr": -9484.22,
-      "dii_net_cr": 10041.84,
-      "history_sessions": 1
+      "date": "2026-11-23",
+      "fii_net_cr": 5672.99,
+      "dii_net_cr": -2760.12,
+      "history_sessions": 3
     },
     "valuation": {
-      "nifty500_pe": 21.56,
+      "nifty500_pe": 22.18,
       "pe_percentile_since": "2017-01-02",
-      "pe_percentile": 0.04656964656964657
+      "pe_percentile": 0.09788469514724181
     }
   },
   "sectors": {
     "Automobile and Auto Components": {
       "members": 38,
-      "rs_vs_n500_63d": 0.01467733479387423,
+      "rs_vs_n500_63d": -0.05462551629024137,
       "above_200dma": true,
-      "breadth_above_50dma": 0.07894736842105263,
-      "vol_63d": 0.1356145997378964,
-      "rs_rank": 9
+      "breadth_above_50dma": 0.6842105263157895,
+      "vol_63d": 0.18607368032960933,
+      "rs_rank": 12
     },
     "Capital Goods": {
-      "members": 63,
-      "rs_vs_n500_63d": 0.04765097744542279,
-      "above_200dma": true,
-      "breadth_above_50dma": 0.3333333333333333,
-      "vol_63d": 0.15625362579502927,
-      "rs_rank": 4
+      "members": 62,
+      "rs_vs_n500_63d": -0.12429174230617401,
+      "above_200dma": false,
+      "breadth_above_50dma": 0.25806451612903225,
+      "vol_63d": 0.2159216002073793,
+      "rs_rank": 19
     },
     "Chemicals": {
       "members": 26,
-      "rs_vs_n500_63d": -0.004186197435072314,
+      "rs_vs_n500_63d": -0.11360207162430569,
       "above_200dma": false,
-      "breadth_above_50dma": 0.038461538461538464,
-      "vol_63d": 0.1475674542069842,
-      "rs_rank": 13
+      "breadth_above_50dma": 0.4230769230769231,
+      "vol_63d": 0.18148333852734302,
+      "rs_rank": 17
     },
     "Construction": {
       "members": 13,
-      "rs_vs_n500_63d": -0.056580673263688874,
+      "rs_vs_n500_63d": -0.0967335061317558,
       "above_200dma": false,
-      "breadth_above_50dma": 0.15384615384615385,
-      "vol_63d": 0.16185931792079028,
-      "rs_rank": 17
+      "breadth_above_50dma": 0.46153846153846156,
+      "vol_63d": 0.2297243104767182,
+      "rs_rank": 16
     },
     "Construction Materials": {
       "members": 11,
-      "rs_vs_n500_63d": -0.06020459172564263,
+      "rs_vs_n500_63d": -0.04183923995068617,
       "above_200dma": false,
-      "breadth_above_50dma": 0.0,
-      "vol_63d": 0.17055116586881014,
-      "rs_rank": 18
+      "breadth_above_50dma": 0.7272727272727273,
+      "vol_63d": 0.19898018918277,
+      "rs_rank": 7
     },
     "Consumer Durables": {
       "members": 16,
-      "rs_vs_n500_63d": 0.015107600306305091,
+      "rs_vs_n500_63d": -0.09549966944375854,
       "above_200dma": false,
-      "breadth_above_50dma": 0.1875,
-      "vol_63d": 0.1479218569154337,
-      "rs_rank": 8
+      "breadth_above_50dma": 0.75,
+      "vol_63d": 0.23534722571342612,
+      "rs_rank": 15
     },
     "Consumer Services": {
       "members": 29,
-      "rs_vs_n500_63d": 0.043693678576589456,
-      "above_200dma": false,
-      "breadth_above_50dma": 0.1724137931034483,
-      "vol_63d": 0.140904961324835,
-      "rs_rank": 6
+      "rs_vs_n500_63d": -0.04594396670822565,
+      "above_200dma": true,
+      "breadth_above_50dma": 0.4827586206896552,
+      "vol_63d": 0.1682388031038109,
+      "rs_rank": 9
     },
     "Fast Moving Consumer Goods": {
       "members": 28,
-      "rs_vs_n500_63d": -0.032078604754521955,
+      "rs_vs_n500_63d": -0.04680671844429152,
       "above_200dma": false,
-      "breadth_above_50dma": 0.03571428571428571,
-      "vol_63d": 0.12329891845249362,
-      "rs_rank": 15
+      "breadth_above_50dma": 0.7142857142857143,
+      "vol_63d": 0.16147898185770673,
+      "rs_rank": 10
     },
     "Financial Services": {
       "members": 101,
-      "rs_vs_n500_63d": -0.016311019464739895,
-      "above_200dma": false,
-      "breadth_above_50dma": 0.09900990099009901,
-      "vol_63d": 0.14232475267315267,
-      "rs_rank": 14
+      "rs_vs_n500_63d": -0.045125513869827105,
+      "above_200dma": true,
+      "breadth_above_50dma": 0.5841584158415841,
+      "vol_63d": 0.17644463659497697,
+      "rs_rank": 8
     },
     "Healthcare": {
       "members": 49,
-      "rs_vs_n500_63d": 0.06382690340201547,
+      "rs_vs_n500_63d": 0.008811584353361823,
       "above_200dma": true,
-      "breadth_above_50dma": 0.3469387755102041,
-      "vol_63d": 0.11825134548038296,
+      "breadth_above_50dma": 0.6938775510204082,
+      "vol_63d": 0.14478901255909152,
       "rs_rank": 2
     },
     "Information Technology": {
       "members": 27,
-      "rs_vs_n500_63d": 0.04657924244479439,
-      "above_200dma": false,
-      "breadth_above_50dma": 0.07407407407407407,
-      "vol_63d": 0.19747147028267656,
-      "rs_rank": 5
+      "rs_vs_n500_63d": -0.05457567391725571,
+      "above_200dma": true,
+      "breadth_above_50dma": 0.6296296296296297,
+      "vol_63d": 0.18000303155290864,
+      "rs_rank": 11
     },
     "Media Entertainment & Publication": {
       "members": 4,
-      "rs_vs_n500_63d": 0.07176296483709244,
+      "rs_vs_n500_63d": 0.13392086611420972,
       "above_200dma": true,
-      "breadth_above_50dma": 0.5,
-      "vol_63d": 0.2666135666698817,
+      "breadth_above_50dma": 0.75,
+      "vol_63d": 0.3312421550611148,
       "rs_rank": 1
     },
     "Metals & Mining": {
       "members": 18,
-      "rs_vs_n500_63d": 0.005504570328470515,
+      "rs_vs_n500_63d": -0.12124727372247968,
       "above_200dma": false,
-      "breadth_above_50dma": 0.0,
-      "vol_63d": 0.177438599396765,
-      "rs_rank": 10
+      "breadth_above_50dma": 0.16666666666666666,
+      "vol_63d": 0.22057469265414142,
+      "rs_rank": 18
     },
     "Oil Gas & Consumable Fuels": {
       "members": 17,
-      "rs_vs_n500_63d": 0.05861501304327832,
+      "rs_vs_n500_63d": -0.016102491515682882,
       "above_200dma": true,
-      "breadth_above_50dma": 0.29411764705882354,
-      "vol_63d": 0.1308490368859598,
-      "rs_rank": 3
+      "breadth_above_50dma": 0.5882352941176471,
+      "vol_63d": 0.16317335034447855,
+      "rs_rank": 4
     },
     "Power": {
       "members": 17,
-      "rs_vs_n500_63d": -0.061582207487467344,
+      "rs_vs_n500_63d": -0.09335170807150595,
       "above_200dma": false,
-      "breadth_above_50dma": 0.11764705882352941,
-      "vol_63d": 0.12649773365156733,
-      "rs_rank": 19
+      "breadth_above_50dma": 0.4117647058823529,
+      "vol_63d": 0.2107995106663881,
+      "rs_rank": 14
     },
     "Realty": {
       "members": 11,
-      "rs_vs_n500_63d": -0.0005452665574158244,
-      "above_200dma": false,
-      "breadth_above_50dma": 0.09090909090909091,
-      "vol_63d": 0.2372334526772479,
-      "rs_rank": 12
+      "rs_vs_n500_63d": -0.03252387002949453,
+      "above_200dma": true,
+      "breadth_above_50dma": 0.9090909090909091,
+      "vol_63d": 0.25034883487856174,
+      "rs_rank": 6
     },
     "Services": {
       "members": 14,
-      "rs_vs_n500_63d": 0.04040959503612018,
+      "rs_vs_n500_63d": -0.019586656930824176,
       "above_200dma": true,
-      "breadth_above_50dma": 0.2857142857142857,
-      "vol_63d": 0.16205478428524478,
-      "rs_rank": 7
+      "breadth_above_50dma": 0.5714285714285714,
+      "vol_63d": 0.16884368173052877,
+      "rs_rank": 5
     },
     "Telecommunication": {
       "members": 10,
-      "rs_vs_n500_63d": -0.05171991808860221,
-      "above_200dma": false,
-      "breadth_above_50dma": 0.0,
-      "vol_63d": 0.1504816933620517,
-      "rs_rank": 16
+      "rs_vs_n500_63d": -0.05487765211466755,
+      "above_200dma": true,
+      "breadth_above_50dma": 0.4,
+      "vol_63d": 0.20184247126066265,
+      "rs_rank": 13
     },
     "Textiles": {
       "members": 5,
-      "rs_vs_n500_63d": 0.0027145378025524858,
+      "rs_vs_n500_63d": 0.0009046445134179848,
       "above_200dma": true,
-      "breadth_above_50dma": 0.2,
-      "vol_63d": 0.1657009456893057,
-      "rs_rank": 11
+      "breadth_above_50dma": 0.6,
+      "vol_63d": 0.2289330907727646,
+      "rs_rank": 3
     }
   },
   "macro_relationships": {
     "gold_inr": {
-      "n": 2239,
+      "n": 2248,
       "since": "2017-01-04",
-      "corr": 0.024,
+      "corr": 0.021,
       "ci95": [
-        -0.017,
-        0.066
+        -0.02,
+        0.062
       ],
-      "corr_126d": 0.241,
-      "beta_126d": 0.1424,
+      "corr_126d": 0.096,
+      "beta_126d": 0.0508,
       "corr_126d_range_3y": [
         -0.254,
         0.29
@@ -210,43 +208,43 @@
       "sign_agreement": 0.51,
       "by_regime": {
         "RISK_NEU": {
-          "corr": 0.045,
-          "n": 856
+          "corr": 0.031,
+          "n": 861
         },
         "RISK_OFF": {
           "corr": 0.032,
           "n": 530
         },
         "RISK_ON": {
-          "corr": -0.012,
-          "n": 853
+          "corr": -0.011,
+          "n": 857
         }
       },
       "by_volatility": {
         "high_vol": {
-          "corr": 0.039,
-          "n": 1108
+          "corr": 0.031,
+          "n": 1112
         },
         "low_vol": {
-          "corr": -0.015,
-          "n": 1131
+          "corr": -0.007,
+          "n": 1136
         }
       },
       "lead_lag": {
         "1": {
-          "corr": 0.079,
+          "corr": 0.078,
           "significant": true
         },
         "2": {
-          "corr": -0.01,
+          "corr": -0.009,
           "significant": false
         },
         "3": {
-          "corr": 0.063,
+          "corr": 0.064,
           "significant": true
         },
         "4": {
-          "corr": -0.035,
+          "corr": -0.034,
           "significant": false
         },
         "5": {
@@ -258,47 +256,47 @@
       "note": "use lead_lag; same-day value overlaps hours after the Indian close"
     },
     "gsec_10y_index": {
-      "n": 2397,
+      "n": 2406,
       "since": "2017-01-03",
-      "corr": 0.096,
+      "corr": 0.097,
       "ci95": [
-        0.056,
-        0.135
+        0.058,
+        0.137
       ],
-      "corr_126d": 0.663,
-      "beta_126d": 2.4057,
+      "corr_126d": 0.582,
+      "beta_126d": 2.0536,
       "corr_126d_range_3y": [
         -0.143,
-        0.663
+        0.649
       ],
-      "sign_agreement": 0.72,
+      "sign_agreement": 0.73,
       "by_regime": {
         "RISK_NEU": {
-          "corr": 0.074,
-          "n": 917
+          "corr": 0.077,
+          "n": 922
         },
         "RISK_OFF": {
           "corr": 0.136,
           "n": 561
         },
         "RISK_ON": {
-          "corr": 0.073,
-          "n": 919
+          "corr": 0.078,
+          "n": 923
         }
       },
       "by_volatility": {
         "high_vol": {
-          "corr": 0.111,
-          "n": 1180
+          "corr": 0.112,
+          "n": 1184
         },
         "low_vol": {
-          "corr": 0.066,
-          "n": 1217
+          "corr": 0.07,
+          "n": 1222
         }
       },
       "lead_lag": {
         "1": {
-          "corr": -0.035,
+          "corr": -0.037,
           "significant": false
         },
         "2": {
@@ -310,7 +308,7 @@
           "significant": false
         },
         "4": {
-          "corr": 0.022,
+          "corr": 0.021,
           "significant": false
         },
         "5": {
@@ -321,42 +319,42 @@
       "label": "moderate"
     },
     "usdinr": {
-      "n": 2387,
+      "n": 2396,
       "since": "2017-01-03",
-      "corr": -0.107,
+      "corr": -0.106,
       "ci95": [
-        -0.147,
-        -0.068
+        -0.146,
+        -0.067
       ],
-      "corr_126d": -0.174,
-      "beta_126d": -0.2789,
+      "corr_126d": -0.14,
+      "beta_126d": -0.1981,
       "corr_126d_range_3y": [
         -0.442,
         0.278
       ],
-      "sign_agreement": 0.85,
+      "sign_agreement": 0.86,
       "by_regime": {
         "RISK_NEU": {
-          "corr": -0.13,
-          "n": 911
+          "corr": -0.125,
+          "n": 916
         },
         "RISK_OFF": {
           "corr": -0.078,
           "n": 559
         },
         "RISK_ON": {
-          "corr": -0.142,
-          "n": 917
+          "corr": -0.144,
+          "n": 921
         }
       },
       "by_volatility": {
         "high_vol": {
-          "corr": -0.097,
-          "n": 1176
+          "corr": -0.095,
+          "n": 1180
         },
         "low_vol": {
-          "corr": -0.146,
-          "n": 1211
+          "corr": -0.145,
+          "n": 1216
         }
       },
       "lead_lag": {
@@ -365,15 +363,15 @@
           "significant": false
         },
         "2": {
-          "corr": -0.033,
+          "corr": -0.034,
           "significant": false
         },
         "3": {
-          "corr": 0.031,
+          "corr": 0.032,
           "significant": false
         },
         "4": {
-          "corr": -0.027,
+          "corr": -0.025,
           "significant": false
         },
         "5": {
@@ -385,24 +383,24 @@
       "note": "use lead_lag; same-day value overlaps hours after the Indian close"
     },
     "brent": {
-      "n": 2241,
+      "n": 2250,
       "since": "2017-01-04",
-      "corr": 0.057,
+      "corr": 0.058,
       "ci95": [
-        0.016,
-        0.098
+        0.017,
+        0.099
       ],
-      "corr_126d": -0.3,
-      "beta_126d": -0.0757,
+      "corr_126d": -0.393,
+      "beta_126d": -0.0945,
       "corr_126d_range_3y": [
-        -0.361,
-        0.165
+        -0.393,
+        0.154
       ],
-      "sign_agreement": 0.67,
+      "sign_agreement": 0.66,
       "by_regime": {
         "RISK_NEU": {
-          "corr": 0.068,
-          "n": 858
+          "corr": 0.073,
+          "n": 863
         },
         "RISK_OFF": {
           "corr": 0.052,
@@ -410,17 +408,17 @@
         },
         "RISK_ON": {
           "corr": 0.049,
-          "n": 853
+          "n": 857
         }
       },
       "by_volatility": {
         "high_vol": {
-          "corr": 0.063,
-          "n": 1108
+          "corr": 0.065,
+          "n": 1112
         },
         "low_vol": {
-          "corr": 0.036,
-          "n": 1133
+          "corr": 0.035,
+          "n": 1138
         }
       },
       "lead_lag": {
@@ -429,7 +427,7 @@
           "significant": false
         },
         "2": {
-          "corr": -0.061,
+          "corr": -0.06,
           "significant": true
         },
         "3": {
@@ -437,11 +435,11 @@
           "significant": true
         },
         "4": {
-          "corr": 0.056,
+          "corr": 0.055,
           "significant": true
         },
         "5": {
-          "corr": 0.072,
+          "corr": 0.073,
           "significant": true
         }
       },
@@ -449,47 +447,47 @@
       "note": "use lead_lag; same-day value overlaps hours after the Indian close"
     },
     "us10y_bp": {
-      "n": 2235,
+      "n": 2244,
       "since": "2017-01-04",
-      "corr": 0.07,
+      "corr": 0.069,
       "ci95": [
-        0.028,
-        0.111
+        0.027,
+        0.11
       ],
-      "corr_126d": -0.062,
-      "beta_126d": -0.0001,
+      "corr_126d": -0.122,
+      "beta_126d": -0.0003,
       "corr_126d_range_3y": [
         -0.122,
         0.157
       ],
-      "sign_agreement": 0.79,
+      "sign_agreement": 0.78,
       "by_regime": {
         "RISK_NEU": {
-          "corr": -0.0,
-          "n": 858
+          "corr": -0.005,
+          "n": 863
         },
         "RISK_OFF": {
           "corr": 0.136,
           "n": 528
         },
         "RISK_ON": {
-          "corr": 0.026,
-          "n": 849
+          "corr": 0.028,
+          "n": 853
         }
       },
       "by_volatility": {
         "high_vol": {
-          "corr": 0.092,
-          "n": 1106
+          "corr": 0.089,
+          "n": 1110
         },
         "low_vol": {
-          "corr": 0.034,
-          "n": 1129
+          "corr": 0.036,
+          "n": 1134
         }
       },
       "lead_lag": {
         "1": {
-          "corr": -0.022,
+          "corr": -0.021,
           "significant": false
         },
         "2": {
@@ -505,7 +503,7 @@
           "significant": true
         },
         "5": {
-          "corr": 0.048,
+          "corr": 0.05,
           "significant": true
         }
       },
@@ -513,15 +511,15 @@
       "note": "use lead_lag; same-day value overlaps hours after the Indian close"
     },
     "sp500": {
-      "n": 2235,
+      "n": 2244,
       "since": "2017-01-04",
-      "corr": 0.255,
+      "corr": 0.248,
       "ci95": [
-        0.216,
-        0.293
+        0.209,
+        0.287
       ],
-      "corr_126d": 0.242,
-      "beta_126d": 0.2998,
+      "corr_126d": 0.13,
+      "beta_126d": 0.123,
       "corr_126d_range_3y": [
         -0.054,
         0.33
@@ -529,26 +527,26 @@
       "sign_agreement": 0.97,
       "by_regime": {
         "RISK_NEU": {
-          "corr": 0.163,
-          "n": 858
+          "corr": 0.139,
+          "n": 863
         },
         "RISK_OFF": {
           "corr": 0.308,
           "n": 528
         },
         "RISK_ON": {
-          "corr": 0.225,
-          "n": 849
+          "corr": 0.227,
+          "n": 853
         }
       },
       "by_volatility": {
         "high_vol": {
-          "corr": 0.285,
-          "n": 1106
+          "corr": 0.276,
+          "n": 1110
         },
         "low_vol": {
-          "corr": 0.141,
-          "n": 1129
+          "corr": 0.142,
+          "n": 1134
         }
       },
       "lead_lag": {
@@ -557,7 +555,7 @@
           "significant": true
         },
         "2": {
-          "corr": 0.014,
+          "corr": 0.015,
           "significant": false
         },
         "3": {
@@ -565,7 +563,7 @@
           "significant": true
         },
         "4": {
-          "corr": -0.084,
+          "corr": -0.083,
           "significant": true
         },
         "5": {
@@ -577,15 +575,15 @@
       "note": "use lead_lag; same-day value overlaps hours after the Indian close"
     },
     "india_vix_change": {
-      "n": 2397,
+      "n": 2406,
       "since": "2017-01-03",
-      "corr": -0.611,
+      "corr": -0.61,
       "ci95": [
-        -0.636,
-        -0.585
+        -0.634,
+        -0.584
       ],
-      "corr_126d": -0.846,
-      "beta_126d": -0.0078,
+      "corr_126d": -0.758,
+      "beta_126d": -0.0072,
       "corr_126d_range_3y": [
         -0.863,
         -0.207
@@ -593,31 +591,31 @@
       "sign_agreement": 1.0,
       "by_regime": {
         "RISK_NEU": {
-          "corr": -0.606,
-          "n": 917
+          "corr": -0.603,
+          "n": 922
         },
         "RISK_OFF": {
           "corr": -0.643,
           "n": 561
         },
         "RISK_ON": {
-          "corr": -0.511,
-          "n": 919
+          "corr": -0.509,
+          "n": 923
         }
       },
       "by_volatility": {
         "high_vol": {
-          "corr": -0.641,
-          "n": 1180
+          "corr": -0.64,
+          "n": 1184
         },
         "low_vol": {
-          "corr": -0.464,
-          "n": 1217
+          "corr": -0.463,
+          "n": 1222
         }
       },
       "lead_lag": {
         "1": {
-          "corr": 0.015,
+          "corr": 0.014,
           "significant": false
         },
         "2": {
@@ -629,11 +627,11 @@
           "significant": false
         },
         "4": {
-          "corr": -0.067,
+          "corr": -0.066,
           "significant": true
         },
         "5": {
-          "corr": -0.032,
+          "corr": -0.03,
           "significant": false
         }
       },
@@ -641,68 +639,127 @@
     },
     "fii_cash_net_cr": {
       "label": "insufficient",
-      "n": 1
+      "n": 3
     },
     "fii_idxfut_net_change": {
-      "label": "insufficient",
-      "n": 7
+      "n": 1310,
+      "since": "2018-01-02",
+      "corr": 0.347,
+      "ci95": [
+        0.299,
+        0.394
+      ],
+      "corr_126d": 0.402,
+      "beta_126d": 0.0,
+      "corr_126d_range_3y": [
+        0.188,
+        0.658
+      ],
+      "sign_agreement": 1.0,
+      "by_regime": {
+        "RISK_NEU": {
+          "corr": 0.446,
+          "n": 477
+        },
+        "RISK_OFF": {
+          "corr": 0.308,
+          "n": 351
+        },
+        "RISK_ON": {
+          "corr": 0.357,
+          "n": 482
+        }
+      },
+      "by_volatility": {
+        "high_vol": {
+          "corr": 0.395,
+          "n": 815
+        },
+        "low_vol": {
+          "corr": 0.321,
+          "n": 495
+        }
+      },
+      "lead_lag": {
+        "1": {
+          "corr": 0.036,
+          "significant": false
+        },
+        "2": {
+          "corr": 0.071,
+          "significant": true
+        },
+        "3": {
+          "corr": -0.002,
+          "significant": false
+        },
+        "4": {
+          "corr": -0.031,
+          "significant": false
+        },
+        "5": {
+          "corr": 0.0,
+          "significant": false
+        }
+      },
+      "label": "stable"
     }
   },
   "sector_macro_betas": {
-    "Automobile and Auto Components": {},
+    "Automobile and Auto Components": {
+      "us10y_bp": -0.0002
+    },
     "Capital Goods": {},
     "Chemicals": {},
     "Construction": {},
-    "Construction Materials": {
-      "gold_inr": 0.0518
-    },
+    "Construction Materials": {},
     "Consumer Durables": {
-      "usdinr": -0.2365
+      "usdinr": -0.2683
     },
     "Consumer Services": {},
     "Fast Moving Consumer Goods": {},
     "Financial Services": {
-      "gsec_10y_index": 0.3903
+      "gsec_10y_index": 0.4074
     },
     "Healthcare": {},
     "Information Technology": {
-      "gsec_10y_index": -0.8699
+      "gsec_10y_index": -0.8478
     },
     "Media Entertainment & Publication": {},
     "Metals & Mining": {
-      "gold_inr": 0.114
+      "gold_inr": 0.1178
     },
     "Oil Gas & Consumable Fuels": {
-      "gold_inr": 0.06
+      "gold_inr": 0.0622
     },
     "Power": {},
     "Realty": {},
     "Services": {},
     "Telecommunication": {},
     "Textiles": {
-      "gsec_10y_index": -0.9074
+      "gsec_10y_index": -0.8578
     }
   },
   "sector_market_beta": {
-    "Automobile and Auto Components": 1.212,
-    "Capital Goods": 1.251,
-    "Chemicals": 1.059,
-    "Construction": 1.375,
-    "Construction Materials": 1.161,
-    "Consumer Durables": 1.181,
-    "Consumer Services": 1.086,
-    "Fast Moving Consumer Goods": 0.8,
-    "Financial Services": 1.242,
-    "Healthcare": 0.73,
-    "Information Technology": 0.935,
-    "Media Entertainment & Publication": 0.949,
-    "Metals & Mining": 1.155,
-    "Oil Gas & Consumable Fuels": 0.883,
+    "Automobile and Auto Components": 1.211,
+    "Capital Goods": 1.233,
+    "Chemicals": 1.045,
+    "Construction": 1.344,
+    "Construction Materials": 1.16,
+    "Consumer Durables": 1.147,
+    "Consumer Services": 1.067,
+    "Fast Moving Consumer Goods": 0.784,
+    "Financial Services": 1.228,
+    "Healthcare": 0.705,
+    "Information Technology": 0.898,
+    "Media Entertainment & Publication": 0.905,
+    "Metals & Mining": 1.156,
+    "Oil Gas & Consumable Fuels": 0.888,
     "Power": 1.06,
-    "Realty": 1.528,
-    "Services": 1.283,
-    "Telecommunication": 1.194,
-    "Textiles": 0.924
+    "Realty": 1.492,
+    "Services": 1.259,
+    "Telecommunication": 1.152,
+    "Textiles": 0.914
   },
   "notes": [
     "Relationships are measured, not assumed; see label, interval and sign agreement before using one.",

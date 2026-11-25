@@ -1,45 +1,45 @@
 {
-  "checked_at": "2026-11-23T11:19:50+00:00",
+  "checked_at": "2026-11-25T01:33:00+00:00",
   "expected_session": "20261123",
   "datasets": {
     "equity_eod": {
-      "status": "STALE",
-      "last": "20261112",
-      "lag_sessions": 7
-    },
-    "indices": {
-      "status": "STALE",
-      "last": "20261001",
-      "lag_sessions": 34
-    },
-    "macro": {
       "status": "FRESH",
       "last": "20261123",
       "lag_sessions": 0
     },
+    "indices": {
+      "status": "FRESH",
+      "last": "20261123",
+      "lag_sessions": 0
+    },
+    "macro": {
+      "status": "FRESH",
+      "last": "20261125",
+      "lag_sessions": 0
+    },
     "fno_summary": {
-      "status": "STALE",
-      "last": "20261001",
-      "lag_sessions": 34
+      "status": "FRESH",
+      "last": "20261123",
+      "lag_sessions": 0
     },
     "participant_oi": {
-      "status": "STALE",
-      "last": "20261001",
-      "lag_sessions": 34
+      "status": "FRESH",
+      "last": "20261123",
+      "lag_sessions": 0
     },
     "fii_dii_cash": {
-      "status": "STALE",
-      "last": "20261120",
-      "lag_sessions": 1
+      "status": "FRESH",
+      "last": "20261123",
+      "lag_sessions": 0
     },
     "corporate_actions": {
       "status": "FRESH",
-      "last": "20261123",
+      "last": "20261125",
       "lag_sessions": 0
     },
     "fundamentals": {
       "status": "FRESH",
-      "last": "20261123",
+      "last": "20261125",
       "lag_sessions": 0
     }
   }
