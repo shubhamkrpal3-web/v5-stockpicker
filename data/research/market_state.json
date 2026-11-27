@@ -1,206 +1,206 @@
 {
-  "as_of": "2026-11-25",
-  "built_at": "2026-11-26T01:07:52+00:00",
+  "as_of": "2026-11-26",
+  "built_at": "2026-11-27T01:09:27+00:00",
   "broad": {
     "index_source": "NSE Nifty 500",
     "regime": "RISK_NEU",
     "trend": {
-      "close": 24025.4,
-      "sma200": 22969.656750000002,
+      "close": 24086.5,
+      "sma200": 22971.701500000003,
       "above_200dma": true,
-      "sma50_slope_20d": -0.004457278424136346
+      "sma50_slope_20d": -0.0033986755114371325
     },
     "volatility": {
-      "realized_20d": 0.14893819493016858,
-      "india_vix": 17.67,
+      "realized_20d": 0.1495370690793349,
+      "india_vix": 16.84,
       "vix_1y_percentile": null,
       "state": "high_vol"
     },
-    "breadth_above_50dma": 0.40092699884125144,
-    "liquidity_turnover_vs_120d": 1.0667556123990323,
-    "risk_appetite_z": 0.454,
+    "breadth_above_50dma": 0.4156521739130435,
+    "liquidity_turnover_vs_120d": 1.0682513830324145,
+    "risk_appetite_z": 0.604,
     "risk_appetite_components": {
-      "inr_strength_20d": 2.172,
-      "fii_index_futures_long_share": -0.582,
-      "breadth": -0.229
+      "inr_strength_20d": 2.585,
+      "fii_index_futures_long_share": -0.622,
+      "breadth": -0.149
     },
     "flows_latest": {
-      "date": "2026-11-25",
-      "fii_net_cr": 4479.08,
-      "dii_net_cr": 4018.72,
-      "history_sessions": 4
+      "date": "2026-11-26",
+      "fii_net_cr": 5843.33,
+      "dii_net_cr": 5630.72,
+      "history_sessions": 5
     },
     "valuation": {
-      "nifty500_pe": 22.44,
+      "nifty500_pe": 22.5,
       "pe_percentile_since": "2017-01-02",
-      "pe_percentile": 0.12396351575456054
+      "pe_percentile": 0.129714048901782
     }
   },
   "sectors": {
     "Automobile and Auto Components": {
       "members": 38,
-      "rs_vs_n500_63d": -0.06773615866010207,
+      "rs_vs_n500_63d": -0.06140365884978971,
       "above_200dma": true,
       "breadth_above_50dma": 0.7105263157894737,
-      "vol_63d": 0.18635667694725633,
+      "vol_63d": 0.18602377944993478,
       "rs_rank": 11
     },
     "Capital Goods": {
       "members": 62,
-      "rs_vs_n500_63d": -0.14720608728758688,
+      "rs_vs_n500_63d": -0.13850957552055831,
       "above_200dma": false,
-      "breadth_above_50dma": 0.25806451612903225,
-      "vol_63d": 0.2156348629432701,
+      "breadth_above_50dma": 0.27419354838709675,
+      "vol_63d": 0.21656423073129025,
       "rs_rank": 18
     },
     "Chemicals": {
       "members": 26,
-      "rs_vs_n500_63d": -0.13382470013407066,
+      "rs_vs_n500_63d": -0.12411077695316397,
       "above_200dma": false,
-      "breadth_above_50dma": 0.38461538461538464,
-      "vol_63d": 0.18172990268681968,
-      "rs_rank": 17
+      "breadth_above_50dma": 0.4230769230769231,
+      "vol_63d": 0.18299053698523812,
+      "rs_rank": 15
     },
     "Construction": {
       "members": 13,
-      "rs_vs_n500_63d": -0.12847352158133152,
+      "rs_vs_n500_63d": -0.12425537706519973,
       "above_200dma": false,
       "breadth_above_50dma": 0.38461538461538464,
-      "vol_63d": 0.22883492169890085,
+      "vol_63d": 0.2289733587371509,
       "rs_rank": 16
     },
     "Construction Materials": {
       "members": 11,
-      "rs_vs_n500_63d": -0.047486034174294645,
+      "rs_vs_n500_63d": -0.052135437938775175,
       "above_200dma": false,
-      "breadth_above_50dma": 0.9090909090909091,
-      "vol_63d": 0.20085155115749095,
-      "rs_rank": 7
+      "breadth_above_50dma": 0.8181818181818182,
+      "vol_63d": 0.20165859686608992,
+      "rs_rank": 8
     },
     "Consumer Durables": {
       "members": 16,
-      "rs_vs_n500_63d": -0.11232473467227744,
+      "rs_vs_n500_63d": -0.1202311915307066,
       "above_200dma": false,
       "breadth_above_50dma": 0.75,
-      "vol_63d": 0.23540658829005767,
+      "vol_63d": 0.23637064865503024,
       "rs_rank": 14
     },
     "Consumer Services": {
       "members": 29,
-      "rs_vs_n500_63d": -0.061638934404967816,
+      "rs_vs_n500_63d": -0.06726943479715297,
       "above_200dma": true,
-      "breadth_above_50dma": 0.5517241379310345,
-      "vol_63d": 0.1686367042311724,
-      "rs_rank": 10
+      "breadth_above_50dma": 0.5862068965517241,
+      "vol_63d": 0.16862172588816254,
+      "rs_rank": 12
     },
     "Fast Moving Consumer Goods": {
       "members": 28,
-      "rs_vs_n500_63d": -0.03683148936866887,
+      "rs_vs_n500_63d": -0.04171459534410782,
       "above_200dma": true,
-      "breadth_above_50dma": 0.75,
-      "vol_63d": 0.1656596567938392,
-      "rs_rank": 4
+      "breadth_above_50dma": 0.7857142857142857,
+      "vol_63d": 0.16538739381358974,
+      "rs_rank": 7
     },
     "Financial Services": {
       "members": 101,
-      "rs_vs_n500_63d": -0.061246544604648734,
+      "rs_vs_n500_63d": -0.055505051966126984,
       "above_200dma": true,
-      "breadth_above_50dma": 0.6534653465346535,
-      "vol_63d": 0.17671727332993678,
+      "breadth_above_50dma": 0.6336633663366337,
+      "vol_63d": 0.1767579230278333,
       "rs_rank": 9
     },
     "Healthcare": {
       "members": 49,
-      "rs_vs_n500_63d": 0.0025502982635783322,
+      "rs_vs_n500_63d": 0.007464478150415621,
       "above_200dma": true,
       "breadth_above_50dma": 0.7551020408163265,
-      "vol_63d": 0.14610403539137792,
+      "vol_63d": 0.14588991409720894,
       "rs_rank": 2
     },
     "Information Technology": {
       "members": 27,
-      "rs_vs_n500_63d": -0.06994592940553201,
+      "rs_vs_n500_63d": -0.05612414808747923,
       "above_200dma": true,
-      "breadth_above_50dma": 0.5925925925925926,
-      "vol_63d": 0.17991824448437554,
-      "rs_rank": 12
+      "breadth_above_50dma": 0.6296296296296297,
+      "vol_63d": 0.18193829706009848,
+      "rs_rank": 10
     },
     "Media Entertainment & Publication": {
       "members": 4,
-      "rs_vs_n500_63d": 0.06878330592665205,
+      "rs_vs_n500_63d": 0.07272087013432493,
       "above_200dma": true,
       "breadth_above_50dma": 0.75,
-      "vol_63d": 0.3472225908994869,
+      "vol_63d": 0.34706243494232014,
       "rs_rank": 1
     },
     "Metals & Mining": {
       "members": 18,
-      "rs_vs_n500_63d": -0.15719402254045756,
+      "rs_vs_n500_63d": -0.15870848891792888,
       "above_200dma": false,
       "breadth_above_50dma": 0.16666666666666666,
-      "vol_63d": 0.22112144368508985,
+      "vol_63d": 0.22079224358832117,
       "rs_rank": 19
     },
     "Oil Gas & Consumable Fuels": {
       "members": 17,
-      "rs_vs_n500_63d": -0.04089827442373861,
+      "rs_vs_n500_63d": -0.039007159486072696,
       "above_200dma": true,
       "breadth_above_50dma": 0.5294117647058824,
-      "vol_63d": 0.16318316405183664,
+      "vol_63d": 0.1631883846018296,
       "rs_rank": 6
     },
     "Power": {
       "members": 17,
-      "rs_vs_n500_63d": -0.12501404459439347,
+      "rs_vs_n500_63d": -0.12664575711022574,
       "above_200dma": false,
-      "breadth_above_50dma": 0.35294117647058826,
-      "vol_63d": 0.21072517260115228,
-      "rs_rank": 15
+      "breadth_above_50dma": 0.4117647058823529,
+      "vol_63d": 0.21067285268081656,
+      "rs_rank": 17
     },
     "Realty": {
       "members": 11,
-      "rs_vs_n500_63d": -0.0497917611617813,
+      "rs_vs_n500_63d": -0.023301588307432564,
       "above_200dma": true,
       "breadth_above_50dma": 0.9090909090909091,
-      "vol_63d": 0.25036208870263427,
-      "rs_rank": 8
+      "vol_63d": 0.2578333628807987,
+      "rs_rank": 4
     },
     "Services": {
       "members": 14,
-      "rs_vs_n500_63d": -0.037879202636947884,
+      "rs_vs_n500_63d": -0.03861622327466874,
       "above_200dma": true,
-      "breadth_above_50dma": 0.5714285714285714,
-      "vol_63d": 0.16885097237707303,
+      "breadth_above_50dma": 0.6428571428571429,
+      "vol_63d": 0.16885660571201572,
       "rs_rank": 5
     },
     "Telecommunication": {
       "members": 10,
-      "rs_vs_n500_63d": -0.09250128932480395,
+      "rs_vs_n500_63d": -0.1064701961805915,
       "above_200dma": false,
-      "breadth_above_50dma": 0.3,
-      "vol_63d": 0.20404903033815147,
+      "breadth_above_50dma": 0.2,
+      "vol_63d": 0.20475838690897885,
       "rs_rank": 13
     },
     "Textiles": {
       "members": 5,
-      "rs_vs_n500_63d": -0.01986064993215053,
+      "rs_vs_n500_63d": -0.008255611662951301,
       "above_200dma": true,
       "breadth_above_50dma": 0.6,
-      "vol_63d": 0.2290360881064731,
+      "vol_63d": 0.2288867184311867,
       "rs_rank": 3
     }
   },
   "macro_relationships": {
     "gold_inr": {
-      "n": 2249,
+      "n": 2250,
       "since": "2017-01-04",
       "corr": 0.021,
       "ci95": [
-        -0.02,
-        0.063
+        -0.021,
+        0.062
       ],
-      "corr_126d": 0.109,
-      "beta_126d": 0.0569,
+      "corr_126d": 0.058,
+      "beta_126d": 0.0308,
       "corr_126d_range_3y": [
         -0.254,
         0.29
@@ -208,8 +208,8 @@
       "sign_agreement": 0.51,
       "by_regime": {
         "RISK_NEU": {
-          "corr": 0.032,
-          "n": 862
+          "corr": 0.03,
+          "n": 863
         },
         "RISK_OFF": {
           "corr": 0.032,
@@ -222,8 +222,8 @@
       },
       "by_volatility": {
         "high_vol": {
-          "corr": 0.032,
-          "n": 1113
+          "corr": 0.031,
+          "n": 1114
         },
         "low_vol": {
           "corr": -0.007,
@@ -240,7 +240,7 @@
           "significant": false
         },
         "3": {
-          "corr": 0.061,
+          "corr": 0.062,
           "significant": true
         },
         "4": {
@@ -256,15 +256,15 @@
       "note": "use lead_lag; same-day value overlaps hours after the Indian close"
     },
     "gsec_10y_index": {
-      "n": 2407,
+      "n": 2408,
       "since": "2017-01-03",
       "corr": 0.098,
       "ci95": [
         0.058,
         0.137
       ],
-      "corr_126d": 0.59,
-      "beta_126d": 2.0972,
+      "corr_126d": 0.564,
+      "beta_126d": 1.9538,
       "corr_126d_range_3y": [
         -0.13,
         0.649
@@ -273,7 +273,7 @@
       "by_regime": {
         "RISK_NEU": {
           "corr": 0.078,
-          "n": 923
+          "n": 924
         },
         "RISK_OFF": {
           "corr": 0.136,
@@ -286,8 +286,8 @@
       },
       "by_volatility": {
         "high_vol": {
-          "corr": 0.113,
-          "n": 1185
+          "corr": 0.112,
+          "n": 1186
         },
         "low_vol": {
           "corr": 0.07,
@@ -319,15 +319,15 @@
       "label": "moderate"
     },
     "usdinr": {
-      "n": 2397,
+      "n": 2398,
       "since": "2017-01-03",
-      "corr": -0.106,
+      "corr": -0.107,
       "ci95": [
         -0.146,
         -0.067
       ],
-      "corr_126d": -0.149,
-      "beta_126d": -0.213,
+      "corr_126d": -0.158,
+      "beta_126d": -0.2228,
       "corr_126d_range_3y": [
         -0.442,
         0.278
@@ -335,8 +335,8 @@
       "sign_agreement": 0.86,
       "by_regime": {
         "RISK_NEU": {
-          "corr": -0.125,
-          "n": 917
+          "corr": -0.126,
+          "n": 918
         },
         "RISK_OFF": {
           "corr": -0.078,
@@ -349,8 +349,8 @@
       },
       "by_volatility": {
         "high_vol": {
-          "corr": -0.095,
-          "n": 1181
+          "corr": -0.096,
+          "n": 1182
         },
         "low_vol": {
           "corr": -0.145,
@@ -383,24 +383,24 @@
       "note": "use lead_lag; same-day value overlaps hours after the Indian close"
     },
     "brent": {
-      "n": 2251,
+      "n": 2252,
       "since": "2017-01-04",
-      "corr": 0.058,
+      "corr": 0.059,
       "ci95": [
         0.017,
-        0.099
+        0.1
       ],
-      "corr_126d": -0.422,
-      "beta_126d": -0.1007,
+      "corr_126d": -0.408,
+      "beta_126d": -0.0952,
       "corr_126d_range_3y": [
-        -0.422,
+        -0.409,
         0.154
       ],
       "sign_agreement": 0.66,
       "by_regime": {
         "RISK_NEU": {
-          "corr": 0.072,
-          "n": 864
+          "corr": 0.075,
+          "n": 865
         },
         "RISK_OFF": {
           "corr": 0.052,
@@ -413,8 +413,8 @@
       },
       "by_volatility": {
         "high_vol": {
-          "corr": 0.065,
-          "n": 1113
+          "corr": 0.066,
+          "n": 1114
         },
         "low_vol": {
           "corr": 0.035,
@@ -499,7 +499,7 @@
           "significant": false
         },
         "4": {
-          "corr": -0.078,
+          "corr": -0.079,
           "significant": true
         },
         "5": {
@@ -575,15 +575,15 @@
       "note": "use lead_lag; same-day value overlaps hours after the Indian close"
     },
     "india_vix_change": {
-      "n": 2407,
+      "n": 2408,
       "since": "2017-01-03",
       "corr": -0.61,
       "ci95": [
         -0.634,
         -0.584
       ],
-      "corr_126d": -0.75,
-      "beta_126d": -0.0072,
+      "corr_126d": -0.742,
+      "beta_126d": -0.0071,
       "corr_126d_range_3y": [
         -0.863,
         -0.207
@@ -592,7 +592,7 @@
       "by_regime": {
         "RISK_NEU": {
           "corr": -0.602,
-          "n": 923
+          "n": 924
         },
         "RISK_OFF": {
           "corr": -0.643,
@@ -606,7 +606,7 @@
       "by_volatility": {
         "high_vol": {
           "corr": -0.64,
-          "n": 1185
+          "n": 1186
         },
         "low_vol": {
           "corr": -0.463,
@@ -639,17 +639,17 @@
     },
     "fii_cash_net_cr": {
       "label": "insufficient",
-      "n": 4
+      "n": 5
     },
     "fii_idxfut_net_change": {
-      "n": 1311,
+      "n": 1312,
       "since": "2018-01-02",
       "corr": 0.348,
       "ci95": [
         0.299,
         0.394
       ],
-      "corr_126d": 0.402,
+      "corr_126d": 0.398,
       "beta_126d": 0.0,
       "corr_126d_range_3y": [
         0.194,
@@ -659,7 +659,7 @@
       "by_regime": {
         "RISK_NEU": {
           "corr": 0.446,
-          "n": 478
+          "n": 479
         },
         "RISK_OFF": {
           "corr": 0.308,
@@ -673,7 +673,7 @@
       "by_volatility": {
         "high_vol": {
           "corr": 0.395,
-          "n": 816
+          "n": 817
         },
         "low_vol": {
           "corr": 0.321,
@@ -698,7 +698,7 @@
           "significant": false
         },
         "5": {
-          "corr": 0.0,
+          "corr": -0.0,
           "significant": false
         }
       },
@@ -708,58 +708,60 @@
   "sector_macro_betas": {
     "Automobile and Auto Components": {},
     "Capital Goods": {
-      "gsec_10y_index": -0.46
+      "gsec_10y_index": -0.4724
     },
     "Chemicals": {},
     "Construction": {},
-    "Construction Materials": {},
+    "Construction Materials": {
+      "brent": -0.0258
+    },
     "Consumer Durables": {
-      "usdinr": -0.2753
+      "usdinr": -0.2711
     },
     "Consumer Services": {},
     "Fast Moving Consumer Goods": {},
     "Financial Services": {
-      "gsec_10y_index": 0.3876
+      "gsec_10y_index": 0.3804
     },
     "Healthcare": {},
     "Information Technology": {
-      "gsec_10y_index": -0.8948
+      "gsec_10y_index": -0.9306
     },
     "Media Entertainment & Publication": {},
     "Metals & Mining": {
       "gold_inr": 0.1253
     },
     "Oil Gas & Consumable Fuels": {
-      "gold_inr": 0.0662
+      "gold_inr": 0.0668
     },
     "Power": {},
     "Realty": {},
     "Services": {},
     "Telecommunication": {},
     "Textiles": {
-      "gsec_10y_index": -0.8922
+      "gsec_10y_index": -0.8814
     }
   },
   "sector_market_beta": {
-    "Automobile and Auto Components": 1.205,
-    "Capital Goods": 1.223,
+    "Automobile and Auto Components": 1.204,
+    "Capital Goods": 1.222,
     "Chemicals": 1.033,
-    "Construction": 1.333,
-    "Construction Materials": 1.163,
-    "Consumer Durables": 1.14,
-    "Consumer Services": 1.063,
-    "Fast Moving Consumer Goods": 0.791,
+    "Construction": 1.332,
+    "Construction Materials": 1.162,
+    "Consumer Durables": 1.137,
+    "Consumer Services": 1.061,
+    "Fast Moving Consumer Goods": 0.789,
     "Financial Services": 1.223,
     "Healthcare": 0.704,
-    "Information Technology": 0.888,
-    "Media Entertainment & Publication": 0.85,
-    "Metals & Mining": 1.14,
-    "Oil Gas & Consumable Fuels": 0.882,
-    "Power": 1.047,
-    "Realty": 1.487,
-    "Services": 1.255,
-    "Telecommunication": 1.134,
-    "Textiles": 0.906
+    "Information Technology": 0.889,
+    "Media Entertainment & Publication": 0.852,
+    "Metals & Mining": 1.138,
+    "Oil Gas & Consumable Fuels": 0.878,
+    "Power": 1.045,
+    "Realty": 1.493,
+    "Services": 1.253,
+    "Telecommunication": 1.13,
+    "Textiles": 0.905
   },
   "notes": [
     "Relationships are measured, not assumed; see label, interval and sign agreement before using one.",
